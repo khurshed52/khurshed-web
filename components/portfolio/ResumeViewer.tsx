@@ -1,9 +1,13 @@
 'use client'
 
-import { Download, ExternalLink, FileText } from 'lucide-react'
+import {
+  Download,
+  ExternalLink,
+  FileText,
+} from 'lucide-react'
 
 export default function ResumeViewer() {
-  const resumePath = '/Khurshed_Khan_-_Senior_Front_end_Developer.pdf'
+  const resumePath = '/Resume.pdf'
 
   return (
     <section className="flex h-[calc(100vh-2.75rem)] flex-col bg-editor">
@@ -19,15 +23,14 @@ export default function ResumeViewer() {
             </p>
 
             <p className="text-[11px] text-zinc-500">
-              Khurshed Khan · PDF document
+              Khurshed Khan · Dynamically generated PDF
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           <a
-            href={resumePath}
-            download="Khurshed-Khan-Resume.pdf"
+            href={`${resumePath}?download=1`}
             className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:brightness-110"
           >
             <Download size={15} />
