@@ -57,7 +57,7 @@ export const contact = {
   email: "khurshedkhan52@gmail.com",
 
   // 🌐 Portfolio
-  website: "https://khurshedkhan.dev",
+  website: "https://www.khurshedkhan.dev/",
 
   // 💼 LinkedIn
   linkedin: "https://www.linkedin.com/in/khurshed-khan-a30b0159/",
@@ -115,7 +115,7 @@ yarn-error.log*
 
 NEXT_PUBLIC_SITE_NAME="Khurshed Khan"
 
-NEXT_PUBLIC_SITE_URL="https://khurshed.dev"
+NEXT_PUBLIC_SITE_URL="https://www.khurshedkhan.dev/"
 
 NEXT_PUBLIC_ROLE="Senior Frontend Engineer"
 

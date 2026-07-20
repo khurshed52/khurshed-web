@@ -182,9 +182,9 @@ body {
 .resume-sidebar-block > p {
   margin-bottom: 0;
   color: var(--resume-body);
-  font-size: 9pt;
+  font-size: 9.5pt;
   font-weight: 500;
-  line-height: 1.34;
+  line-height: 1.45;
   overflow-wrap: anywhere;
 }
 

@@ -39,7 +39,7 @@ export const resumeData = {
 
     website: {
       label: 'Website',
-      url: 'https://khurshed-portfolio.vercel.app/',
+      url: 'https://www.khurshedkhan.dev/',
     },
 
     linkedin: {
@@ -232,7 +232,7 @@ export const resumeData = {
       'Built reusable UI components and managed application state with Pinia.',
       'Collaborated with UI/UX designers to convert Figma designs into pixel-perfect, cross-browser compatible interfaces.',
       'Integrated RESTful APIs to deliver dynamic market data, multilingual content, and interactive website features.',
-      '• Enhanced website performance, responsiveness, and SEO best practices.'
+      'Enhanced website performance, responsiveness, and SEO best practices.'
     ],
 
     visitLink: 'https://www.cptmarkets.com/',
