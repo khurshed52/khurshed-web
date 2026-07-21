@@ -22,7 +22,8 @@ export const fileContents: Partial<Record<EditorFile, string>> = {
   "name": "khurshed-khan",
   "version": "1.0.0",
   "private": true,
-
+  "description": "Frontend Engineer Portfolio built with Next.js",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

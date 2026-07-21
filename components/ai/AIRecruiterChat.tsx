@@ -156,6 +156,7 @@ export default function AIRecruiterChat() {
 
   return (
     <>
+    <div className="ai-recruiter-widget"> 
       {!isOpen && (
        <button
   type="button"
@@ -354,6 +355,7 @@ export default function AIRecruiterChat() {
           </form>
         </section>
       )}
+      </div>
     </>
   );
 }
