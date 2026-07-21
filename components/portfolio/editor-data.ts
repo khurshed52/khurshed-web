@@ -19,29 +19,40 @@ export const sectionFiles: Record<Section, EditorFile> = {
 
 export const fileContents: Partial<Record<EditorFile, string>> = {
   'package.json': `{
-  "name": "khurshed.dev",
-  "version": "2.0.0",
+  "name": "khurshed-khan",
+  "version": "1.0.0",
   "private": true,
-  "author": "Khurshed Khan",
-  "description": "Personal Developer Portfolio",
 
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write ."
+    "lint": "next lint"
   },
 
   "dependencies": {
-    "next": "^15.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "typescript": "^5.0.0",
-    "tailwindcss": "^4.0.0",
-    "gsap": "^3.12.0",
+    "@google/genai": "^2.12.0",
+    "@sparticuz/chromium": "149.0.0",
+    "@types/node": "^20.14.12",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.19",
+    "clsx": "^2.1.1",
+    "gsap": "^3.12.5",
     "lucide-react": "^0.468.0",
-    "framer-motion": "^11.0.0"
+    "next": "^14.2.5",
+    "postcss": "^8.4.40",
+    "puppeteer-core": "25.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "tailwindcss": "^3.4.7",
+    "typescript": "^5.5.4"
+  },
+
+  "devDependencies": {
+    "puppeteer": "25.1.0"
   }
 }`,
 

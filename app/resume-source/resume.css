@@ -183,7 +183,7 @@ body {
   margin-bottom: 0;
   color: var(--resume-body);
   font-size: 9.5pt;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
@@ -200,7 +200,7 @@ body {
 .resume-education p {
   margin-bottom: 2mm;
   color: var(--resume-body);
-  font-size: 9pt;
+  font-size: 9.5pt;
   line-height: 1.35;
   font-weight: 500;
   overflow-wrap: anywhere;
