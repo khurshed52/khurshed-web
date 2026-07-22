@@ -34,7 +34,7 @@ export default function AIRecruiterChat() {
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [isThinking, setIsThinking] = useState(false);
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -61,68 +61,174 @@ export default function AIRecruiterChat() {
     };
   }
 
-  async function sendQuestion(message: string) {
-    const trimmedMessage = message.trim();
+async function sendQuestion(message: string) {
+  const trimmedMessage = message.trim();
 
-    if (!trimmedMessage || isLoading) {
-      return;
-    }
+  if (!trimmedMessage || isLoading) {
+    return;
+  }
 
-    const userMessage = createMessage("user", trimmedMessage);
+  const userMessage = createMessage("user", trimmedMessage);
 
-    setMessages((currentMessages) => [
-      ...currentMessages,
-      userMessage,
-    ]);
+  const assistantMessage = createMessage("assistant", "");
 
-    setQuestion("");
-    setIsLoading(true);
+  setMessages((currentMessages) => [
+    ...currentMessages,
+    userMessage,
+  ]);
 
-    try {
-      const response = await fetch("/api/ai-recruiter", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: trimmedMessage,
-        }),
-      });
+  setQuestion("");
+  setIsLoading(true);
+  setIsThinking(true);
 
-      const data: {
-        answer?: string;
-        error?: string;
-      } = await response.json();
+  let assistantAdded = false;
+  let receivedText = "";
 
-      if (!response.ok) {
-        throw new Error(
-          data.error || "The AI recruiter could not answer right now.",
-        );
+  try {
+    const response = await fetch("/api/ai-recruiter", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: trimmedMessage,
+      }),
+    });
+
+    if (!response.ok) {
+      let errorMessage =
+        "The AI recruiter could not answer right now.";
+
+      try {
+        const errorData = (await response.json()) as {
+          error?: string;
+        };
+
+        errorMessage = errorData.error || errorMessage;
+      } catch {
+        // The response was not JSON, so retain the fallback message.
       }
 
-      const assistantMessage = createMessage(
-        "assistant",
-        data.answer || "I could not generate a response.",
+      throw new Error(errorMessage);
+    }
+
+    if (!response.body) {
+      throw new Error(
+        "Your browser could not read the AI response stream.",
       );
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+
+    while (true) {
+      const { value, done } = await reader.read();
+
+      if (done) {
+        break;
+      }
+
+      const chunk = decoder.decode(value, {
+        stream: true,
+      });
+
+      if (!chunk) {
+        continue;
+      }
+
+      receivedText += chunk;
+
+      if (!assistantAdded) {
+        assistantAdded = true;
+        setIsThinking(false);
+
+        setMessages((currentMessages) => [
+          ...currentMessages,
+          {
+            ...assistantMessage,
+            content: receivedText,
+          },
+        ]);
+      } else {
+        setMessages((currentMessages) =>
+          currentMessages.map((currentMessage) =>
+            currentMessage.id === assistantMessage.id
+              ? {
+                  ...currentMessage,
+                  content: receivedText,
+                }
+              : currentMessage,
+          ),
+        );
+      }
+    }
+
+    const finalChunk = decoder.decode();
+
+    if (finalChunk) {
+      receivedText += finalChunk;
+    }
+
+    if (!receivedText.trim()) {
+      throw new Error(
+        "Gemini returned an empty response. Please try again.",
+      );
+    }
+
+    if (!assistantAdded) {
+      setIsThinking(false);
 
       setMessages((currentMessages) => [
         ...currentMessages,
-        assistantMessage,
+        {
+          ...assistantMessage,
+          content: receivedText,
+        },
       ]);
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "Something went wrong. Please try again.";
+    } else {
+      setMessages((currentMessages) =>
+        currentMessages.map((currentMessage) =>
+          currentMessage.id === assistantMessage.id
+            ? {
+                ...currentMessage,
+                content: receivedText,
+              }
+            : currentMessage,
+        ),
+      );
+    }
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Something went wrong. Please try again.";
 
+    setIsThinking(false);
+
+    if (assistantAdded) {
+      setMessages((currentMessages) =>
+        currentMessages.map((currentMessage) =>
+          currentMessage.id === assistantMessage.id
+            ? {
+                ...currentMessage,
+                content:
+                  receivedText.trim() ||
+                  errorMessage,
+              }
+            : currentMessage,
+        ),
+      );
+    } else {
       setMessages((currentMessages) => [
         ...currentMessages,
         createMessage("assistant", errorMessage),
       ]);
-    } finally {
-      setIsLoading(false);
     }
+  } finally {
+    setIsThinking(false);
+    setIsLoading(false);
   }
+}
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -264,25 +370,52 @@ export default function AIRecruiterChat() {
                           : "rounded-bl-md border border-white/5 bg-zinc-800 text-zinc-100",
                       ].join(" ")}
                     >
+                   <div className="relative">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
                         {message.content}
                     </ReactMarkdown>
+
+                    {!isUser &&
+                        isLoading &&
+                        !isThinking &&
+                        message.id === messages[messages.length - 1]?.id && (
+                        <span
+                            aria-hidden="true"
+                            className="ml-1 inline-block h-4 w-1.5 animate-pulse rounded-sm bg-cyan-400 align-middle"
+                        />
+                        )}
+                    </div>
                     </div>
                   </div>
                 );
               })}
 
-              {isLoading && (
-                <div className="flex justify-start">
-                  <div className="rounded-2xl rounded-bl-md border border-white/5 bg-zinc-800 px-4 py-3">
-                    <div className="flex items-center gap-1.5">
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-zinc-400 [animation-delay:-0.3s]" />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-zinc-400 [animation-delay:-0.15s]" />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-zinc-400" />
-                    </div>
-                  </div>
-                </div>
-              )}
+            {isThinking && (
+  <div className="flex justify-start">
+    <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-white/5 bg-zinc-800 px-4 py-3">
+      <div className="flex items-center gap-3">
+        <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-600/20">
+          <span className="text-sm">🤖</span>
+
+          <span className="absolute inset-0 animate-ping rounded-full border border-cyan-400/20" />
+        </span>
+
+        <div>
+          <p className="text-sm font-medium text-zinc-200">
+            Khurshed AI is thinking
+            <span className="inline-flex w-5 justify-start">
+              <span className="animate-pulse">...</span>
+            </span>
+          </p>
+
+          <p className="mt-0.5 text-xs text-zinc-500">
+            Reviewing portfolio and resume
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
               <div ref={messagesEndRef} />
             </div>
