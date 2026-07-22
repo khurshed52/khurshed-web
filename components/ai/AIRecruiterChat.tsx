@@ -391,31 +391,31 @@ async function sendQuestion(message: string) {
               })}
 
             {isThinking && (
-  <div className="flex justify-start">
-    <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-white/5 bg-zinc-800 px-4 py-3">
-      <div className="flex items-center gap-3">
-        <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-600/20">
-          <span className="text-sm">🤖</span>
+                <div className="flex justify-start">
+                    <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-white/5 bg-zinc-800 px-4 py-3">
+                    <div className="flex items-center gap-3">
+                        <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-600/20">
+                        <span className="text-sm">🤖</span>
 
-          <span className="absolute inset-0 animate-ping rounded-full border border-cyan-400/20" />
-        </span>
+                        <span className="absolute inset-0 animate-ping rounded-full border border-cyan-400/20" />
+                        </span>
 
-        <div>
-          <p className="text-sm font-medium text-zinc-200">
-            Khurshed AI is thinking
-            <span className="inline-flex w-5 justify-start">
-              <span className="animate-pulse">...</span>
-            </span>
-          </p>
+                        <div>
+                        <p className="text-sm font-medium text-zinc-200">
+                            Khurshed AI is thinking
+                            <span className="inline-flex w-5 justify-start">
+                            <span className="animate-pulse">...</span>
+                            </span>
+                        </p>
 
-          <p className="mt-0.5 text-xs text-zinc-500">
-            Reviewing portfolio and resume
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+                        <p className="mt-0.5 text-xs text-zinc-500">
+                            Reviewing portfolio and resume
+                        </p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                )}
 
               <div ref={messagesEndRef} />
             </div>
