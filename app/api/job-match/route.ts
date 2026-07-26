@@ -53,8 +53,13 @@ Return the requested structured result.
 
 export async function POST(request: Request) {
   try {
-    if (!process.env.GEMINI_API_KEY) {
-      console.error('GEMINI_API_KEY is missing')
+    const apiKey = process.env.GEMINI_API_KEY
+    const model = process.env.GEMINI_MODEL
+
+    if (!apiKey || !model) {
+      console.error(
+        'Gemini API credentials or model are missing',
+      )
 
       return Response.json(
         {
@@ -119,14 +124,14 @@ export async function POST(request: Request) {
     }
 
     const ai = new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY,
+      apiKey,
     })
 
     const resumeContext = createResumeContext()
 
     const response =
       await ai.models.generateContent({
-        model: 'gemini-2.5-flash-preview-05-20',
+        model,
 
         contents: createPrompt(
           jobDescription,
