@@ -10,6 +10,9 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Khurshed Khan | Developer Portfolio',
   description: 'A VS Code-inspired developer portfolio built with Next.js, Tailwind CSS and GSAP.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
