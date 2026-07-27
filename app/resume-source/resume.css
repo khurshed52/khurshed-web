@@ -307,10 +307,8 @@ body {
 
 /* PAGE TWO */
 .resume-page-two {
-  padding: 8mm 10mm;
-  background:
-    linear-gradient(135deg, rgb(8 121 120 / 4.5%), transparent 38%),
-    #fff;
+  padding: 8mm 4mm;
+  background: #fff;
 }
 
 .resume-project-page-header {

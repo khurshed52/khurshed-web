@@ -62,82 +62,31 @@ export default function AIRecruiterChat() {
   }
 
 async function sendQuestion(message: string) {
-  const trimmedMessage = message.trim();
+    const trimmedMessage = message.trim();
 
-  if (!trimmedMessage || isLoading) {
-    return;
-  }
-
-  const userMessage = createMessage("user", trimmedMessage);
-
-  const assistantMessage = createMessage("assistant", "");
-
-  setMessages((currentMessages) => [
-    ...currentMessages,
-    userMessage,
-  ]);
-
-  setQuestion("");
-  setIsLoading(true);
-  setIsThinking(true);
-
-  let assistantAdded = false;
-  let receivedText = "";
-
-  try {
-    const response = await fetch("/api/ai-recruiter", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message: trimmedMessage,
-      }),
-    });
-
-    if (!response.ok) {
-      let errorMessage =
-        "The AI recruiter could not answer right now.";
-
-      try {
-        const errorData = (await response.json()) as {
-          error?: string;
-        };
-
-        errorMessage = errorData.error || errorMessage;
-      } catch {
-        // The response was not JSON, so retain the fallback message.
-      }
-
-      throw new Error(errorMessage);
+    if (!trimmedMessage || isLoading) {
+      return;
     }
 
-    if (!response.body) {
-      throw new Error(
-        "Your browser could not read the AI response stream.",
-      );
-    }
+    const userMessage = createMessage("user", trimmedMessage);
+    const assistantMessage = createMessage("assistant", "");
 
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
+    setMessages((currentMessages) => [...currentMessages, userMessage]);
+    setQuestion("");
+    setIsLoading(true);
+    setIsThinking(true);
 
-    while (true) {
-      const { value, done } = await reader.read();
+    let receivedText = "";
+    let displayedText = "";
+    let assistantAdded = false;
+    let streamFinished = false;
 
-      if (done) {
-        break;
-      }
-
-      const chunk = decoder.decode(value, {
-        stream: true,
+    const wait = (milliseconds: number) =>
+      new Promise<void>((resolve) => {
+        window.setTimeout(resolve, milliseconds);
       });
 
-      if (!chunk) {
-        continue;
-      }
-
-      receivedText += chunk;
-
+    const updateAssistantMessage = (content: string) => {
       if (!assistantAdded) {
         assistantAdded = true;
         setIsThinking(false);
@@ -146,89 +95,148 @@ async function sendQuestion(message: string) {
           ...currentMessages,
           {
             ...assistantMessage,
-            content: receivedText,
+            content,
           },
         ]);
-      } else {
+
+        return;
+      }
+
+      setMessages((currentMessages) =>
+        currentMessages.map((currentMessage) =>
+          currentMessage.id === assistantMessage.id
+            ? {
+                ...currentMessage,
+                content,
+              }
+            : currentMessage,
+        ),
+      );
+    };
+
+    const typingPromise = (async () => {
+      while (!streamFinished || displayedText.length < receivedText.length) {
+        if (displayedText.length >= receivedText.length) {
+          await wait(12);
+          continue;
+        }
+
+        const remainingCharacters = receivedText.length - displayedText.length;
+        const charactersPerFrame = Math.min(
+          8,
+          Math.max(1, Math.ceil(remainingCharacters / 24)),
+        );
+
+        displayedText = receivedText.slice(
+          0,
+          displayedText.length + charactersPerFrame,
+        );
+
+        updateAssistantMessage(displayedText);
+        await wait(18);
+      }
+    })();
+
+    try {
+      const response = await fetch("/api/ai-recruiter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: trimmedMessage,
+        }),
+      });
+
+      if (!response.ok) {
+        let errorMessage = "The AI recruiter could not answer right now.";
+
+        try {
+          const errorData = (await response.json()) as {
+            error?: string;
+          };
+
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          // Keep the fallback message when the response is not JSON.
+        }
+
+        throw new Error(errorMessage);
+      }
+
+      if (!response.body) {
+        throw new Error("Your browser could not read the AI response stream.");
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { value, done } = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        const chunk = decoder.decode(value, {
+          stream: true,
+        });
+
+        if (chunk) {
+          receivedText += chunk;
+        }
+      }
+
+      const finalChunk = decoder.decode();
+
+      if (finalChunk) {
+        receivedText += finalChunk;
+      }
+
+      if (!receivedText.trim()) {
+        throw new Error("Gemini returned an empty response. Please try again.");
+      }
+
+      streamFinished = true;
+      await typingPromise;
+    } catch (error) {
+      streamFinished = true;
+      await typingPromise;
+
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.";
+
+      setIsThinking(false);
+
+      if (assistantAdded) {
+        const finalContent = displayedText.trim()
+          ? `${displayedText}\n\n${errorMessage}`
+          : errorMessage;
+
         setMessages((currentMessages) =>
           currentMessages.map((currentMessage) =>
             currentMessage.id === assistantMessage.id
               ? {
                   ...currentMessage,
-                  content: receivedText,
+                  content: finalContent,
                 }
               : currentMessage,
           ),
         );
+      } else {
+        setMessages((currentMessages) => [
+          ...currentMessages,
+          createMessage("assistant", errorMessage),
+        ]);
       }
-    }
-
-    const finalChunk = decoder.decode();
-
-    if (finalChunk) {
-      receivedText += finalChunk;
-    }
-
-    if (!receivedText.trim()) {
-      throw new Error(
-        "Gemini returned an empty response. Please try again.",
-      );
-    }
-
-    if (!assistantAdded) {
+    } finally {
+      streamFinished = true;
       setIsThinking(false);
-
-      setMessages((currentMessages) => [
-        ...currentMessages,
-        {
-          ...assistantMessage,
-          content: receivedText,
-        },
-      ]);
-    } else {
-      setMessages((currentMessages) =>
-        currentMessages.map((currentMessage) =>
-          currentMessage.id === assistantMessage.id
-            ? {
-                ...currentMessage,
-                content: receivedText,
-              }
-            : currentMessage,
-        ),
-      );
+      setIsLoading(false);
     }
-  } catch (error) {
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "Something went wrong. Please try again.";
-
-    setIsThinking(false);
-
-    if (assistantAdded) {
-      setMessages((currentMessages) =>
-        currentMessages.map((currentMessage) =>
-          currentMessage.id === assistantMessage.id
-            ? {
-                ...currentMessage,
-                content:
-                  receivedText.trim() ||
-                  errorMessage,
-              }
-            : currentMessage,
-        ),
-      );
-    } else {
-      setMessages((currentMessages) => [
-        ...currentMessages,
-        createMessage("assistant", errorMessage),
-      ]);
-    }
-  } finally {
-    setIsThinking(false);
-    setIsLoading(false);
   }
-}
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
