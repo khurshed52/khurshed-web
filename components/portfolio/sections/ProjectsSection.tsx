@@ -84,7 +84,7 @@ export function ProjectsSection() {
                   <Link
                     href={project.github}
                     target="_blank"
-                    className="rounded-lg border border-border p-2 text-zinc-400 transition hover:border-accent hover:text-white"
+                    className="rounded-lg border border-border p-2 text-zinc-400 transition hover:border-accent hover:text-zinc-100"
                   >
                     <Github size={18} />
                   </Link>

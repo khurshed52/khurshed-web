@@ -13,10 +13,10 @@ export function ResumePreview() {
   const [hasError, setHasError] = useState(false)
 
   return (
-    <section className="flex h-full min-h-[720px] flex-col bg-[#1e1e1e]">
-      <header className="flex min-h-[74px] items-center justify-between border-b border-white/10 px-7">
+    <section className="flex h-full min-h-[720px] flex-col bg-editor">
+      <header className="flex min-h-[74px] items-center justify-between border-b border-border px-7">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04]">
+          <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-panel">
             <FileText
               className="text-zinc-300"
               size={21}
@@ -47,7 +47,7 @@ export function ResumePreview() {
             href="/Resume.pdf"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-10 items-center gap-2 rounded-lg border border-white/15 bg-white/[0.02] px-5 text-sm font-medium text-zinc-200 transition hover:bg-white/[0.06]"
+            className="inline-flex h-10 items-center gap-2 rounded-lg border border-border bg-panel px-5 text-sm font-medium text-zinc-200 transition hover:bg-panel/70"
           >
             <ExternalLink size={16} />
             View Fullscreen
@@ -55,11 +55,11 @@ export function ResumePreview() {
         </div>
       </header>
 
-      <div className="relative min-h-0 flex-1 overflow-hidden bg-[#2b2b2b]">
+      <div className="relative min-h-0 flex-1 overflow-hidden bg-sidebar">
         {isLoading && (
-          <div className="absolute inset-0 z-20 flex min-h-[720px] items-center justify-center bg-[#1e1e1e]">
+          <div className="absolute inset-0 z-20 flex min-h-[720px] items-center justify-center bg-editor">
             <div className="flex flex-col items-center text-center">
-              <div className="relative mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+              <div className="relative mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-panel">
                 <FileText
                   size={27}
                   className="text-zinc-300"
@@ -81,7 +81,7 @@ export function ResumePreview() {
                 This may take a few seconds.
               </p>
 
-              <div className="mt-6 h-1 w-64 overflow-hidden rounded-full bg-white/10">
+              <div className="mt-6 h-1 w-64 overflow-hidden rounded-full bg-panel">
                 <div className="resume-loading-progress h-full w-1/3 rounded-full bg-[#0e8fdb]" />
               </div>
             </div>
@@ -89,7 +89,7 @@ export function ResumePreview() {
         )}
 
         {hasError && !isLoading && (
-          <div className="absolute inset-0 z-20 flex min-h-[720px] items-center justify-center bg-[#1e1e1e]">
+          <div className="absolute inset-0 z-20 flex min-h-[720px] items-center justify-center bg-editor">
             <div className="text-center">
               <h2 className="text-lg font-semibold text-zinc-100">
                 Unable to load resume

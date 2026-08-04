@@ -36,7 +36,7 @@ export function ContactSection() {
           </div>
 
           {/* Heading */}
-          <h2 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
+          <h2 className="text-4xl font-bold tracking-tight text-zinc-100 md:text-5xl">
             Let's build something{" "}
             <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent">
               useful.
@@ -68,7 +68,7 @@ export function ContactSection() {
               href={profile.github}
               target="_blank"
               rel="noreferrer"
-              className="group flex h-14 min-w-[220px] items-center justify-center gap-3 rounded-2xl border border-border bg-white/[0.03] px-8 text-lg text-zinc-200 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-500 hover:bg-white/[0.05]"
+              className="group flex h-14 min-w-[220px] items-center justify-center gap-3 rounded-2xl border border-border bg-panel px-8 text-lg text-zinc-200 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-500 hover:bg-panel/70"
             >
               <Github size={22} />
 
@@ -84,7 +84,7 @@ export function ContactSection() {
               href={profile.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="group flex h-14 min-w-[220px] items-center justify-center gap-3 rounded-2xl border border-border bg-white/[0.03] px-8 text-lg text-zinc-200 transition-all duration-300 hover:-translate-y-1 hover:border-sky-500/40 hover:bg-sky-500/5"
+              className="group flex h-14 min-w-[220px] items-center justify-center gap-3 rounded-2xl border border-border bg-panel px-8 text-lg text-zinc-200 transition-all duration-300 hover:-translate-y-1 hover:border-sky-500/40 hover:bg-sky-500/5"
             >
               <Linkedin size={22} />
 
@@ -108,7 +108,7 @@ export function ContactSection() {
 
           {/* Footer */}
           <p className="mt-6 text-sm text-zinc-500">
-            Usually responds within <span className="text-white">24 hours</span>
+            Usually responds within <span className="text-zinc-100">24 hours</span>
           </p>
         </div>
       </div>

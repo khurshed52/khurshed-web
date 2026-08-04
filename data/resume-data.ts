@@ -24,6 +24,7 @@ export type ResumeProject = {
 
 export type ResumeEducation = {
   degree: string
+  specialization: string
   institution: string
   location: string
   period: string
@@ -117,10 +118,11 @@ export const resumeData = {
 
   education: [
     {
-      degree: 'Bachelor of Commerce',
-      institution: 'DDU University',
-      location: 'Uttar Pradesh',
-      period: 'May 2008 — May 2011',
+      degree: "Bachelor of Technology (B.Tech.)",
+      specialization: "Computer Science & Engineering",
+      institution: "Sabarmati University",
+      location: "Ahmedabad, India",
+      period: "2011 — 2015",
     },
   ] satisfies ResumeEducation[],
 

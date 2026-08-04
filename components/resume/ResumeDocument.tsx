@@ -133,12 +133,12 @@ function ResumeSidebar() {
             key={`${item.degree}-${item.period}`}
             className="resume-education"
           >
-            <p>
-              {item.degree}, {item.institution},{' '}
-              {item.location}
-            </p>
-
-            <span>{item.period}</span>
+           <p className="font-semibold">{item.degree}</p>
+          <p>{item.specialization}</p>
+          <p>
+            {item.institution}, {item.location}
+          </p>
+          <p>{item.period}</p>
           </article>
         ))}
       </section>

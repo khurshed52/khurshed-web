@@ -11,7 +11,7 @@ export default function ResumeViewer() {
 
   return (
     <section className="flex h-[calc(100vh-2.75rem)] flex-col bg-editor">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-[#1b1b1b] px-4 py-3 sm:px-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-panel px-4 py-3 sm:px-6">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-800/80 text-zinc-200">
             <FileText size={17} />

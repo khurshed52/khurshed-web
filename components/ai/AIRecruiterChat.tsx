@@ -318,16 +318,16 @@ async function sendQuestion(message: string) {
       {isOpen && (
         <section
           aria-label="AI Recruiter chat"
-          className="fixed bottom-3 right-3 z-[100] flex h-[min(700px,calc(100dvh-24px))] w-[420px] max-w-[calc(100vw-24px)] flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0d0d0d] shadow-[0_24px_80px_rgba(0,0,0,0.65)]"
+          className="fixed bottom-3 right-3 z-[100] flex h-[min(700px,calc(100dvh-24px))] w-[420px] max-w-[calc(100vw-24px)] flex-col overflow-hidden rounded-3xl border border-border bg-panel-strong shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
         >
-          <header className="flex shrink-0 items-center justify-between border-b border-white/10 bg-[#111111] px-5 py-4">
+          <header className="flex shrink-0 items-center justify-between border-b border-border bg-panel px-5 py-4">
             <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-xl">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-editor text-xl">
                 🤖
               </div>
 
               <div className="min-w-0">
-                <p className="truncate text-base font-semibold text-white">
+                <p className="truncate text-base font-semibold text-zinc-100">
                   AI Recruiter
                 </p>
 
@@ -342,7 +342,7 @@ async function sendQuestion(message: string) {
                 type="button"
                 onClick={handleResetChat}
                 aria-label="Reset conversation"
-                className="rounded-lg px-3 py-2 text-xs text-zinc-400 transition hover:bg-white/5 hover:text-white"
+                className="rounded-lg px-3 py-2 text-xs text-zinc-400 transition hover:bg-editor hover:text-zinc-100"
               >
                 Reset
               </button>
@@ -351,7 +351,7 @@ async function sendQuestion(message: string) {
                 type="button"
                 onClick={() => setIsOpen(false)}
                 aria-label="Close AI Recruiter"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-xl text-zinc-400 transition hover:bg-white/5 hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-xl text-zinc-400 transition hover:bg-editor hover:text-zinc-100"
               >
                 ×
               </button>
@@ -375,7 +375,7 @@ async function sendQuestion(message: string) {
                         "max-w-[88%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-6",
                         isUser
                           ? "rounded-br-md bg-cyan-600 text-white"
-                          : "rounded-bl-md border border-white/5 bg-zinc-800 text-zinc-100",
+                          : "rounded-bl-md border border-border bg-zinc-800 text-zinc-100",
                       ].join(" ")}
                     >
                    <div className="relative">
@@ -400,7 +400,7 @@ async function sendQuestion(message: string) {
 
             {isThinking && (
                 <div className="flex justify-start">
-                    <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-white/5 bg-zinc-800 px-4 py-3">
+                    <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-border bg-zinc-800 px-4 py-3">
                     <div className="flex items-center gap-3">
                         <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-600/20">
                         <span className="text-sm">🤖</span>
@@ -430,13 +430,13 @@ async function sendQuestion(message: string) {
 
             {messages.length === 1 && (
               <div className="mt-6">
-                <div className="mb-4 border-t border-white/10" />
+                <div className="mb-4 border-t border-border" />
 
                 <div className="space-y-2">
                   <button
                     type="button"
                     onClick={handleMatchMyJob}
-                    className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-left text-sm text-zinc-200 transition hover:border-cyan-500/40 hover:bg-white/[0.07] hover:text-white"
+                    className="w-full rounded-xl border border-border bg-editor px-4 py-3 text-left text-sm text-zinc-200 transition hover:border-cyan-500/40 hover:bg-panel hover:text-zinc-100"
                   >
                     Match my job
                   </button>
@@ -445,7 +445,7 @@ async function sendQuestion(message: string) {
                     type="button"
                     onClick={handleReactExperience}
                     disabled={isLoading}
-                    className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-left text-sm text-zinc-200 transition hover:border-cyan-500/40 hover:bg-white/[0.07] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                    className="w-full rounded-xl border border-border bg-editor px-4 py-3 text-left text-sm text-zinc-200 transition hover:border-cyan-500/40 hover:bg-panel hover:text-zinc-100 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     React experience
                   </button>
@@ -454,7 +454,7 @@ async function sendQuestion(message: string) {
                     href="/Resume.pdf"
                     target="_blank"
                     rel="noreferrer"
-                    className="block w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-left text-sm text-zinc-200 transition hover:border-cyan-500/40 hover:bg-white/[0.07] hover:text-white"
+                    className="block w-full rounded-xl border border-border bg-editor px-4 py-3 text-left text-sm text-zinc-200 transition hover:border-cyan-500/40 hover:bg-panel hover:text-zinc-100"
                   >
                     Download resume
                   </a>
@@ -465,9 +465,9 @@ async function sendQuestion(message: string) {
 
           <form
             onSubmit={handleSubmit}
-            className="shrink-0 border-t border-white/10 bg-[#111111] p-3"
+            className="shrink-0 border-t border-border bg-panel p-3"
           >
-            <div className="flex items-end gap-2 rounded-2xl border border-white/10 bg-[#18181b] p-2 transition focus-within:border-cyan-500/50">
+            <div className="flex items-end gap-2 rounded-2xl border border-border bg-editor p-2 transition focus-within:border-cyan-500/50">
               <textarea
                 ref={textareaRef}
                 value={question}
@@ -477,7 +477,7 @@ async function sendQuestion(message: string) {
                 placeholder="Type your question..."
                 disabled={isLoading}
                 aria-label="Ask the AI recruiter a question"
-                className="max-h-32 min-h-11 flex-1 resize-none bg-transparent px-3 py-2.5 text-sm leading-5 text-white outline-none placeholder:text-zinc-500 disabled:cursor-not-allowed"
+                className="max-h-32 min-h-11 flex-1 resize-none bg-transparent px-3 py-2.5 text-sm leading-5 text-zinc-100 outline-none placeholder:text-zinc-500 disabled:cursor-not-allowed"
               />
 
               <button

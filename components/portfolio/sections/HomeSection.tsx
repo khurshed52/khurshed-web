@@ -60,7 +60,7 @@ export function HomeSection({ orbitRef }: HomeSectionProps) {
               {/* Current role */}
               <div
                 data-orbit-card
-                className="flex min-w-0 items-center gap-2 rounded-xl border border-border bg-[#202020]/95 p-2.5 shadow-xl backdrop-blur sm:min-w-[210px] sm:gap-3 sm:p-4"
+                className="flex min-w-0 items-center gap-2 rounded-xl border border-border bg-panel/95 p-2.5 shadow-xl backdrop-blur sm:min-w-[210px] sm:gap-3 sm:p-4"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg sm:h-11 sm:w-11 sm:rounded-xl">
                   <BriefcaseBusiness size={19} />
@@ -84,7 +84,7 @@ export function HomeSection({ orbitRef }: HomeSectionProps) {
               {/* Experience */}
               <div
                 data-orbit-card
-                className="flex min-w-0 items-center gap-2 rounded-xl border border-border bg-[#202020]/95 p-2.5 shadow-xl backdrop-blur sm:min-w-[210px] sm:gap-3 sm:p-4"
+                className="flex min-w-0 items-center gap-2 rounded-xl border border-border bg-panel/95 p-2.5 shadow-xl backdrop-blur sm:min-w-[210px] sm:gap-3 sm:p-4"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-orange-500 text-white shadow-lg sm:h-11 sm:w-11 sm:rounded-xl">
                   <Rocket size={19} />
@@ -215,7 +215,7 @@ export function HomeSection({ orbitRef }: HomeSectionProps) {
               {/* Location */}
               <div
                 data-orbit-card
-                className="flex min-w-0 items-center gap-2 rounded-xl border border-border bg-[#202020]/95 p-2.5 shadow-xl backdrop-blur sm:min-w-[210px] sm:gap-3 sm:p-4"
+                className="flex min-w-0 items-center gap-2 rounded-xl border border-border bg-panel/95 p-2.5 shadow-xl backdrop-blur sm:min-w-[210px] sm:gap-3 sm:p-4"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-purple text-white shadow-lg sm:h-11 sm:w-11 sm:rounded-xl">
                   <MapPin size={19} />
@@ -239,7 +239,7 @@ export function HomeSection({ orbitRef }: HomeSectionProps) {
               {/* Availability */}
               <div
                 data-orbit-card
-                className="flex min-w-0 items-center gap-2 rounded-xl border border-border bg-[#202020]/95 p-2.5 shadow-xl backdrop-blur sm:min-w-[210px] sm:gap-3 sm:p-4"
+                className="flex min-w-0 items-center gap-2 rounded-xl border border-border bg-panel/95 p-2.5 shadow-xl backdrop-blur sm:min-w-[210px] sm:gap-3 sm:p-4"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500 text-white shadow-lg sm:h-11 sm:w-11 sm:rounded-xl">
                   <ShieldCheck size={19} />

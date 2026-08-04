@@ -3,6 +3,7 @@
 import { Menu } from 'lucide-react'
 import FileIcon from './FileIcon'
 import type { EditorFile } from './types'
+import ThemeToggle from '../theme/ThemeToggle'
 
 type EditorTabsProps = {
   activeFile: EditorFile
@@ -18,7 +19,7 @@ export default function EditorTabs({
   onOpenMobile,
 }: EditorTabsProps) {
   return (
-    <div className="fixed inset-x-0 top-0 z-50 flex h-11 items-center border-b border-border bg-[#181818]">
+    <div className="fixed inset-x-0 top-0 z-50 flex h-11 items-center border-b border-border bg-sidebar">
       <button
         type="button"
         onClick={onOpenMobile}
@@ -47,7 +48,7 @@ export default function EditorTabs({
                     : 'border-t-2 border-t-transparent bg-sky-500/[0.04] text-sky-300 hover:bg-sky-500/10 hover:text-sky-100'
                   : isActive
                     ? 'border-t-2 border-t-accent bg-editor text-zinc-100'
-                    : 'border-t-2 border-t-transparent text-zinc-500 hover:bg-[#202020] hover:text-zinc-300'
+                    : 'border-t-2 border-t-transparent text-zinc-500 hover:bg-panel hover:text-zinc-300'
               }`}
             >
               <FileIcon file={file} />
@@ -65,6 +66,9 @@ export default function EditorTabs({
             </button>
           )
         })}
+        <div className="ml-auto pr-4">
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   )

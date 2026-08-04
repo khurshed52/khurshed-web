@@ -223,8 +223,8 @@ function TreeButton({
       onClick={onClick}
       className={`flex w-full items-center gap-2 px-3 py-1.5 text-left ${
         active
-          ? 'bg-[#37373d] text-zinc-100'
-          : 'text-zinc-400 hover:bg-[#2a2d2e]'
+          ? 'bg-accent/15 text-zinc-100'
+          : 'text-zinc-400 hover:bg-panel'
       }`}
     >
       <ChevronRight

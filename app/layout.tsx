@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import AIRecruiterChat from "@/components/ai/AIRecruiterChat";
+import { ThemeProvider } from "next-themes";
+
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains',
@@ -17,11 +19,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${jetbrains.variable} bg-editor text-zinc-200 antialiased`}>
-        {children}
-         <AIRecruiterChat />
-        </body>
+        <ThemeProvider
+          attribute="data-theme"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <AIRecruiterChat />
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

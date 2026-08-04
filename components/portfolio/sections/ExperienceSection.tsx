@@ -167,8 +167,8 @@ function ExperienceJson({
   index: number
 }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-[#181818]">
-      <div className="flex items-center justify-between border-b border-border bg-[#202020] px-4 py-3">
+    <div className="overflow-hidden rounded-xl border border-border bg-sidebar">
+      <div className="flex items-center justify-between border-b border-border bg-panel px-4 py-3">
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
