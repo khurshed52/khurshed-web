@@ -17,7 +17,7 @@ export default function ThemeToggle() {
       onClick={() =>
         setTheme(resolvedTheme === "dark" ? "light" : "dark")
       }
-      className="flex h-10 w-10 items-center justify-center rounded-md border border-border hover:bg-panel transition"
+      className="flex h-8 w-8 items-center justify-center rounded-md border border-transparent text-zinc-400 transition hover:border-border hover:bg-panel hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
       aria-label="Toggle Theme"
     >
       {resolvedTheme === "dark" ? (

@@ -279,9 +279,9 @@ async function sendQuestion(message: string) {
   className="
     group fixed bottom-6 right-6 z-[9999]
     flex items-center gap-3
-    rounded-full border border-cyan-400/30
-    bg-neutral-950/95 px-4 py-3
-    text-white shadow-[0_12px_45px_rgba(0,0,0,0.55)]
+    rounded-full border border-border
+    bg-panel-strong/95 px-4 py-3
+    text-zinc-100 shadow-[0_12px_36px_rgba(15,23,42,0.22)]
     backdrop-blur-xl
     transition-all duration-300
     hover:-translate-y-1
@@ -295,7 +295,7 @@ async function sendQuestion(message: string) {
 
     <span className="absolute -right-0.5 -top-0.5 flex h-3.5 w-3.5">
       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-      <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-2 border-neutral-950 bg-emerald-400" />
+      <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-2 border-panel-strong bg-emerald-400" />
     </span>
   </span>
 
@@ -304,12 +304,12 @@ async function sendQuestion(message: string) {
       Ask AI Recruiter
     </span>
 
-    <span className="mt-0.5 block text-xs text-neutral-400">
+    <span className="mt-0.5 block text-xs text-zinc-500">
       Explore Khurshed&apos;s experience
     </span>
   </span>
 
-  <span className="hidden text-neutral-500 transition-transform duration-300 group-hover:translate-x-1 sm:block">
+  <span className="hidden text-zinc-500 transition-transform duration-300 group-hover:translate-x-1 sm:block">
     →
   </span>
 </button>

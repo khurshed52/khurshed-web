@@ -1,10 +1,16 @@
 import type { CSSProperties, ReactNode } from 'react'
 import {
+  BriefcaseBusiness,
+  GraduationCap,
   Globe2,
+  Languages,
   Linkedin,
   Mail,
   MapPin,
   Phone,
+  Settings,
+  Trophy,
+  UserRound,
 } from 'lucide-react'
 
 import { resumeData } from '@/data/resume-data'
@@ -12,15 +18,21 @@ import ProjectCard from './ProjectCard'
 
 type Project = (typeof resumeData.projects)[number]
 
-function SectionTitle({
+function FirstPageSectionTitle({
   children,
+  icon,
 }: {
   children: ReactNode
+  icon: ReactNode
 }) {
   return (
-    <div className="resume-section-title">
+    <div className="resume-first-section-title">
+      <span className="resume-first-section-icon">
+        {icon}
+      </span>
       <h2>{children}</h2>
-      <span aria-hidden="true" />
+      <span className="resume-first-section-line" aria-hidden="true" />
+      <span className="resume-first-section-dot" aria-hidden="true" />
     </div>
   )
 }
@@ -30,24 +42,16 @@ function ResumeHeader() {
 
   return (
     <header className="resume-header">
-      <div className="resume-photo-wrapper">
-        <img
-          src={profile.photo}
-          alt={profile.name}
-          className="resume-photo"
-        />
-      </div>
-
       <div className="resume-header-panel">
         <h1>{profile.name}</h1>
         <p className="resume-role">{profile.role}</p>
 
-        <div className="resume-location">
-          <MapPin size={12} />
-          <span>{profile.location}</span>
-        </div>
-
         <div className="resume-contact-row">
+          <span className="resume-contact-item">
+            <MapPin size={12} />
+            <span>{profile.location}</span>
+          </span>
+
           <a href={`tel:${profile.phone}`}>
             <Phone size={11} />
             <span>{profile.phone}</span>
@@ -81,68 +85,24 @@ function ResumeHeader() {
   )
 }
 
-function SidebarDivider() {
-  return <div className="resume-sidebar-divider" />
-}
+function SkillsTable() {
+  const rows = [
+    ...resumeData.skillGroups,
+    {
+      title: 'Soft Skills',
+      skills: resumeData.softSkills,
+    },
+  ]
 
-function ResumeSidebar() {
   return (
-    <aside className="resume-sidebar">
-      <section>
-        <h2 className="resume-sidebar-heading">
-          Technical Skills
-        </h2>
-
-        <div className="resume-skill-groups">
-          {resumeData.skillGroups.map((group) => (
-            <article
-              key={group.title}
-              className="resume-skill-group"
-            >
-              <h3>{group.title}</h3>
-              <p>{group.skills.join(', ')}</p>
-              <SidebarDivider />
-            </article>
-          ))}
+    <div className="resume-skills-table">
+      {rows.map((group) => (
+        <div className="resume-skill-row" key={group.title}>
+          <h3>{group.title}</h3>
+          <p>{group.skills.join(', ')}</p>
         </div>
-      </section>
-
-      <section className="resume-sidebar-block">
-        <h3>Soft Skills</h3>
-        <p>{resumeData.softSkills.join(', ')}</p>
-        <SidebarDivider />
-      </section>
-
-      <section className="resume-sidebar-block">
-        <h3>Languages</h3>
-        <p>{resumeData.languages.join(', ')}</p>
-        <SidebarDivider />
-      </section>
-
-      <section className="resume-sidebar-block">
-        <h3>Nationality</h3>
-        <p>{resumeData.nationality}</p>
-        <SidebarDivider />
-      </section>
-
-      <section className="resume-sidebar-block">
-        <h3>Education</h3>
-
-        {resumeData.education.map((item) => (
-          <article
-            key={`${item.degree}-${item.period}`}
-            className="resume-education"
-          >
-           <p className="font-semibold">{item.degree}</p>
-          <p>{item.specialization}</p>
-          <p>
-            {item.institution}, {item.location}
-          </p>
-          <p>{item.period}</p>
-          </article>
-        ))}
-      </section>
-    </aside>
+      ))}
+    </div>
   )
 }
 
@@ -154,14 +114,16 @@ function EmploymentHistory() {
           key={`${experience.company}-${experience.period}`}
           className="resume-experience"
         >
-          <h3>
-            {experience.role}, {experience.company},{' '}
-            {experience.location}
-          </h3>
+          <span className="resume-timeline-dot" aria-hidden="true" />
 
-          <p className="resume-period">
-            {experience.period}
-          </p>
+          <div className="resume-experience-header">
+            <h3>{experience.role}</h3>
+            <span aria-hidden="true" />
+            <p>
+              {experience.company}, {experience.location}
+            </p>
+            <strong>{experience.period}</strong>
+          </div>
 
           <ul>
             {experience.achievements.map((achievement) => (
@@ -173,17 +135,23 @@ function EmploymentHistory() {
 
           {experience.keyAchievements.length > 0 && (
             <div className="resume-key-achievements">
-              <h4>Key Achievements:</h4>
+              <span className="resume-achievement-icon">
+                <Trophy size={15} />
+              </span>
 
-              <ul>
-                {experience.keyAchievements.map(
-                  (achievement) => (
-                    <li key={achievement}>
-                      {achievement}
-                    </li>
-                  )
-                )}
-              </ul>
+              <div>
+                <h4>Key Achievements</h4>
+
+                <ul>
+                  {experience.keyAchievements.map(
+                    (achievement) => (
+                      <li key={achievement}>
+                        {achievement}
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
             </div>
           )}
         </article>
@@ -192,34 +160,80 @@ function EmploymentHistory() {
   )
 }
 
+function ResumeFooterDetails() {
+  return (
+    <footer className="resume-first-footer">
+      <section className="resume-education-panel">
+        <span className="resume-footer-icon">
+          <GraduationCap size={16} />
+        </span>
+
+        <div>
+          <h2>Education</h2>
+          {resumeData.education.map((item) => (
+            <article key={`${item.degree}-${item.period}`}>
+              <h3>{item.degree}</h3>
+              <p>{item.specialization}</p>
+              <p className="resume-education-school">
+                {item.institution}, {item.location}
+              </p>
+              <strong>{item.period}</strong>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <div className="resume-personal-details">
+        <div>
+          <Languages size={15} />
+          <h3>Languages</h3>
+          <p>{resumeData.languages.join(', ')}</p>
+        </div>
+
+        <div>
+          <Globe2 size={15} />
+          <h3>Nationality</h3>
+          <p>{resumeData.nationality}</p>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
 function FirstPage() {
   return (
     <section className="resume-page resume-page-one">
       <ResumeHeader />
 
-      <div className="resume-first-page-grid">
-        <ResumeSidebar />
+      <main className="resume-first-page-content">
+        <section className="resume-first-section resume-summary-section">
+          <FirstPageSectionTitle icon={<UserRound size={16} />}>
+            Professional Summary
+          </FirstPageSectionTitle>
 
-        <main className="resume-main">
-          <section className="resume-content-section">
-            <SectionTitle>
-              Professional Summary
-            </SectionTitle>
+          <p className="resume-summary">
+            {resumeData.summary}
+          </p>
+        </section>
 
-            <p className="resume-summary">
-              {resumeData.summary}
-            </p>
-          </section>
+        <section className="resume-first-section resume-skills-section">
+          <FirstPageSectionTitle icon={<Settings size={16} />}>
+            Technical Skills
+          </FirstPageSectionTitle>
 
-          <section className="resume-content-section">
-            <SectionTitle>
-              Employment History
-            </SectionTitle>
+          <SkillsTable />
+        </section>
 
-            <EmploymentHistory />
-          </section>
-        </main>
-      </div>
+        <section className="resume-first-section resume-employment-section">
+          <FirstPageSectionTitle icon={<BriefcaseBusiness size={16} />}>
+            Professional Experience
+          </FirstPageSectionTitle>
+
+          <EmploymentHistory />
+        </section>
+
+        <ResumeFooterDetails />
+      </main>
     </section>
   )
 }

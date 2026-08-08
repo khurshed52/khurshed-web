@@ -7,19 +7,20 @@
 [data-theme="light"] {
   color-scheme: light;
 
-  --background: 248 250 252;
-  --editor: 255 255 255;
-  --sidebar: 248 250 252;
-  --panel: 241 245 249;
+  --background: 226 232 240;
+  --editor: 248 250 252;
+  --sidebar: 238 242 247;
+  --panel: 231 237 244;
   --panel-strong: 255 255 255;
-  --border: 209 213 219;
+  --card: 255 255 255;
+  --border: 186 198 211;
 
-  --text-primary: 17 24 39;
-  --text-secondary: 55 65 81;
-  --text-muted: 107 114 128;
+  --text-primary: 15 23 42;
+  --text-secondary: 51 65 85;
+  --text-muted: 100 116 139;
 
-  --scrollbar: #cbd5e1;
-  --scrollbar-hover: #94a3b8;
+  --scrollbar: #b9c5d3;
+  --scrollbar-hover: #8797aa;
 
   --accent: #007acc;
 }
@@ -33,6 +34,7 @@
   --sidebar: 24 24 24;
   --panel: 32 32 32;
   --panel-strong: 17 17 17;
+  --card: 32 32 32;
   --border: 51 51 51;
 
   --text-primary: 244 244 245;

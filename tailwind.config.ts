@@ -13,6 +13,7 @@ const config: Config = {
         sidebar: 'rgb(var(--sidebar) / <alpha-value>)',
         panel: 'rgb(var(--panel) / <alpha-value>)',
         'panel-strong': 'rgb(var(--panel-strong) / <alpha-value>)',
+        card: 'rgb(var(--card) / <alpha-value>)',
         border: 'rgb(var(--border) / <alpha-value>)',
         zinc: {
           100: 'rgb(var(--text-primary) / <alpha-value>)',
