@@ -32,7 +32,7 @@ body {
   color: var(--resume-body);
   font-family: var(--resume-font);
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.4;
 }
 
@@ -183,7 +183,7 @@ body {
   margin: 0 2.5mm 0 10.5mm;
   color: var(--resume-body);
   font-size: 9.5pt;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.55;
 }
 
@@ -218,7 +218,7 @@ body {
   padding: 0.6mm 0 0.6mm 4mm;
   border-left: 0.3mm solid #aeb6bf;
   color: var(--resume-text);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .resume-experience-list {
@@ -306,7 +306,7 @@ body {
   padding-left: 0.2mm;
   color: var(--resume-body);
   font-size: 9.5pt;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.55;
 }
 
@@ -348,7 +348,7 @@ body {
   padding-left: 4.2mm;
   color: var(--resume-body);
   font-size: 9.5pt;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.5;
 }
 
@@ -427,7 +427,7 @@ body {
 }
 
 .resume-personal-details h3 { font-weight: 800; }
-.resume-personal-details p { font-weight: 500; }
+.resume-personal-details p { font-weight: 600; }
 
 /* PAGE TWO */
 .resume-page-two {
@@ -536,7 +536,7 @@ body {
   margin: 0;
   color: var(--resume-muted);
   font-size: 8.5pt;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
 }
 
@@ -624,7 +624,7 @@ body {
   padding-left: 0.5mm;
   color: var(--resume-body);
   font-size: 9.8pt;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
