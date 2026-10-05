@@ -52,24 +52,25 @@ export const resumeData = {
   },
 
   summary:
-    'Senior Frontend Developer with 9+ years of experience designing and developing scalable, high-performance web applications using React.js, Next.js, Angular, Vue.js, and TypeScript. Specialized in fintech, trading platforms, real-time dashboards, and enterprise applications. Proven expertise in building responsive user interfaces, API integrations, performance optimization, and leading frontend initiatives. Strong experience collaborating with cross-functional teams and mentoring developers to deliver enterprise-grade solutions.',
+    'Senior Frontend Developer with 9+ years of experience designing and developing scalable, high-performance web applications using React.js, Next.js, Angular, Vue.js, and TypeScript. Specialized in fintech, trading platforms, real-time dashboards, and enterprise applications. Experienced in integrating AI/LLM capabilities into frontend products, including Gemini-powered conversational interfaces and natural-language workflows.',
 
   skillGroups: [
     {
       title: 'Frontend Technologies',
-      skills: [
-        'React',
-        'Next.js',
-        'Angular',
-        'Vue.js',
-        'Redux',
-        'Context API',
-        'Ember.js',
-        'TypeScript',
-        'JavaScript (ES6+)',
-        'HTML5',
-        'CSS3',
-      ],
+    skills: [
+      'React.js',
+      'Next.js',
+      'TypeScript',
+      'JavaScript (ES6+)',
+      'Angular',
+      'Vue.js',
+      'Redux',
+      'TanStack Query (React Query)',
+      'Context API',
+      'Ember.js',
+      'HTML5',
+      'CSS3',
+    ],
     },
     {
       title: 'UI Frameworks',
@@ -85,20 +86,33 @@ export const resumeData = {
       skills: ['Highcharts.js', 'Chart.js'],
     },
     {
-      title: 'Backend Integration',
+      title: 'Backend & API Integration',
       skills: [
+        'Node.js',
         'REST APIs',
         'WebSocket',
         'API Integration',
         'Third-Party Services',
       ],
     },
+      {
+      title: 'AI & LLM Integration',
+      skills: [
+        'Gemini API',
+        'LLM Integration',
+        'Prompt Engineering',
+        'Generative AI Integration'
+      ],
+    },
+    {
+      title: 'Testing & Quality',
+      skills: ['Playwright, End-to-End Testing, UI Automation, Cross-Browser Testing'],
+    },
     {
       title: 'Tools & Technologies',
       skills: [
         'Git',
         'GitHub',
-        'Node.js',
         'MongoDB',
         'Figma',
         'Webpack',
@@ -118,7 +132,7 @@ export const resumeData = {
 
   education: [
     {
-      degree: "Bachelor of Technology (B.Tech.)",
+      degree: "Bachelor of Technology (B.Tech)",
       specialization: "Computer Science & Engineering",
       institution: "Sabarmati University",
       location: "Ahmedabad, India",
@@ -172,7 +186,7 @@ export const resumeData = {
  projects: [
       {
     name: 'TradePro AI Trading Platform',
-    role: 'Front End Developer',
+    role: 'Senior Frontend Developer | AI Integration',
 
     software: [
       'Next.js',
@@ -197,7 +211,7 @@ export const resumeData = {
   },
     {
     name: 'Trive Client Portal',
-    role: 'Front End Developer',
+    role: 'Senior Front End Developer',
 
     software: [
       'Angular',
@@ -220,7 +234,7 @@ export const resumeData = {
   },
   {
     name: 'CPT Markets',
-    role: 'Front End Developer',
+    role: 'Senior Front End Developer',
 
     software: [
       'Vue.js',
