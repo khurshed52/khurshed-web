@@ -9,6 +9,7 @@ export type ResumeExperience = {
   location: string
   period: string
   achievements: string[]
+  highlights: string[]
   keyAchievements: string[]
 }
 
@@ -156,10 +157,16 @@ export const resumeData = {
         'Partnered directly with product and backend teams to ship new features on a regular release cycle, integrating REST and WebSocket APIs for live market data.',
       ],
 
-      keyAchievements: [
-        'Developed real-time market data dashboards and reusable component libraries, accelerating feature delivery and improving development efficiency.',
-        'Improved application performance and reduced page load time by 40%.',
+      highlights: [
+        'Forex/CFD trading platforms',
+        '20+ reusable components',
+        'real-time trading dashboards',
+        '40%',
+        '3-5 developers',
+        'REST and WebSocket APIs',
       ],
+
+      keyAchievements: [],
     },
     {
       role: 'Senior Frontend Developer',
@@ -168,18 +175,46 @@ export const resumeData = {
       period: 'March 2021 — September 2025',
 
       achievements: [
-        'Developed and maintained global trading platforms using React.js, Next.js, and Vue.js.',
-        'Implemented multilingual support (i18n) for international users.',
-        'Built interactive analytics dashboards using Highcharts.js.',
-        'Integrated REST APIs, WebSocket services, and third-party financial systems.',
-        'Worked closely with UX designers and backend teams.',
-        'Mentored junior developers and improved code quality standards.',
+        'Developed and maintained global trading platforms using React.js, Next.js, Vue.js, and TypeScript.',
+        'Built interactive financial dashboards with Highcharts.js for real-time market data and trading analytics.',
+        'Delivered multilingual Arabic and English experiences using i18n for international users and regional markets.',
+        'Integrated REST APIs, WebSockets, and financial systems for live prices and account workflows.',
+        'Built reusable UI components, mentored junior developers, and partnered with UX and backend teams to improve delivery speed and code quality.',
       ],
 
-      keyAchievements: [
-        'Implemented multilingual support across global markets.',
-        'Improved development productivity through reusable UI components.',
+      highlights: [
+        'global trading platforms',
+        'interactive financial dashboards',
+        'multilingual Arabic and English experiences',
+        'REST APIs, WebSockets, and financial systems',
+        'delivery speed and code quality',
       ],
+
+      keyAchievements: [],
+    },
+    {
+      role: 'Frontend Developer',
+      company: 'Micro Pro LLC — General Authority of Sports',
+      location: 'Dubai',
+      period: 'February 2017 – February 2021',
+
+      achievements: [
+        'Developed responsive, accessible, and interactive government web applications using Angular, TypeScript, JavaScript, HTML5, and CSS3.',
+        'Implemented multilingual Arabic (RTL) and English (LTR) interfaces, ensuring consistent layouts, typography, and user experience across languages.',
+        'Developed frontend interfaces aligned with UAE TDRA digital government guidelines and standards, focusing on usability, accessibility, and responsive design.',
+        'Integrated REST APIs and collaborated with backend developers, UI/UX designers, and stakeholders to deliver scalable government web applications.',
+        'Optimized frontend performance, cross-browser compatibility, and reusable Angular components to improve application quality and maintainability.',
+      ],
+
+      highlights: [
+        'government web applications',
+        'Arabic (RTL) and English (LTR) interfaces',
+        'UAE TDRA digital government guidelines and standards',
+        'scalable government web applications',
+        'reusable Angular components',
+      ],
+
+      keyAchievements: [],
     },
   ] satisfies ResumeExperience[],
 

@@ -107,6 +107,41 @@ function SkillsTable() {
 }
 
 function EmploymentHistory() {
+  const renderHighlightedText = (
+    text: string,
+    highlights: string[]
+  ) => {
+    const matchingHighlights = highlights
+      .filter((highlight) => text.includes(highlight))
+      .sort((a, b) => text.indexOf(a) - text.indexOf(b))
+
+    if (matchingHighlights.length === 0) return text
+
+    const nodes: ReactNode[] = []
+    let cursor = 0
+
+    matchingHighlights.forEach((highlight) => {
+      const start = text.indexOf(highlight, cursor)
+
+      if (start === -1) return
+      if (start > cursor) nodes.push(text.slice(cursor, start))
+
+      nodes.push(
+        <span
+          className="resume-experience-emphasis"
+          key={`${highlight}-${start}`}
+        >
+          {highlight}
+        </span>
+      )
+      cursor = start + highlight.length
+    })
+
+    if (cursor < text.length) nodes.push(text.slice(cursor))
+
+    return nodes
+  }
+
   return (
     <div className="resume-experience-list">
       {resumeData.experience.map((experience) => (
@@ -128,7 +163,10 @@ function EmploymentHistory() {
           <ul>
             {experience.achievements.map((achievement) => (
               <li key={achievement}>
-                {achievement}
+                {renderHighlightedText(
+                  achievement,
+                  experience.highlights
+                )}
               </li>
             ))}
           </ul>

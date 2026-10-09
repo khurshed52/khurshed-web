@@ -58,17 +58,17 @@ body {
 /* PAGE ONE */
 .resume-header {
   width: 100%;
-  padding: 3.5mm 4mm 2.5mm;
+  padding: 1.5mm 4mm 1.5mm;
 }
 
 .resume-header-panel {
   width: 100%;
-  padding-bottom: 4mm;
+  padding-bottom: 2mm;
   border-bottom: 0.55mm solid var(--resume-teal-dark);
 }
 
 .resume-header-panel h1 {
-  margin-bottom: 1.2mm;
+  margin-bottom: 0.8mm;
   color: #09152e;
   font-size: 24pt;
   font-weight: 800;
@@ -78,7 +78,7 @@ body {
 }
 
 .resume-role {
-  margin-bottom: 3mm;
+  margin-bottom: 2mm;
   color: var(--resume-teal-dark);
   font-size: 12.5pt;
   font-weight: 800;
@@ -224,7 +224,7 @@ body {
 .resume-experience-list {
   position: relative;
   display: grid;
-  gap: 2.5mm;
+  gap: 1.5mm;
   margin-left: 4mm;
   padding-left: 6.5mm;
 }
@@ -258,9 +258,10 @@ body {
 
 .resume-experience-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 2mm;
-  margin-bottom: 1mm;
+  margin-bottom: 0.7mm;
 }
 
 .resume-experience-header h3,
@@ -296,7 +297,7 @@ body {
 
 .resume-experience > ul {
   display: grid;
-  gap: 0.7mm;
+  gap: 0.55mm;
   margin: 0;
   padding-left: 4.4mm;
   list-style: disc;
@@ -307,7 +308,14 @@ body {
   color: var(--resume-body);
   font-size: 9.5pt;
   font-weight: 500;
-  line-height: 1.55;
+  line-height: 1.48;
+}
+
+.resume-experience-emphasis {
+  padding: 0;
+  background: transparent;
+  color: var(--resume-text);
+  font-weight: 700;
 }
 
 .resume-key-achievements {
@@ -364,7 +372,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6mm;
-  padding-top: 1.8mm;
+  padding-top: 1.2mm;
   border-top: 0.55mm solid var(--resume-teal-dark);
 }
 
