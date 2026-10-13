@@ -18,7 +18,9 @@ function ProjectCard({
   )
 
   return (
-    <article className="resume-project-card">
+    <article
+      className={`resume-project-card${index === 0 ? ' resume-project-card-featured' : ''}`}
+    >
       <header className="resume-project-card-header">
         <div className="resume-project-identity">
           <span className="resume-project-number">
@@ -86,13 +88,24 @@ function ProjectCard({
           Tech Stack
         </h3>
 
-        <div className="resume-project-stack">
-          {project.software.map((technology) => (
-            <span key={technology}>
-              {technology}
-            </span>
-          ))}
-        </div>
+        {project.stackGroups ? (
+          <div className="resume-project-stack-groups">
+            {project.stackGroups.map((group) => (
+              <div key={group.label}>
+                <strong>{group.label}:</strong>
+                <span>{group.technologies.join(', ')}</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="resume-project-stack">
+            {project.software.map((technology) => (
+              <span key={technology}>
+                {technology}
+              </span>
+            ))}
+          </div>
+        )}
       </section>
     </article>
   )

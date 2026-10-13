@@ -475,12 +475,12 @@ body {
 
 .resume-project-card-list {
   display: grid;
-  gap: 3.2mm;
+  gap: 2.3mm;
 }
 
 .resume-project-card {
   min-width: 0;
-  padding: 3.6mm 4.6mm;
+  padding: 3mm 4mm;
   overflow: hidden;
   border: 0.3mm solid #e2e6e9;
   border-radius: 3mm;
@@ -494,7 +494,7 @@ body {
   align-items: flex-start;
   justify-content: space-between;
   gap: 5mm;
-  padding-bottom: 2.7mm;
+  padding-bottom: 2.2mm;
   border-bottom: 0.25mm solid #dfe4e8;
 }
 
@@ -538,6 +538,11 @@ body {
   line-height: 1.05;
   letter-spacing: -0.25pt;
   overflow-wrap: anywhere;
+}
+
+.resume-project-card-featured .resume-project-heading h2 {
+  font-size: 13pt;
+  letter-spacing: -0.15pt;
 }
 
 .resume-project-heading p {
@@ -593,12 +598,12 @@ body {
 }
 
 .resume-project-section {
-  padding-top: 2.7mm;
+  padding-top: 2.1mm;
 }
 
 .resume-project-section-title {
   position: relative;
-  margin: 1mm 0 1.8mm;
+  margin: 0.7mm 0 1.3mm;
   padding-left: 3mm;
   color: var(--resume-teal-dark);
   font-size: 8.2pt;
@@ -621,7 +626,7 @@ body {
 .resume-project-responsibility-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1mm;
+  gap: 0.55mm;
   margin: 0;
   padding-left: 4.5mm;
   list-style: disc;
@@ -631,15 +636,15 @@ body {
   min-width: 0;
   padding-left: 0.5mm;
   color: var(--resume-body);
-  font-size: 9.8pt;
+  font-size: 9.2pt;
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.42;
   overflow-wrap: anywhere;
 }
 
 .resume-project-stack-section {
-  margin-top: 2.7mm;
-  padding-top: 2.7mm;
+  margin-top: 2mm;
+  padding-top: 2mm;
   border-top: 0.25mm solid #dfe4e8;
 }
 
@@ -660,6 +665,29 @@ body {
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
+}
+
+.resume-project-stack-groups {
+  display: grid;
+  gap: 0.6mm;
+}
+
+.resume-project-stack-groups > div {
+  display: grid;
+  grid-template-columns: 36mm minmax(0, 1fr);
+  gap: 2mm;
+  color: var(--resume-body);
+  font-size: calc(7.4pt + 1px);
+  line-height: 1.3;
+}
+
+.resume-project-stack-groups strong {
+  color: var(--resume-teal-dark);
+  font-weight: 700;
+}
+
+.resume-project-stack-groups span {
+  font-weight: 500;
 }
 
 /* PRINT */

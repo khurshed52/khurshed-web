@@ -17,6 +17,10 @@ export type ResumeProject = {
   name: string
   role: string
   software: string[]
+  stackGroups?: {
+    label: string
+    technologies: string[]
+  }[]
   responsibilities: string[]
 
   visitLink: string | false
@@ -84,7 +88,7 @@ export const resumeData = {
     },
     {
       title: 'Data Visualization',
-      skills: ['Highcharts.js', 'Chart.js'],
+      skills: ['Highcharts.js', 'Chart.js', 'Recharts'],
     },
     {
       title: 'Backend & API Integration',
@@ -220,25 +224,61 @@ export const resumeData = {
 
  projects: [
       {
-    name: 'TradePro AI Trading Platform',
-    role: 'Senior Frontend Developer | AI Integration',
+    name: 'TradePro — AI-Powered Trading Platform',
+    role: 'Senior Software Engineer | Frontend & FinTech Solutions',
 
     software: [
       'Next.js',
+      'React.js',
       'TypeScript',
+      'JavaScript',
       'Tailwind CSS',
-      'Gemini API',
-      'GSAP',
       'Ant Design',
+      'Node.js',
+      'Express.js',
+      'Prisma ORM',
+      'PostgreSQL',
+      'REST APIs',
+      'Live Market Data APIs',
+      'Veriff (KYC)',
+      'Stripe',
+      'Currency Exchange APIs',
+      'Git',
+      'GitHub',
+      'Postman',
+      'Custom React Hooks',
+      'Component-Based Architecture',
+      'Server-Side Pagination',
+    ],
+
+    stackGroups: [
+      {
+        label: 'Frontend',
+        technologies: ['Next.js', 'React.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Ant Design', 'Recharts'],
+      },
+      {
+        label: 'Backend & Database',
+        technologies: ['Node.js', 'Express.js', 'Prisma ORM', 'PostgreSQL'],
+      },
+      {
+        label: 'Integrations',
+        technologies: ['REST APIs', 'Live Market Data APIs', 'Veriff (KYC)', 'Stripe', 'Currency Exchange APIs'],
+      },
+      {
+        label: 'Tools & Architecture',
+        technologies: ['Git', 'GitHub', 'Postman', 'Custom React Hooks', 'Component-Based Architecture', 'Server-Side Pagination'],
+      },
     ],
 
     responsibilities: [
-      'Built responsive trading dashboards and authentication modules using Next.js and TypeScript.',
-      'Integrated REST APIs for user onboarding, KYC verification, wallet management, and live market data.',
-      'Built reusable frontend components and scalable application architecture for maintainable development.',
-      'Collaborated with designers and backend developers to deliver AI-powered trading features and production-ready releases.',
-      'Optimized application performance with code splitting, lazy loading, and GSAP animations.',
-      'Implemented Gemini API integration for AI-powered chat, investment insights, and natural language query processing.'
+      'Designed and developed responsive trading dashboards and interactive financial data visualizations using Next.js, React.js, TypeScript, Recharts, Tailwind CSS, and Ant Design.',
+      'Integrated live financial market data APIs to display real-time market prices, currency exchange rates, and trading information.',
+      'Implemented Veriff-powered identity verification (KYC), integrating live verification workflows, customer onboarding, and verification-status tracking.',
+      'Developed secure authentication, customer profile management, and trading account management modules with REST API integrations.',
+      'Implemented multi-currency deposits, withdrawals, and internal fund transfers, including transaction lifecycle management, balance tracking, and currency conversion.',
+      'Built comprehensive financial reporting modules for deposits, withdrawals, and transfers, featuring advanced filtering, server-side pagination, and transaction history.',
+      'Developed backend REST APIs and financial transaction services using Node.js, Express.js, Prisma ORM, and PostgreSQL, integrating frontend and backend workflows.',
+      'Engineered reusable React components, custom hooks, and strongly typed API service layers to improve code maintainability, scalability, and application consistency.',
     ],
 
     visitLink: 'https://ai-trading-platfrom.vercel.app/login',
