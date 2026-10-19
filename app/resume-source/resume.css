@@ -70,7 +70,7 @@ body {
 .resume-header-panel h1 {
   margin-bottom: 0.8mm;
   color: #09152e;
-  font-size: 24pt;
+  font-size: 20pt;
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.7pt;
@@ -80,11 +80,11 @@ body {
 .resume-role {
   margin-bottom: 2mm;
   color: var(--resume-teal-dark);
-  font-size: 12.5pt;
-  font-weight: 800;
+  font-size: 13pt;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: 0.15pt;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .resume-contact-row svg { flex: 0 0 auto; }
@@ -124,7 +124,7 @@ body {
   padding: 0 4mm 5mm;
 }
 
-.resume-first-section { margin-bottom: 1.5mm; }
+.resume-first-section { margin-bottom: 1mm; }
 
 .resume-first-section-title {
   display: flex;
@@ -134,7 +134,11 @@ body {
 }
 
 .resume-summary-section .resume-first-section-title {
-  margin-bottom: 0.9mm;
+  margin-bottom: 0;
+}
+
+.resume-summary-section {
+  margin-bottom: 0.4mm;
 }
 
 .resume-first-section-icon,
@@ -180,11 +184,11 @@ body {
 }
 
 .resume-summary {
-  margin: 0 2.5mm 0 10.5mm;
+  margin: -3.6mm 2.5mm 0 10.5mm;
   color: var(--resume-body);
   font-size: 9.5pt;
   font-weight: 500;
-  line-height: 1.55;
+  line-height: 1.48;
 }
 
 .resume-skills-table {
@@ -194,7 +198,7 @@ body {
 
 .resume-skill-row {
   display: grid;
-  grid-template-columns: 46mm minmax(0, 1fr);
+  grid-template-columns: 52mm minmax(0, 1fr);
   min-height: 5.4mm;
   border-bottom: 0.25mm dotted #bdc4ca;
 }
@@ -212,6 +216,7 @@ body {
   padding-right: 4mm;
   color: var(--resume-teal-dark);
   font-weight: 800;
+  white-space: nowrap;
 }
 
 .resume-skill-row p {
@@ -224,7 +229,7 @@ body {
 .resume-experience-list {
   position: relative;
   display: grid;
-  gap: 1.5mm;
+  gap: 1mm;
   margin-left: 4mm;
   padding-left: 6.5mm;
 }
@@ -388,7 +393,7 @@ body {
 }
 
 .resume-education-panel h2 {
-  margin-bottom: 1.2mm;
+  margin-bottom: 0.6mm;
   color: var(--resume-teal-dark);
   font-size: 10pt;
   font-weight: 800;

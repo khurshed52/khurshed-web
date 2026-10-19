@@ -38,7 +38,7 @@ export type ResumeEducation = {
 export const resumeData = {
   profile: {
     name: 'Khurshed Khan',
-    role: 'Senior Frontend Developer',
+    role: 'Senior Frontend Developer | Full-Stack Developer',
     location: 'Dubai, UAE',
     phone: '+971 559553204',
     email: 'Khurshedkhan52@gmail.com',
@@ -57,7 +57,7 @@ export const resumeData = {
   },
 
   summary:
-    'Senior Frontend Developer with 9+ years of experience designing and developing scalable, high-performance web applications using React.js, Next.js, Angular, Vue.js, and TypeScript. Specialized in fintech, trading platforms, real-time dashboards, and enterprise applications. Experienced in integrating AI/LLM capabilities into frontend products, including Gemini-powered conversational interfaces and natural-language workflows.',
+    'Senior Frontend Developer with 9+ years of experience building scalable, high-performance applications, specializing in FinTech, Forex/CFD trading platforms, and real-time systems. Strong expertise in React.js, Next.js, TypeScript, Angular, and Vue.js, with hands-on full-stack development experience using Node.js, Express.js, PostgreSQL, Prisma ORM, Redis, and BullMQ. Experienced in developing secure APIs, financial application workflows, and AI-powered solutions using Gemini API and LLM integration.',
 
   skillGroups: [
     {
@@ -91,20 +91,23 @@ export const resumeData = {
       skills: ['Highcharts.js', 'Chart.js', 'Recharts'],
     },
     {
-      title: 'Backend & API Integration',
+      title: 'Backend & API Development',
       skills: [
         'Node.js',
+        'Express.js',
         'REST APIs',
-        'WebSocket',
-        'API Integration',
-        'Third-Party Services',
+        'PostgreSQL',
+        'Prisma ORM',
+        'Redis',
+        'BullMQ',
+        'WebSocket'
       ],
     },
       {
       title: 'AI & LLM Integration',
       skills: [
         'Gemini API',
-        'LLM Integration',
+        'Secure LLM Integration',
         'Prompt Engineering',
         'Generative AI Integration'
       ],
@@ -225,7 +228,7 @@ export const resumeData = {
  projects: [
       {
     name: 'TradePro — AI-Powered Trading Platform',
-    role: 'Senior Software Engineer | Frontend & FinTech Solutions',
+    role: 'Full-Stack Developer | FinTech & AI Integration',
 
     software: [
       'Next.js',
