@@ -35,21 +35,31 @@ export type ResumeEducation = {
   period: string
 }
 
+// Skills intentionally excluded from the recruiter-facing PDF until their
+// hands-on depth can be confirmed. Re-enable them from this single list only.
+export const UNVERIFIED_SKILLS = [
+  'Redis',
+  'BullMQ',
+  'End-to-End Testing',
+  'UI Automation',
+] as const
+
 export const resumeData = {
   profile: {
     name: 'Khurshed Khan',
     role: 'Senior Frontend Developer | Full-Stack Developer',
     location: 'Dubai, UAE',
+    relocation: 'Open to Relocate to India',
     phone: '+971 559553204',
     email: 'Khurshedkhan52@gmail.com',
 
     website: {
-      label: 'Website',
+      label: 'khurshedkhan.dev',
       url: 'https://www.khurshedkhan.dev/',
     },
 
     linkedin: {
-      label: 'LinkedIn',
+      label: 'linkedin.com/in/khurshed-khan',
       url: 'https://www.linkedin.com/in/khurshed-khan-a30b0159/',
     },
 
@@ -57,38 +67,36 @@ export const resumeData = {
   },
 
   summary:
-    'Senior Frontend Developer with 9+ years of experience building scalable, high-performance applications, specializing in FinTech, Forex/CFD trading platforms, and real-time systems. Strong expertise in React.js, Next.js, TypeScript, Angular, and Vue.js, with hands-on full-stack development experience using Node.js, Express.js, PostgreSQL, Prisma ORM, Redis, and BullMQ. Experienced in developing secure APIs, financial application workflows, and AI-powered solutions using Gemini API and LLM integration.',
+    'Senior Frontend Developer (Full-Stack) with 9+ years of experience building React.js and Next.js applications for FinTech, Forex/CFD trading platforms, and enterprise systems in the UAE. Strong expertise in TypeScript, Angular, and Vue.js, with full-stack experience in Node.js, Express.js, PostgreSQL, and Prisma ORM. Skilled in real-time WebSocket dashboards, secure financial workflows, WCAG 2.1 AA accessibility, UAE TDRA-aligned government applications, and AI features using the Gemini API.',
 
   skillGroups: [
     {
       title: 'Frontend Technologies',
-    skills: [
-      'React.js',
-      'Next.js',
-      'TypeScript',
-      'JavaScript (ES6+)',
-      'Angular',
-      'Vue.js',
-      'Redux',
-      'TanStack Query (React Query)',
-      'Context API',
-      'Ember.js',
-      'HTML5',
-      'CSS3',
-    ],
-    },
-    {
-      title: 'UI Frameworks',
       skills: [
-        'Tailwind CSS',
-        'Bootstrap',
-        'Angular Material',
-        'Ant Design',
+        'React.js',
+        'Next.js',
+        'TypeScript',
+        'Angular 19',
+        'Vue.js',
+        'Nuxt.js',
+        'JavaScript (ES6+)',
+        'HTML5',
+        'CSS3',
       ],
     },
     {
-      title: 'Data Visualization',
-      skills: ['Highcharts.js', 'Chart.js', 'Recharts'],
+      title: 'State Management & UI',
+      skills: [
+        'NgRx',
+        'Pinia',
+        'Redux',
+        'TanStack Query (React Query)',
+        'Context API',
+        'Tailwind CSS',
+        'Angular Material',
+        'Ant Design',
+        'Bootstrap',
+      ],
     },
     {
       title: 'Backend & API Development',
@@ -98,12 +106,20 @@ export const resumeData = {
         'REST APIs',
         'PostgreSQL',
         'Prisma ORM',
-        'Redis',
-        'BullMQ',
-        'WebSocket'
+        'WebSockets',
       ],
     },
-      {
+    {
+      title: 'Integrations',
+      skills: [
+        'Stripe',
+        'Veriff (KYC)',
+        'PSP Integration',
+        'i18n (Arabic RTL/LTR)',
+        'Live Market Data APIs',
+      ],
+    },
+    {
       title: 'AI & LLM Integration',
       skills: [
         'Gemini API',
@@ -113,17 +129,31 @@ export const resumeData = {
       ],
     },
     {
-      title: 'Testing & Quality',
-      skills: ['Playwright, End-to-End Testing, UI Automation, Cross-Browser Testing'],
+      title: 'Visualization, GIS & Media',
+      skills: ['Recharts', 'Highcharts', 'Chart.js', 'Mapbox', 'Video.js'],
+    },
+    {
+      title: 'Quality & Performance',
+      skills: [
+        'Playwright',
+        'Responsive Design',
+        'Performance Optimization',
+        'State Management',
+        'WCAG 2.1 AA',
+        'UAE TDRA',
+        'CSP',
+        'XSS/CSRF Mitigation',
+        'Cross-Browser Testing',
+      ],
     },
     {
       title: 'Tools & Technologies',
       skills: [
         'Git',
         'GitHub',
+        'CI/CD',
+        'Postman',
         'MongoDB',
-        'Figma',
-        'Webpack',
       ],
     },
   ] satisfies ResumeSkillGroup[],
@@ -144,33 +174,39 @@ export const resumeData = {
       specialization: "Computer Science & Engineering",
       institution: "Sabarmati University",
       location: "Ahmedabad, India",
-      period: "2011 — 2015",
+      period: "2011 – 2015",
     },
   ] satisfies ResumeEducation[],
 
   experience: [
     {
-      role: 'Senior Frontend Developer',
+      role: 'Senior Frontend Developer (Full-Stack)',
       company: 'Trive International',
       location: 'Dubai',
-      period: 'October 2025 — Present',
+      period: 'October 2025 – Present',
 
       achievements: [
-        'Lead frontend architecture and development of Forex/CFD trading platforms supporting thousands of active traders, using React.js, Next.js, and TypeScript.',
-        'Architected a library of 20+ reusable components, significantly cutting new feature development time.',
-        'Built real-time trading dashboards handling high-frequency WebSocket price updates with minimal latency.',
+        // TODO_METRIC: Confirm [X active traders] before adding a user count.
+        // The unverified "supporting thousands" wording is intentionally omitted.
+        'Lead application development for Forex/CFD trading platforms using React.js, Next.js, and TypeScript.',
+        'Develop end-to-end financial application features using React.js, Next.js, Node.js, REST APIs, and database integrations.',
+        'Delivered Angular 19 client portal features using TypeScript and NgRx, including authentication, KYC, account management, and payment workflows.',
+        'Built real-time trading dashboards using WebSockets for live market data.',
         'Reduced page load time by 40% through code-splitting, lazy loading, and bundle optimization.',
-        'Own frontend technical decisions across a team of 3-5 developers, including code review standards and architecture reviews.',
-        'Partnered directly with product and backend teams to ship new features on a regular release cycle, integrating REST and WebSocket APIs for live market data.',
+        'Architected a library of 20+ reusable UI components, accelerating feature development.',
+        'Lead technical decisions for a team of 3–5 developers, including code reviews and architecture improvements.',
+        'Collaborate with product and engineering teams to deliver secure, scalable financial applications.',
       ],
 
       highlights: [
         'Forex/CFD trading platforms',
-        '20+ reusable components',
+        '20+ reusable UI components',
         'real-time trading dashboards',
         '40%',
-        '3-5 developers',
+        '3–5 developers',
         'REST and WebSocket APIs',
+        'Angular 19 client portal features',
+        'TypeScript and NgRx',
       ],
 
       keyAchievements: [],
@@ -179,11 +215,11 @@ export const resumeData = {
       role: 'Senior Frontend Developer',
       company: 'CPT Markets',
       location: 'Dubai',
-      period: 'March 2021 — September 2025',
+      period: 'March 2021 – September 2025',
 
       achievements: [
         'Developed and maintained global trading platforms using React.js, Next.js, Vue.js, and TypeScript.',
-        'Built interactive financial dashboards with Highcharts.js for real-time market data and trading analytics.',
+        'Built real-time dashboards, GIS maps, and video interfaces using Highcharts, Mapbox, and Video.js.',
         'Delivered multilingual Arabic and English experiences using i18n for international users and regional markets.',
         'Integrated REST APIs, WebSockets, and financial systems for live prices and account workflows.',
         'Built reusable UI components, mentored junior developers, and partnered with UX and backend teams to improve delivery speed and code quality.',
@@ -191,13 +227,15 @@ export const resumeData = {
 
       highlights: [
         'global trading platforms',
-        'interactive financial dashboards',
+        'real-time dashboards, GIS maps, and video interfaces',
         'multilingual Arabic and English experiences',
         'REST APIs, WebSockets, and financial systems',
         'delivery speed and code quality',
       ],
 
       keyAchievements: [],
+      // TODO_METRIC: Confirm a CPT Markets metric before adding it to the PDF,
+      // e.g. [X% faster load time] or [X releases per month].
     },
     {
       role: 'Frontend Developer',
@@ -207,28 +245,29 @@ export const resumeData = {
 
       achievements: [
         'Developed responsive, accessible, and interactive government web applications using Angular, TypeScript, JavaScript, HTML5, and CSS3.',
-        'Implemented multilingual Arabic (RTL) and English (LTR) interfaces, ensuring consistent layouts, typography, and user experience across languages.',
-        'Developed frontend interfaces aligned with UAE TDRA digital government guidelines and standards, focusing on usability, accessibility, and responsive design.',
-        'Integrated REST APIs and collaborated with backend developers, UI/UX designers, and stakeholders to deliver scalable government web applications.',
-        'Optimized frontend performance, cross-browser compatibility, and reusable Angular components to improve application quality and maintainability.',
+        'Built reusable Angular components and multilingual Arabic (RTL) and English (LTR) interfaces with consistent layouts and user experience.',
+        'Delivered accessible WCAG 2.1 AA and UAE TDRA-aligned government interfaces.',
+        'Integrated REST APIs, applied CSP and XSS/CSRF mitigation, and optimized performance and cross-browser compatibility for secure government applications.',
       ],
 
       highlights: [
         'government web applications',
         'Arabic (RTL) and English (LTR) interfaces',
-        'UAE TDRA digital government guidelines and standards',
-        'scalable government web applications',
+        'WCAG 2.1 AA and UAE TDRA-aligned government interfaces',
+        'CSP and XSS/CSRF mitigation',
         'reusable Angular components',
       ],
 
       keyAchievements: [],
+      // TODO_METRIC: Confirm a Micro Pro metric before adding it to the PDF,
+      // e.g. [X government portals delivered].
     },
   ] satisfies ResumeExperience[],
 
  projects: [
       {
     name: 'TradePro — AI-Powered Trading Platform',
-    role: 'Full-Stack Developer | FinTech & AI Integration',
+    role: 'Senior Full-Stack Developer | FinTech & AI Integration',
 
     software: [
       'Next.js',
@@ -296,7 +335,7 @@ export const resumeData = {
   },
     {
     name: 'Trive Client Portal',
-    role: 'Senior Front End Developer',
+    role: 'Senior Frontend Developer',
 
     software: [
       'Angular',
@@ -319,21 +358,22 @@ export const resumeData = {
   },
   {
     name: 'CPT Markets',
-    role: 'Senior Front End Developer',
+    role: 'Senior Frontend Developer',
 
     software: [
       'Vue.js',
       'Nuxt.js',
-      'Figma',
+      'Mapbox',
+      'Video.js',
       'Pinia',
     ],
 
     responsibilities: [
       'Developed responsive, SEO-friendly web pages using Vue.js and Nuxt.js.',
       'Built reusable UI components and managed application state with Pinia.',
-      'Collaborated with UI/UX designers to convert Figma designs into pixel-perfect, cross-browser compatible interfaces.',
-      'Integrated RESTful APIs to deliver dynamic market data, multilingual content, and interactive website features.',
-      'Enhanced website performance, responsiveness, and SEO best practices.'
+      'Collaborated with UI/UX designers to convert approved designs into pixel-perfect, cross-browser compatible interfaces.',
+      'Integrated REST APIs, Mapbox-powered mapping, and Video.js features for dynamic market data and interactive monitoring.',
+      'Improved website performance and responsiveness while implementing SEO best practices.'
     ],
 
     visitLink: 'https://www.cptmarkets.com/',

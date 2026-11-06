@@ -1,5 +1,8 @@
-import { resumeData } from '@/data/resume-data'
+import type { ResumeTarget } from '@/data/resume-targets'
+import { getResumeData } from '@/lib/resume/getResumeData'
 
-export function createResumeContext() {
-  return resumeData;
+export function createResumeContext(
+  target: ResumeTarget = 'default',
+) {
+  return getResumeData(target)
 }

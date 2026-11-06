@@ -2,6 +2,11 @@ import chromium from '@sparticuz/chromium'
 import type { Browser } from 'puppeteer-core'
 import puppeteerCore from 'puppeteer-core'
 
+import {
+  parseResumeTarget,
+  resumeTargets,
+} from '@/data/resume-targets'
+
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -55,7 +60,17 @@ async function launchBrowser(): Promise<Browser> {
 }
 
 function getResumeSourceUrl(request: Request): string {
-  return new URL('/resume-source', request.url).toString()
+  const requestUrl = new URL(request.url)
+  const target = parseResumeTarget(
+    requestUrl.searchParams.get('target')
+  )
+  const sourceUrl = new URL('/resume-source', request.url)
+
+  if (target !== 'default') {
+    sourceUrl.searchParams.set('target', target)
+  }
+
+  return sourceUrl.toString()
 }
 
 async function waitForResumeAssets(
@@ -103,6 +118,10 @@ export async function GET(request: Request) {
 
     const shouldDownload =
       requestUrl.searchParams.get('download') === '1'
+    const target = parseResumeTarget(
+      requestUrl.searchParams.get('target')
+    )
+    const filename = resumeTargets[target].filename
 
     browser = await launchBrowser()
 
@@ -181,8 +200,8 @@ export async function GET(request: Request) {
         'Content-Type': 'application/pdf',
 
         'Content-Disposition': shouldDownload
-          ? 'attachment; filename="Khurshed-Khan-Resume.pdf"'
-          : 'inline; filename="Khurshed-Khan-Resume.pdf"',
+          ? `attachment; filename="${filename}"`
+          : `inline; filename="${filename}"`,
 
         'Content-Length': String(pdf.byteLength),
 

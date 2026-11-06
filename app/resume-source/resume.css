@@ -120,8 +120,22 @@ body {
   stroke-width: 2.4;
 }
 
+.resume-relocation {
+  display: inline-flex;
+  align-items: center;
+  color: var(--resume-teal-dark);
+  font-size: 7pt;
+  font-weight: 700;
+}
+
+.resume-relocation::before {
+  margin-right: 1.3mm;
+  color: #a9afb7;
+  content: '|';
+}
+
 .resume-first-page-content {
-  padding: 0 4mm 5mm;
+  padding: 0 4mm 3mm;
 }
 
 .resume-first-section { margin-bottom: 1mm; }
@@ -188,7 +202,7 @@ body {
   color: var(--resume-body);
   font-size: 9.5pt;
   font-weight: 500;
-  line-height: 1.48;
+  line-height: 1.42;
 }
 
 .resume-skills-table {
@@ -199,7 +213,7 @@ body {
 .resume-skill-row {
   display: grid;
   grid-template-columns: 52mm minmax(0, 1fr);
-  min-height: 5.4mm;
+  min-height: 5.1mm;
   border-bottom: 0.25mm dotted #bdc4ca;
 }
 
@@ -227,35 +241,47 @@ body {
 }
 
 .resume-experience-list {
-  position: relative;
+  position: static;
   display: grid;
-  gap: 1mm;
+  gap: 0.7mm;
   margin-left: 4mm;
   padding-left: 6.5mm;
+  background: linear-gradient(#3d98a0, #3d98a0) no-repeat 1mm 1.5mm / 0.3mm calc(100% - 3mm);
 }
 
 .resume-experience-list::before {
-  position: absolute;
-  top: 1.5mm;
-  bottom: 1.5mm;
-  left: 1mm;
-  width: 0.3mm;
-  background: #3d98a0;
-  content: '';
+  content: none;
 }
 
 .resume-experience {
-  position: relative;
+  display: block;
   min-width: 0;
   break-inside: avoid;
 }
 
+.resume-experience-body {
+  display: block;
+  min-width: 0;
+}
+
+.resume-experience:not(:last-child) {
+  padding-bottom: 0.8mm;
+}
+
+.resume-experience + .resume-experience::before {
+  content: none;
+}
+
+.resume-experience + .resume-experience {
+  padding-top: 0.8mm;
+  border-top: 0.2mm solid #d5d9de;
+}
+
 .resume-timeline-dot {
-  position: absolute;
-  top: 0.8mm;
-  left: -6.85mm;
+  float: left;
   width: 3mm;
   height: 3mm;
+  margin: 0.8mm -3mm 0 -6.85mm;
   border: 0.55mm solid #fff;
   border-radius: 50%;
   background: var(--resume-teal-dark);
@@ -289,8 +315,8 @@ body {
 }
 
 .resume-experience-header p {
-  color: var(--resume-text);
-  font-weight: 600;
+  color: var(--resume-teal-dark);
+  font-weight: 800;
 }
 
 .resume-experience-header strong {
@@ -300,7 +326,7 @@ body {
   white-space: nowrap;
 }
 
-.resume-experience > ul {
+.resume-experience-body > ul {
   display: grid;
   gap: 0.55mm;
   margin: 0;
@@ -308,12 +334,32 @@ body {
   list-style: disc;
 }
 
-.resume-experience > ul li {
+.resume-experience-body > ul li {
   padding-left: 0.2mm;
   color: var(--resume-body);
   font-size: 9.5pt;
   font-weight: 500;
-  line-height: 1.48;
+  line-height: 1.4;
+}
+
+.resume-source-page[data-resume-target='uae-fullstack']
+  .resume-experience-body > ul li {
+  line-height: 1.42;
+}
+
+.resume-source-page[data-resume-target='uae-fullstack']
+  .resume-experience:not(:last-child) {
+  padding-bottom: 0;
+}
+
+.resume-source-page[data-resume-target='angular-frontend']
+  .resume-experience-body > ul li {
+  line-height: 1.4;
+}
+
+.resume-source-page[data-resume-target='angular-frontend']
+  .resume-experience:not(:last-child) {
+  padding-bottom: 0;
 }
 
 .resume-experience-emphasis {
@@ -607,9 +653,9 @@ body {
 }
 
 .resume-project-section-title {
-  position: relative;
   margin: 0.7mm 0 1.3mm;
-  padding-left: 3mm;
+  padding-left: 2.4mm;
+  border-left: 0.6mm solid var(--resume-teal);
   color: var(--resume-teal-dark);
   font-size: 8.2pt;
   font-weight: 800;
@@ -619,13 +665,7 @@ body {
 }
 
 .resume-project-section-title::before {
-  position: absolute;
-  top: -0.25mm;
-  bottom: -0.25mm;
-  left: 0;
-  width: 0.6mm;
-  background: var(--resume-teal);
-  content: '';
+  content: none;
 }
 
 .resume-project-responsibility-list {
@@ -674,7 +714,7 @@ body {
 
 .resume-project-stack-groups {
   display: grid;
-  gap: 0.6mm;
+  gap: 0.35mm;
 }
 
 .resume-project-stack-groups > div {
@@ -682,8 +722,8 @@ body {
   grid-template-columns: 36mm minmax(0, 1fr);
   gap: 2mm;
   color: var(--resume-body);
-  font-size: calc(7.4pt + 1px);
-  line-height: 1.3;
+  font-size: 8pt;
+  line-height: 1.22;
 }
 
 .resume-project-stack-groups strong {

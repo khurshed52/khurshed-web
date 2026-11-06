@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import {
   BriefcaseBusiness,
   GraduationCap,
@@ -13,10 +13,8 @@ import {
   UserRound,
 } from 'lucide-react'
 
-import { resumeData } from '@/data/resume-data'
+import type { ResolvedResumeData } from '@/lib/resume/getResumeData'
 import ProjectCard from './ProjectCard'
-
-type Project = (typeof resumeData.projects)[number]
 
 function FirstPageSectionTitle({
   children,
@@ -37,8 +35,11 @@ function FirstPageSectionTitle({
   )
 }
 
-function ResumeHeader() {
-  const { profile } = resumeData
+function ResumeHeader({
+  profile,
+}: {
+  profile: ResolvedResumeData['profile']
+}) {
 
   return (
     <header className="resume-header">
@@ -50,6 +51,9 @@ function ResumeHeader() {
           <span className="resume-contact-item">
             <MapPin size={12} />
             <span>{profile.location}</span>
+            {/* <span className="resume-relocation">
+              {profile.relocation}
+            </span>  */}
           </span>
 
           <a href={`tel:${profile.phone}`}>
@@ -80,17 +84,24 @@ function ResumeHeader() {
             <span>{profile.linkedin.label}</span>
           </a>
         </div>
+
       </div>
     </header>
   )
 }
 
-function SkillsTable() {
+function SkillsTable({
+  skillGroups,
+  softSkills,
+}: {
+  skillGroups: ResolvedResumeData['skillGroups']
+  softSkills: ResolvedResumeData['softSkills']
+}) {
   const rows = [
-    ...resumeData.skillGroups,
+    ...skillGroups,
     {
       title: 'Soft Skills',
-      skills: resumeData.softSkills,
+      skills: softSkills,
     },
   ]
 
@@ -106,7 +117,11 @@ function SkillsTable() {
   )
 }
 
-function EmploymentHistory() {
+function EmploymentHistory({
+  experience,
+}: {
+  experience: ResolvedResumeData['experience']
+}) {
   const renderHighlightedText = (
     text: string,
     highlights: string[]
@@ -144,61 +159,71 @@ function EmploymentHistory() {
 
   return (
     <div className="resume-experience-list">
-      {resumeData.experience.map((experience) => (
+      {experience.map((experience) => (
         <article
           key={`${experience.company}-${experience.period}`}
           className="resume-experience"
         >
           <span className="resume-timeline-dot" aria-hidden="true" />
 
-          <div className="resume-experience-header">
-            <h3>{experience.role}</h3>
-            <span aria-hidden="true" />
-            <p>
-              {experience.company}, {experience.location}
-            </p>
-            <strong>{experience.period}</strong>
-          </div>
-
-          <ul>
-            {experience.achievements.map((achievement) => (
-              <li key={achievement}>
-                {renderHighlightedText(
-                  achievement,
-                  experience.highlights
-                )}
-              </li>
-            ))}
-          </ul>
-
-          {experience.keyAchievements.length > 0 && (
-            <div className="resume-key-achievements">
-              <span className="resume-achievement-icon">
-                <Trophy size={15} />
-              </span>
-
-              <div>
-                <h4>Key Achievements</h4>
-
-                <ul>
-                  {experience.keyAchievements.map(
-                    (achievement) => (
-                      <li key={achievement}>
-                        {achievement}
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>
+          <div className="resume-experience-body">
+            <div className="resume-experience-header">
+              <h3>{experience.role}</h3>
+              <span aria-hidden="true" />
+              <p>
+                {experience.company}, {experience.location}
+              </p>
+              <strong>{experience.period}</strong>
             </div>
-          )}
+
+            <ul>
+              {experience.achievements.map((achievement) => (
+                <li key={achievement}>
+                  {renderHighlightedText(
+                    achievement,
+                    experience.highlights
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            {experience.keyAchievements.length > 0 && (
+              <div className="resume-key-achievements">
+                <span className="resume-achievement-icon">
+                  <Trophy size={15} />
+                </span>
+
+                <div>
+                  <h4>Key Achievements</h4>
+
+                  <ul>
+                    {experience.keyAchievements.map(
+                      (achievement) => (
+                        <li key={achievement}>
+                          {achievement}
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
         </article>
       ))}
     </div>
   )
 }
 
-function ResumeFooterDetails() {
+function ResumeFooterDetails({
+  education,
+  languages,
+  nationality,
+}: {
+  education: ResolvedResumeData['education']
+  languages: ResolvedResumeData['languages']
+  nationality: ResolvedResumeData['nationality']
+}) {
   return (
     <footer className="resume-first-footer">
       <section className="resume-education-panel">
@@ -208,7 +233,7 @@ function ResumeFooterDetails() {
 
         <div>
           <h2>Education</h2>
-          {resumeData.education.map((item) => (
+          {education.map((item) => (
             <article key={`${item.degree}-${item.period}`}>
               <h3>{item.degree}</h3>
               <p>{item.specialization}</p>
@@ -225,23 +250,23 @@ function ResumeFooterDetails() {
         <div>
           <Languages size={15} />
           <h3>Languages</h3>
-          <p>{resumeData.languages.join(', ')}</p>
+          <p>{languages.join(', ')}</p>
         </div>
 
         <div>
           <Globe2 size={15} />
           <h3>Nationality</h3>
-          <p>{resumeData.nationality}</p>
+          <p>{nationality}</p>
         </div>
       </div>
     </footer>
   )
 }
 
-function FirstPage() {
+function FirstPage({ data }: { data: ResolvedResumeData }) {
   return (
     <section className="resume-page resume-page-one">
-      <ResumeHeader />
+      <ResumeHeader profile={data.profile} />
 
       <main className="resume-first-page-content">
         <section className="resume-first-section resume-summary-section">
@@ -250,7 +275,7 @@ function FirstPage() {
           </FirstPageSectionTitle>
 
           <p className="resume-summary">
-            {resumeData.summary}
+            {data.summary}
           </p>
         </section>
 
@@ -259,7 +284,10 @@ function FirstPage() {
             Technical Skills
           </FirstPageSectionTitle>
 
-          <SkillsTable />
+          <SkillsTable
+            skillGroups={data.skillGroups}
+            softSkills={data.softSkills}
+          />
         </section>
 
         <section className="resume-first-section resume-employment-section">
@@ -267,10 +295,14 @@ function FirstPage() {
             Professional Experience
           </FirstPageSectionTitle>
 
-          <EmploymentHistory />
+          <EmploymentHistory experience={data.experience} />
         </section>
 
-        <ResumeFooterDetails />
+        <ResumeFooterDetails
+          education={data.education}
+          languages={data.languages}
+          nationality={data.nationality}
+        />
       </main>
     </section>
   )
@@ -292,7 +324,7 @@ function ProjectMeta({
   )
 }
 
-function SecondPage() {
+function SecondPage({ data }: { data: ResolvedResumeData }) {
   return (
     <section className="resume-page resume-page-two">
       <header className="resume-project-page-header">
@@ -302,7 +334,7 @@ function SecondPage() {
       </header>
 
       <div className="resume-project-card-list">
-        {resumeData.projects.map((project, index) => (
+        {data.projects.map((project, index) => (
           <ProjectCard
             key={project.name}
             project={project}
@@ -314,14 +346,18 @@ function SecondPage() {
   )
 }
 
-export function ResumeDocument() {
+export function ResumeDocument({
+  data,
+}: {
+  data: ResolvedResumeData
+}) {
   return (
     <div
       className="resume-document"
       data-resume-ready="true"
     >
-      <FirstPage />
-      <SecondPage />
+      <FirstPage data={data} />
+      <SecondPage data={data} />
     </div>
   )
 }
