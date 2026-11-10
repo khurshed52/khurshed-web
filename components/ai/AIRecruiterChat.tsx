@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -26,6 +26,7 @@ const INITIAL_MESSAGE: ChatMessage = {
 
 export default function AIRecruiterChat() {
   const router = useRouter();
+  const pathname = usePathname();
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -266,6 +267,10 @@ async function sendQuestion(message: string) {
   function handleResetChat() {
     setMessages([INITIAL_MESSAGE]);
     setQuestion("");
+  }
+
+  if (pathname === "/") {
+    return null;
   }
 
   return (

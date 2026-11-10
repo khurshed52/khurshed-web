@@ -1,5 +1,5 @@
-import Portfolio from '@/components/portfolio'
+import CinematicPortfolio from '@/components/storyboard/CinematicPortfolio'
 
 export default function Page() {
-  return <Portfolio />
+  return <CinematicPortfolio />
 }

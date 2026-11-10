@@ -10,8 +10,8 @@ const jetbrains = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Khurshed Khan | Developer Portfolio',
-  description: 'A VS Code-inspired developer portfolio built with Next.js, Tailwind CSS and GSAP.',
+  title: 'Khurshed Khan | Senior Frontend Developer',
+  description: 'Cinematic portfolio of Khurshed Khan, a Senior Frontend Developer in Dubai building real-time FinTech, government and AI-enabled products.',
   icons: {
     icon: '/favicon.ico',
   },
