@@ -111,7 +111,8 @@ export default function CinematicPortfolio() {
             </video>
           ))
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#030712]/38 via-transparent to-[#030712]/10" />
+        <div className="hero-texture-overlay absolute inset-0" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#030712]/58 via-[#030712]/12 to-[#030712]/10" />
         <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#050712]/75 to-transparent" />
       </div>
       <>
@@ -132,14 +133,14 @@ export default function CinematicPortfolio() {
 
           <section id="hero" className="relative z-10 flex min-h-screen items-center px-5 pb-36 pt-28 sm:px-8 lg:px-14">
             <div className="mx-auto w-full max-w-[1500px]">
-              <div className="max-w-[760px]">
+              <div className="max-w-[690px]">
                 <p className="hero-role-badge portfolio-label">
                   <Code2 size={17} aria-hidden="true" />
                   <span>Senior Frontend Developer</span>
                   <span className="text-white/35">·</span>
                   <span>Full-Stack Developer</span>
                 </p>
-                <h1 className="mt-7 text-balance text-4xl font-semibold leading-[1.04] tracking-[-0.05em] text-white drop-shadow-[0_3px_18px_rgba(0,0,0,0.8)] lg:text-6xl xl:text-7xl">
+                <h1 className="mt-7 text-balance text-4xl font-semibold leading-[1.06] tracking-[-0.045em] text-white drop-shadow-[0_3px_18px_rgba(0,0,0,0.85)] lg:text-5xl xl:text-6xl">
                   I build
                   <span key={heroMessage} className="hero-rotating-copy mt-2 block text-teal-300">{heroMessages[heroMessage]}</span>
                 </h1>

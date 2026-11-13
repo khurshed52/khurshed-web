@@ -113,6 +113,16 @@ body {
   background: rgba(125, 211, 252, 0.28);
 }
 
+.hero-texture-overlay {
+  background-image:
+    radial-gradient(circle at 18% 46%, rgba(2, 8, 23, 0.22) 0, rgba(2, 8, 23, 0.06) 36%, transparent 64%),
+    repeating-linear-gradient(118deg, rgba(255, 255, 255, 0.018) 0, rgba(255, 255, 255, 0.018) 1px, transparent 1px, transparent 5px);
+  background-size: auto, 8px 8px;
+  mix-blend-mode: multiply;
+  opacity: 0.78;
+  pointer-events: none;
+}
+
 .hero-role-badge {
   display: inline-flex;
   flex-wrap: wrap;
