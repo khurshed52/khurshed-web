@@ -144,4 +144,42 @@ export const experience = [
       'i18n',
     ],
   },
+
+  {
+    company: 'Micro Pro LLC — General Authority of Sports',
+    location: 'Dubai, UAE',
+    role: 'Frontend Developer',
+    period: 'February 2017 — February 2021',
+    current: false,
+
+    summary:
+      'Delivered secure, accessible UAE government applications using Angular and TypeScript, with multilingual Arabic RTL and English LTR experiences aligned with UAE TDRA standards.',
+
+    achievements: [
+      'Developed responsive and interactive government web applications using Angular, TypeScript, JavaScript, HTML5 and CSS3.',
+      'Built reusable Angular components and consistent multilingual Arabic RTL and English LTR interfaces.',
+      'Delivered accessible WCAG 2.1 AA and UAE TDRA-aligned government interfaces.',
+      'Integrated REST APIs and collaborated with backend, UI/UX and stakeholder teams on scalable government services.',
+      'Applied Content Security Policy and XSS/CSRF mitigation for secure frontend delivery.',
+      'Optimized application performance, responsive behaviour and cross-browser compatibility.',
+    ],
+
+    highlights: [
+      'Angular government applications',
+      'Arabic RTL & English LTR',
+      'WCAG 2.1 AA & UAE TDRA',
+      'Secure REST API integration',
+    ],
+
+    stack: [
+      'Angular',
+      'TypeScript',
+      'JavaScript',
+      'HTML5',
+      'CSS3',
+      'REST APIs',
+      'WCAG 2.1 AA',
+      'UAE TDRA',
+    ],
+  },
 ]

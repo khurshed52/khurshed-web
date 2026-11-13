@@ -100,7 +100,7 @@ function SkillsTable({
   const rows = [
     ...skillGroups,
     {
-      title: 'Soft Skills',
+      title: 'Architecture & Leadership',
       skills: softSkills,
     },
   ]
