@@ -123,6 +123,12 @@ body {
   pointer-events: none;
 }
 
+.cinematic-webgl-canvas {
+  height: 100% !important;
+  width: 100% !important;
+  pointer-events: auto;
+}
+
 .hero-role-badge {
   display: inline-flex;
   flex-wrap: wrap;
@@ -529,6 +535,10 @@ body {
 
 body:has(.cinematic-portfolio) .ai-recruiter-widget {
   display: none !important;
+}
+
+body:has(.resume-generator-page) .ai-recruiter-widget {
+  display: none;
 }
 
 .story-static-fallback .story-depth-back {

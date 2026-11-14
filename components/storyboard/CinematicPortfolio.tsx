@@ -2,17 +2,14 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import { ArrowUpRight, CalendarDays, Code2, Github, Linkedin, Mail, MapPin, Monitor, Zap } from 'lucide-react'
+import dynamic from 'next/dynamic'
+import { useCallback, useEffect, useState } from 'react'
+import { Accessibility, Activity, ArrowUpRight, CalendarDays, Code2, FileCog, Github, Languages, Linkedin, Mail, MapPin, ShieldCheck, Users, WalletCards } from 'lucide-react'
 
 import { experience, profile, projects } from '@/data/portfolio'
 
 const chapters = ['Projects', 'Experience', 'Skills', 'Contact'] as const
-const storyFrame = '/storyboard/dubai-fintech-workspace.png'
-const storyVideos = [
-  '/storyboard/monitor-fintech-dashboard.mp4',
-  '/storyboard/dubai-fintech-workspace.mp4',
-] as const
+const CinematicScene = dynamic(() => import('./CinematicScene'), { ssr: false })
 const heroMessages = [
   'scalable FinTech and Forex platforms.',
   'real-time dashboards for live markets.',
@@ -27,12 +24,31 @@ const skillGroups = [
   ['Quality & intelligence', 'Playwright', 'WCAG 2.1 AA', 'Gemini API', 'Secure LLM integration', 'CI/CD'],
 ]
 
+const achievementGroups = [
+  {
+    middle: { label: 'KYC, payments & multi-currency wallets', icon: WalletCards },
+    right: { label: 'Technical leadership · 3–5 developers', icon: Users },
+  },
+  {
+    middle: { label: 'Real-time WebSocket dashboards', icon: Activity },
+    right: { label: 'Secure AI function calling', icon: ShieldCheck },
+  },
+  {
+    middle: { label: 'Arabic RTL & English LTR', icon: Languages },
+    right: { label: 'WCAG 2.1 AA & UAE TDRA guidelines', icon: Accessibility },
+  },
+] as const
+
 export default function CinematicPortfolio() {
   const [activeChapter, setActiveChapter] = useState<number | null>(null)
   const [reducedMotion, setReducedMotion] = useState(false)
   const [heroMessage, setHeroMessage] = useState(0)
-  const [activeVideo, setActiveVideo] = useState(0)
-  const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)]
+  const [introReady, setIntroReady] = useState(false)
+  const [showOwnerTools, setShowOwnerTools] = useState(false)
+  const [achievementGroup, setAchievementGroup] = useState(0)
+  const [achievementPhase, setAchievementPhase] = useState<'idle' | 'out' | 'in'>('idle')
+
+  const revealHero = useCallback(() => setIntroReady(true), [])
 
   useEffect(() => {
     const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -43,11 +59,71 @@ export default function CinematicPortfolio() {
   }, [])
 
   useEffect(() => {
+    setShowOwnerTools(
+      window.location.hostname === 'localhost'
+      || window.location.hostname === '127.0.0.1'
+    )
+  }, [])
+
+  useEffect(() => {
     if (reducedMotion) return
     const interval = window.setInterval(() => {
       setHeroMessage((current) => (current + 1) % heroMessages.length)
     }, 3400)
     return () => window.clearInterval(interval)
+  }, [reducedMotion])
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setAchievementGroup(0)
+      setAchievementPhase('idle')
+      return
+    }
+
+    let intervalId: number | undefined
+    let swapTimeoutId: number | undefined
+    let firstFrameId: number | undefined
+    let secondFrameId: number | undefined
+
+    const rotateAchievements = () => {
+      setAchievementPhase('out')
+      swapTimeoutId = window.setTimeout(() => {
+        setAchievementGroup((current) => (current + 1) % achievementGroups.length)
+        setAchievementPhase('in')
+        firstFrameId = window.requestAnimationFrame(() => {
+          secondFrameId = window.requestAnimationFrame(() => setAchievementPhase('idle'))
+        })
+      }, 350)
+    }
+
+    const startRotation = () => {
+      if (document.hidden || intervalId !== undefined) return
+      intervalId = window.setInterval(rotateAchievements, 3500)
+    }
+
+    const stopRotation = () => {
+      if (intervalId !== undefined) window.clearInterval(intervalId)
+      if (swapTimeoutId !== undefined) window.clearTimeout(swapTimeoutId)
+      if (firstFrameId !== undefined) window.cancelAnimationFrame(firstFrameId)
+      if (secondFrameId !== undefined) window.cancelAnimationFrame(secondFrameId)
+      intervalId = undefined
+      swapTimeoutId = undefined
+      firstFrameId = undefined
+      secondFrameId = undefined
+      setAchievementPhase('idle')
+    }
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) stopRotation()
+      else startRotation()
+    }
+
+    startRotation()
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      stopRotation()
+    }
   }, [reducedMotion])
 
   useEffect(() => {
@@ -78,39 +154,21 @@ export default function CinematicPortfolio() {
     document.getElementById(chapters[index].toLowerCase())?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })
   }
 
-  const playNextVideo = (current: number) => {
-    const next = (current + 1) % storyVideos.length
-    const nextVideo = videoRefs[next].current
-    if (!nextVideo) return
-    nextVideo.currentTime = 0
-    void nextVideo.play()
-    setActiveVideo(next)
-  }
+  const rotatingAchievements = achievementGroups[achievementGroup]
+  const MiddleAchievementIcon = rotatingAchievements.middle.icon
+  const RightAchievementIcon = rotatingAchievements.right.icon
+  const achievementMotionClass = achievementPhase === 'out'
+    ? '-translate-y-2.5 opacity-0'
+    : achievementPhase === 'in'
+      ? 'translate-y-2.5 opacity-0'
+      : 'translate-y-0 opacity-100'
 
   return (
     <main className="cinematic-portfolio min-h-screen bg-[#050712] text-slate-100">
       <a href="#projects" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-slate-950">Skip to portfolio</a>
 
       <div className="story-stage fixed inset-0 z-0" aria-hidden="true">
-        {reducedMotion ? (
-          <Image src={storyFrame} alt="" fill priority sizes="100vw" className="story-frame-image object-cover" />
-        ) : (
-          storyVideos.map((video, index) => (
-            <video
-              key={video}
-              ref={videoRefs[index]}
-              className={`story-frame-image absolute inset-0 h-full w-full object-cover ${activeVideo === index ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
-              autoPlay={index === 0}
-              muted
-              playsInline
-              preload="auto"
-              poster={index === 0 ? storyFrame : undefined}
-              onEnded={() => playNextVideo(index)}
-            >
-              <source src={video} type="video/mp4" />
-            </video>
-          ))
-        )}
+        <CinematicScene reducedMotion={reducedMotion} onReveal={revealHero} />
         <div className="hero-texture-overlay absolute inset-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#030712]/58 via-[#030712]/12 to-[#030712]/10" />
         <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#050712]/75 to-transparent" />
@@ -120,20 +178,40 @@ export default function CinematicPortfolio() {
             <div className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 sm:px-8">
               <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' })} className="text-left">
                 <span className="portfolio-display block text-sm font-semibold tracking-[0.16em] text-white">KHURSHED KHAN</span>
-                <span className="portfolio-label mt-1 block text-[10px] uppercase tracking-[0.24em] text-sky-300">Designing systems after dark</span>
+                <span className="portfolio-label mt-1 block text-[10px] uppercase tracking-[0.24em] text-sky-300">ENGINEERING RELIABLE DIGITAL PRODUCTS</span>
               </button>
               <nav aria-label="Portfolio chapters" className="hidden items-center gap-8 md:flex lg:gap-12">
                 {chapters.map((chapter, index) => (
                   <button key={chapter} type="button" onClick={() => scrollToChapter(index)} className={`portfolio-label rounded-full px-2 py-2 text-xs font-semibold transition ${activeChapter === index ? 'bg-white px-4 text-slate-950' : 'text-slate-300 hover:bg-white/5 hover:text-white'}`}>{chapter}</button>
                 ))}
               </nav>
-              <Link href="/Resume.pdf" target="_blank" className="rounded-full border border-sky-300/25 bg-sky-300/10 px-4 py-2 text-xs font-medium text-sky-100 transition hover:bg-sky-300 hover:text-slate-950">Resume <ArrowUpRight className="ml-1 inline" size={13} /></Link>
+              <div className="flex items-center gap-3">
+                {showOwnerTools && (
+                  <Link
+                    href="/resume-generator"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hidden items-center gap-2 rounded-full border border-teal-300/30 bg-teal-300/10 px-4 py-2 text-xs font-semibold text-teal-100 transition hover:bg-teal-300 hover:text-slate-950 sm:inline-flex"
+                  >
+                    <FileCog size={14} />
+                    Generate Resume
+                  </Link>
+                )}
+                <Link
+                  href="/Resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-sky-300/25 bg-sky-300/10 px-4 py-2 text-xs font-medium text-sky-100 transition hover:bg-sky-300 hover:text-slate-950"
+                >
+                  Resume <ArrowUpRight className="ml-1 inline" size={13} />
+                </Link>
+              </div>
             </div>
           </header>
 
-          <section id="hero" className="relative z-10 flex min-h-screen items-center px-5 pb-36 pt-28 sm:px-8 lg:px-14">
+          <section id="hero" className="relative z-10 mt-[73px] flex min-h-[calc(100svh-73px)] items-center px-5 pb-[190px] pt-8 sm:px-8 sm:pb-[104px] lg:px-14">
             <div className="mx-auto w-full max-w-[1500px]">
-              <div className="max-w-[690px]">
+              <div className={`max-w-[690px] transition duration-1000 ease-out ${introReady ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}>
                 <p className="hero-role-badge portfolio-label">
                   <Code2 size={17} aria-hidden="true" />
                   <span>Senior Frontend Developer</span>
@@ -147,23 +225,38 @@ export default function CinematicPortfolio() {
               </div>
             </div>
 
-            <div className="absolute inset-x-0 bottom-0 border-y border-white/10 bg-[#030712]/88 px-5 py-5 backdrop-blur-md sm:px-8 lg:px-14">
-              <div className="mx-auto grid max-w-[1500px] gap-4 sm:grid-cols-3 sm:gap-0">
-                <div className="flex items-center gap-4 sm:border-r sm:border-white/15 sm:px-7 lg:px-12">
-                  <CalendarDays className="text-teal-300" size={25} />
-                  <span className="portfolio-label text-sm font-semibold uppercase tracking-[0.12em] text-white">9+ years experience</span>
+            {!introReady && !reducedMotion && (
+              <button
+                type="button"
+                onClick={revealHero}
+                className="portfolio-label absolute bottom-44 right-6 z-20 rounded-full border border-white/15 bg-slate-950/55 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/75 transition hover:border-teal-300/50 hover:text-white sm:bottom-24 sm:right-10"
+              >
+                Skip intro
+              </button>
+            )}
+
+          </section>
+
+            <div className="fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-[#030712]/88 px-5 py-4 backdrop-blur-md sm:px-8 sm:py-2 lg:px-14">
+              <div className="mx-auto grid min-h-[116px] max-w-[1500px] grid-cols-2 gap-3 sm:min-h-[48px] sm:grid-cols-3 sm:gap-0">
+                <div className="col-span-2 flex items-center justify-center gap-3 sm:col-span-1 sm:justify-start sm:border-r sm:border-white/15 sm:px-3 lg:gap-4 lg:px-8 xl:px-12">
+                  <CalendarDays className="shrink-0 text-teal-300" size={22} aria-hidden="true" />
+                  <span className="portfolio-label whitespace-nowrap text-[9px] font-bold uppercase tracking-[0.1em] text-white lg:text-[11px] xl:text-xs">9+ years experience</span>
                 </div>
-                <div className="flex items-center gap-4 sm:border-r sm:border-white/15 sm:px-7 lg:px-12">
-                  <Monitor className="text-teal-300" size={25} />
-                  <span className="portfolio-label text-sm font-semibold uppercase tracking-[0.12em] text-white">Real-time dashboards</span>
+                <div className="flex min-w-0 items-center justify-center sm:border-r sm:border-white/15 sm:px-3 lg:px-8 xl:px-12">
+                  <div className={`flex w-full min-w-0 items-center justify-center gap-2 transition-[opacity,transform] duration-[350ms] ease-out sm:justify-start lg:gap-3 ${achievementMotionClass}`}>
+                    <MiddleAchievementIcon className="shrink-0 text-teal-300" size={22} aria-hidden="true" />
+                    <span className="portfolio-label text-center text-[9px] font-bold uppercase leading-4 tracking-[0.1em] text-white sm:whitespace-nowrap sm:text-left lg:text-[11px] xl:text-xs">{rotatingAchievements.middle.label}</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-4 sm:px-7 lg:px-12">
-                  <Zap className="text-teal-300" size={25} />
-                  <span className="portfolio-label text-sm font-semibold uppercase tracking-[0.12em] text-white">40% faster page loads</span>
+                <div className="flex min-w-0 items-center justify-center sm:px-3 lg:px-8 xl:px-12">
+                  <div className={`flex w-full min-w-0 items-center justify-center gap-2 transition-[opacity,transform] duration-[350ms] ease-out sm:justify-start lg:gap-3 ${achievementMotionClass}`}>
+                    <RightAchievementIcon className="shrink-0 text-teal-300" size={22} aria-hidden="true" />
+                    <span className="portfolio-label text-center text-[9px] font-bold uppercase leading-4 tracking-[0.1em] text-white sm:whitespace-nowrap sm:text-left lg:text-[11px] xl:text-xs">{rotatingAchievements.right.label}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </section>
 
           <section id="projects" className="chapter-section relative z-10 min-h-screen px-5 py-28 sm:px-8 lg:px-14">
             <ChapterHeading eyebrow="01 / Selected work" title="Projects built for moments that matter." description="Financial workflows, global trading experiences, and operational systems—designed to stay fast when the data does not slow down." />
@@ -192,7 +285,7 @@ export default function CinematicPortfolio() {
               {experience.map((item) => (
                 <article key={item.company} className="cinematic-card grid gap-8 md:grid-cols-[260px_1fr]">
                   <div><p className="portfolio-label text-xs font-semibold uppercase tracking-[0.24em] text-sky-300">{item.period}</p><h3 className="mt-4 text-2xl font-semibold text-white">{item.company}</h3><p className="portfolio-display mt-2 text-sm font-medium text-slate-300">{item.role} · {item.location}</p></div>
-                  <div><p className="portfolio-display text-base font-medium leading-7 text-slate-200">{item.summary}</p><ul className="mt-6 grid gap-3 sm:grid-cols-2">{item.highlights.map((highlight) => <li key={highlight} className="portfolio-display rounded-2xl border border-white/8 bg-white/[0.035] px-4 py-3 text-sm font-medium text-slate-200">{highlight}</li>)}</ul></div>
+                  <div><p className="portfolio-display text-base font-medium leading-7 text-slate-200">{item.summary}</p><ul className="mt-6 grid gap-3 sm:grid-cols-2">{item.highlights.map((highlight) => <li key={highlight} className="portfolio-display rounded-[10px] border border-[#1e1e1e] px-4 py-3 text-sm font-medium text-slate-200 shadow-[0_0_3px_#1b2331ba]">{highlight}</li>)}</ul></div>
                 </article>
               ))}
             </div>
@@ -205,7 +298,7 @@ export default function CinematicPortfolio() {
                 <article key={title} className="cinematic-card">
                   <span className="portfolio-label text-xs tracking-[0.24em] text-sky-300">0{index + 1}</span>
                   <h3 className="mt-5 text-2xl font-semibold text-white">{title}</h3>
-                  <div className="mt-7 space-y-3">{skills.map((skill) => <div key={skill} className="flex items-center justify-between border-b border-white/8 pb-3 text-sm text-slate-300"><span>{skill}</span><span className="h-1.5 w-1.5 rounded-full bg-sky-300" /></div>)}</div>
+                  <div className="mt-7 space-y-3">{skills.map((skill) => <div key={skill} className="flex items-center justify-between rounded-[10px] border border-[#1e1e1e] px-3 py-2.5 text-sm text-slate-300 shadow-[0_0_3px_#1b2331ba]"><span>{skill}</span><span className="h-1.5 w-1.5 rounded-full bg-sky-300" /></div>)}</div>
                 </article>
               ))}
             </div>
