@@ -46,7 +46,7 @@ export const resumeTargets = {
     filename: 'Khurshed-Khan-Resume-Angular.pdf',
     role: 'Senior Frontend Developer',
     summary:
-      'Senior Frontend Developer with 9+ years building scalable FinTech, trading, enterprise, and government applications. Strong expertise in Angular 20/21, TypeScript, React.js, Next.js, and Vue.js, with backend experience in Node.js, Express.js, PostgreSQL, and Prisma ORM. Delivered four years of Angular-based UAE government applications featuring reusable components, REST APIs, Arabic RTL and English LTR interfaces, WCAG 2.1 AA accessibility, TDRA alignment, and frontend security. Also experienced in WebSockets, secure financial workflows, and Gemini API integration.',
+      'Senior Frontend Developer with 9+ years building scalable FinTech, trading, enterprise, and government applications. Strong expertise in Angular 19, TypeScript, React.js, Next.js, and Vue.js, with backend experience in Node.js, Express.js, PostgreSQL, and Prisma ORM. Delivered four years of Angular-based UAE government applications featuring reusable components, REST APIs, Arabic RTL and English LTR interfaces, WCAG 2.1 AA accessibility, TDRA alignment, and frontend security. Also experienced in WebSockets, secure financial workflows, and Gemini API integration.',
     skillGroupOrder: [
       'Frontend Technologies',
       'State Management & UI',
@@ -59,7 +59,7 @@ export const resumeTargets = {
     ],
     skillReplacements: {
       'Frontend Technologies': [
-        'Angular 20/21',
+        'Angular 19',
         'TypeScript',
         'JavaScript (ES6+)',
         'React.js',
@@ -88,10 +88,10 @@ export const resumeTargets = {
       'Trive International': {
         role: 'Senior Frontend Developer',
         achievementReplacements: {
-          2: 'Delivered Angular 20/21 client portal features using TypeScript and NgRx, including authentication, KYC, account management, and payment workflows.',
+          2: 'Delivered Angular 19 client portal features using TypeScript and NgRx, including authentication, KYC, account management, and payment workflows.',
         },
         highlights: [
-          'Angular 20/21 client portal features',
+          'Angular 19 client portal features',
           'TypeScript and NgRx',
           'authentication, KYC, account management, and payment workflows',
         ],
@@ -123,9 +123,9 @@ export const resumeTargets = {
     projectOverrides: {
       'Trive Client Portal': {
         name: 'Trive Client Portal — Angular Trading Platform',
-        role: 'Senior Frontend Developer | Angular 20/21 & TypeScript',
+        role: 'Senior Frontend Developer | Angular 19 & TypeScript',
         software: [
-          'Angular 20/21',
+          'Angular 19',
           'TypeScript',
           'NgRx',
           'Ant Design',
@@ -137,7 +137,7 @@ export const resumeTargets = {
           'MT5',
         ],
         responsibilities: [
-          'Developed responsive and scalable client portal interfaces using Angular 20/21, TypeScript, and Ant Design.',
+          'Developed responsive and scalable client portal interfaces using Angular 19, TypeScript, and Ant Design.',
           'Built secure registration, authentication, KYC verification, and client profile management workflows.',
           'Managed user sessions, trading workflows, and application state using NgRx.',
           'Integrated REST APIs for MetaTrader 4 (MT4), MetaTrader 5 (MT5), and real-time client account management.',

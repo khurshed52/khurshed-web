@@ -47,7 +47,7 @@ export const projects = [
     description:
       'A secure Forex trading platform that streamlines user registration, KYC verification, wallet deposits, and seamless trading through MetaTrader 4 (MT4) and MetaTrader 5 (MT5), providing a reliable experience for global traders.',
 
-    stack: ['Angular 20/21', 'TypeScript', 'NgRx', 'Ant Design', 'PSP Integration'],
+    stack: ['Angular 19', 'TypeScript', 'NgRx', 'Ant Design', 'PSP Integration'],
 
     image: '/projects/trive-portal.png',
 

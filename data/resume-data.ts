@@ -75,7 +75,7 @@ export const resumeData = {
       skills: [
         'React.js',
         'Next.js',
-        'Angular 20/21',
+        'Angular 19',
         'TypeScript',
         'JavaScript (ES6+)',
         'Vue.js',
@@ -193,7 +193,7 @@ export const resumeData = {
         // TODO_METRIC: Confirm [X active traders] before adding a user count.
         // The unverified "supporting thousands" wording is intentionally omitted.
         'Lead development of Forex/CFD trading platforms using React.js, Next.js, and TypeScript, delivering account and trading workflows through REST API integrations.',
-        'Delivered Angular 20/21 client portal features using TypeScript and NgRx, including authentication, KYC, account management, and payment workflows.',
+        'Delivered Angular 19 client portal features using TypeScript and NgRx, including authentication, KYC, account management, and payment workflows.',
         'Built real-time trading dashboards using WebSockets for live market data.',
         'Reduced page load time by 40% through code-splitting, lazy loading, and bundle optimization.',
         'Architected a library of 20+ reusable UI components, accelerating feature development.',
@@ -207,7 +207,7 @@ export const resumeData = {
         '40%',
         '3–5 developers',
         'REST and WebSocket APIs',
-        'Angular 20/21 client portal features',
+        'Angular 19 client portal features',
         'TypeScript and NgRx',
       ],
 
@@ -338,7 +338,7 @@ export const resumeData = {
     role: 'Senior Frontend Developer',
 
     software: [
-      'Angular 20/21',
+      'Angular 19',
       'TypeScript',
       'NgRx',
       'Ant Design',
@@ -346,7 +346,7 @@ export const resumeData = {
     ],
 
     responsibilities: [
-      'Developed responsive Angular 20/21 and TypeScript portal interfaces for registration, authentication, KYC, profiles, and account management, using NgRx for sessions and trading workflows.',
+      'Developed responsive Angular 19 and TypeScript portal interfaces for registration, authentication, KYC, profiles, and account management, using NgRx for sessions and trading workflows.',
       'Integrated REST APIs for MetaTrader 4 (MT4), MetaTrader 5 (MT5), and real-time account information.',
       'Integrated PSP services supporting wallet deposits, withdrawals, and transaction processing.',
       'Collaborated with backend and product teams to deliver secure, responsive client workflows.',

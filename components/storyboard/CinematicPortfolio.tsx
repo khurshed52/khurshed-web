@@ -2,27 +2,75 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { useCallback, useEffect, useState } from 'react'
-import { Accessibility, Activity, ArrowUpRight, CalendarDays, Code2, FileCog, Github, Languages, Linkedin, Mail, MapPin, ShieldCheck, Users, WalletCards } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Accessibility, Activity, ArrowUpRight, BarChart3, CalendarDays, ChartNoAxesCombined, Code2, FileCog, Github, Globe2, Languages, Layers3, Linkedin, Mail, MapPin, MonitorCog, Network, ShieldCheck, Users, WalletCards, Zap } from 'lucide-react'
 
 import { experience, profile, projects } from '@/data/portfolio'
 
 const chapters = ['Projects', 'Experience', 'Skills', 'Contact'] as const
-const CinematicScene = dynamic(() => import('./CinematicScene'), { ssr: false })
-const heroMessages = [
-  'scalable FinTech and Forex platforms.',
-  'real-time dashboards for live markets.',
-  'secure full-stack financial workflows.',
-  'accessible multilingual government applications.',
-  'AI-powered experiences with controlled backend access.',
-] as const
 
 const skillGroups = [
-  ['Frontend systems', 'Angular 20/21', 'React.js', 'Next.js', 'TypeScript', 'Vue.js', 'NgRx'],
-  ['Full-stack delivery', 'Node.js', 'Express.js', 'PostgreSQL', 'Prisma ORM', 'REST APIs', 'WebSockets'],
-  ['Quality & intelligence', 'Playwright', 'WCAG 2.1 AA', 'Gemini API', 'Secure LLM integration', 'CI/CD'],
-]
+  {
+    title: 'Frontend systems',
+    number: '01',
+    tone: 'blue',
+    icon: MonitorCog,
+    skills: [
+      { name: 'React.js', code: 'RE' },
+      { name: 'Next.js', code: 'NX' },
+      { name: 'Angular 19', code: 'NG' },
+      { name: 'JavaScript', code: 'JS' },
+      { name: 'TypeScript', code: 'TS' },
+      { name: 'Vue.js', code: 'VU' },
+      { name: 'NgRx', code: 'RX' },
+    ],
+  },
+  {
+    title: 'Full-stack delivery',
+    number: '02',
+    tone: 'violet',
+    icon: Layers3,
+    skills: [
+      { name: 'Node.js', code: 'JS' },
+      { name: 'Express.js', code: 'EX' },
+      { name: 'PostgreSQL', code: 'PG' },
+      { name: 'Prisma ORM', code: 'PR' },
+      { name: 'REST APIs', code: '{}' },
+      { name: 'WebSockets', code: 'WS' },
+    ],
+  },
+  {
+    title: 'Quality & intelligence',
+    number: '03',
+    tone: 'teal',
+    icon: ShieldCheck,
+    skills: [
+      { name: 'Playwright', code: 'PW' },
+      { name: 'WCAG 2.1 AA, TDRA', code: 'A11Y' },
+      { name: 'Gemini API', code: 'AI' },
+      { name: 'Secure LLM integration', code: 'LLM' },
+      { name: 'CI/CD', code: 'CD' },
+    ],
+  },
+] as const
+
+const experiencePresentation = [
+  {
+    tone: 'blue',
+    icon: Activity,
+    highlightIcons: [Activity, Layers3, Zap, Users],
+  },
+  {
+    tone: 'violet',
+    icon: BarChart3,
+    highlightIcons: [Globe2, Languages, ChartNoAxesCombined, Layers3],
+  },
+  {
+    tone: 'teal',
+    icon: ShieldCheck,
+    highlightIcons: [Code2, Languages, Accessibility, Network],
+  },
+] as const
 
 const achievementGroups = [
   {
@@ -57,13 +105,10 @@ const contactSlides = [
 export default function CinematicPortfolio() {
   const [activeChapter, setActiveChapter] = useState<number | null>(null)
   const [reducedMotion, setReducedMotion] = useState(false)
-  const [heroMessage, setHeroMessage] = useState(0)
-  const [introReady, setIntroReady] = useState(false)
   const [showOwnerTools, setShowOwnerTools] = useState(false)
   const [achievementGroup, setAchievementGroup] = useState(0)
   const [achievementPhase, setAchievementPhase] = useState<'idle' | 'out' | 'in'>('idle')
-
-  const revealHero = useCallback(() => setIntroReady(true), [])
+  const heroVideoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -81,11 +126,10 @@ export default function CinematicPortfolio() {
   }, [])
 
   useEffect(() => {
-    if (reducedMotion) return
-    const interval = window.setInterval(() => {
-      setHeroMessage((current) => (current + 1) % heroMessages.length)
-    }, 3400)
-    return () => window.clearInterval(interval)
+    const video = heroVideoRef.current
+    if (!video) return
+    if (reducedMotion) video.pause()
+    else void video.play().catch(() => undefined)
   }, [reducedMotion])
 
   useEffect(() => {
@@ -183,7 +227,9 @@ export default function CinematicPortfolio() {
       <a href="#projects" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-slate-950">Skip to portfolio</a>
 
       <div className="story-stage fixed inset-0 z-0" aria-hidden="true">
-        <CinematicScene reducedMotion={reducedMotion} onReveal={revealHero} />
+        <video ref={heroVideoRef} className="h-full w-full object-cover" autoPlay loop muted playsInline preload="metadata">
+          <source src="/storyboard/portfolio-hero.webm" type="video/webm" />
+        </video>
         <div className="hero-texture-overlay absolute inset-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#030712]/58 via-[#030712]/12 to-[#030712]/10" />
         <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#050712]/75 to-transparent" />
@@ -226,7 +272,7 @@ export default function CinematicPortfolio() {
 
           <section id="hero" className="relative z-10 mt-[73px] flex min-h-[calc(100svh-73px)] items-center px-5 pb-[190px] pt-8 sm:px-8 sm:pb-[104px] lg:px-14">
             <div className="mx-auto w-full max-w-[1500px]">
-              <div className={`max-w-[690px] transition duration-1000 ease-out ${introReady ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}>
+              <div className="max-w-[690px]">
                 <p className="hero-role-badge portfolio-label">
                   <Code2 size={17} aria-hidden="true" />
                   <span>Senior Frontend Developer</span>
@@ -235,23 +281,13 @@ export default function CinematicPortfolio() {
                 </p>
                 <h1 className="mt-7 text-balance text-4xl font-semibold leading-[1.06] tracking-[-0.045em] text-white drop-shadow-[0_3px_18px_rgba(0,0,0,0.85)] lg:text-5xl xl:text-6xl">
                   I build
-                  <span key={heroMessage} className="hero-rotating-copy mt-2 block text-teal-300">{heroMessages[heroMessage]}</span>
+                  <span className="mt-2 block text-teal-300">scalable FinTech and Forex platforms.</span>
                 </h1>
                 <p className="portfolio-display mt-6 text-sm font-semibold tracking-[0.02em] text-white/85 sm:text-base">
                   React.js · Next.js · TypeScript · Node.js <span className="text-teal-300/70">|</span> Dubai, UAE
                 </p>
               </div>
             </div>
-
-            {!introReady && !reducedMotion && (
-              <button
-                type="button"
-                onClick={revealHero}
-                className="portfolio-label absolute bottom-44 right-6 z-20 rounded-full border border-white/15 bg-slate-950/55 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/75 transition hover:border-teal-300/50 hover:text-white sm:bottom-24 sm:right-10"
-              >
-                Skip intro
-              </button>
-            )}
 
           </section>
 
@@ -276,21 +312,21 @@ export default function CinematicPortfolio() {
               </div>
             </div>
 
-          <section id="projects" className="chapter-section relative z-10 min-h-screen px-5 py-28 sm:px-8 lg:px-14">
-            <ChapterHeading eyebrow="01 / Selected work" title="Projects built for moments that matter." description="Financial workflows, global trading experiences, and operational systems—designed to stay fast when the data does not slow down." />
-            <div className="mx-auto mt-14 grid max-w-[1500px] gap-5 lg:grid-cols-3">
+          <section id="projects" className="chapter-section relative z-10 px-5 pb-14 pt-10 sm:px-8 lg:px-14 lg:pt-12">
+            <ChapterHeading compact eyebrow="01 / Selected work" title="Projects built for moments that matter." description="Financial workflows, global trading experiences, and operational systems—designed to stay fast when the data does not slow down." />
+            <div className="mx-auto mt-8 grid max-w-[1500px] gap-5 lg:grid-cols-3">
               {projects.map((project, index) => (
                 <article key={project.name} className="cinematic-card group">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-[1.3rem] border border-white/10">
+                  <div className="relative aspect-video overflow-hidden rounded-[1.3rem] border border-white/10">
                     <Image src={project.image} alt={`${project.name} interface`} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#08101f] via-transparent to-transparent" />
                     <span className="portfolio-label absolute left-4 top-4 rounded-full border border-white/15 bg-slate-950/60 px-3 py-1 text-[10px] tracking-[0.24em] text-white backdrop-blur-xl">0{index + 1}</span>
                   </div>
-                  <div className="px-1 pb-1 pt-6">
+                  <div className="px-1 pb-1 pt-4">
                     <h3 className="text-2xl font-semibold tracking-[-0.03em] text-white">{project.name}</h3>
-                    <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-400">{project.description}</p>
-                    <div className="mt-5 flex flex-wrap gap-2">{project.stack.map((tech) => <span key={tech} className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-slate-300">{tech}</span>)}</div>
-                    <div className="mt-6 flex flex-wrap items-center gap-5">
+                    <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-400">{project.description}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">{project.stack.map((tech) => <span key={tech} className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-slate-300">{tech}</span>)}</div>
+                    <div className="mt-4 flex flex-wrap items-center gap-5">
                       <Link href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-sky-300 transition hover:text-white">View live site <ArrowUpRight size={15} /></Link>
                       {project.hasGithub && project.github && (
                         <Link href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 transition hover:text-white"><Github size={15} /> View source</Link>
@@ -302,38 +338,79 @@ export default function CinematicPortfolio() {
             </div>
           </section>
 
-          <section id="experience" className="chapter-section relative z-10 min-h-screen px-5 py-28 sm:px-8 lg:px-14">
-            <ChapterHeading eyebrow="02 / Experience" title="Leadership grounded in delivery." description="Nine years shaping frontend architecture, real-time interfaces, and dependable product systems across FinTech and government services." />
-            <div className="mx-auto mt-14 max-w-[1200px] space-y-5">
-              {experience.map((item) => (
-                <article key={item.company} className="cinematic-card grid gap-8 md:grid-cols-[260px_1fr]">
-                  <div><p className="portfolio-label text-xs font-semibold uppercase tracking-[0.24em] text-sky-300">{item.period}</p><h3 className="mt-4 text-2xl font-semibold text-white">{item.company}</h3><p className="portfolio-display mt-2 text-sm font-medium text-slate-300">{item.role} · {item.location}</p></div>
-                  <div><p className="portfolio-display text-base font-medium leading-7 text-slate-200">{item.summary}</p><ul className="mt-6 grid gap-3 sm:grid-cols-2">{item.highlights.map((highlight) => <li key={highlight} className="portfolio-display rounded-[10px] border border-[#1e1e1e] px-4 py-3 text-sm font-medium text-slate-200 shadow-[0_0_3px_#1b2331ba]">{highlight}</li>)}</ul></div>
-                </article>
-              ))}
+          <section id="experience" className="chapter-section relative z-10 px-5 pb-14 pt-10 sm:px-8 lg:px-14 lg:pt-12">
+            <ChapterHeading compact eyebrow="02 / Experience" title="Leadership grounded in delivery." description="Nine years shaping frontend architecture, real-time interfaces, and dependable product systems across FinTech and government services." />
+            <div className="experience-showcase mx-auto mt-8 max-w-[1500px] space-y-4">
+              {experience.map((item, index) => {
+                const presentation = experiencePresentation[index]
+                const CompanyIcon = presentation.icon
+
+                return (
+                  <article key={item.company} className={`experience-showcase-card skill-tone-${presentation.tone}`}>
+                    <span className="experience-timeline-dot" aria-hidden="true" />
+                    <div className="experience-identity">
+                      <div className="experience-company-icon"><CompanyIcon size={28} strokeWidth={1.8} aria-hidden="true" /></div>
+                      <div className="min-w-0">
+                        <p className="experience-date portfolio-label">{item.period}</p>
+                        <h3 className="mt-3 text-xl font-semibold leading-tight tracking-[-0.025em] text-white sm:text-2xl">{item.company}</h3>
+                        <p className="portfolio-display mt-2 text-sm font-medium text-slate-300">{item.role}</p>
+                        <p className="portfolio-display mt-1 flex items-center gap-2 text-sm font-medium text-slate-400"><MapPin size={16} aria-hidden="true" />{item.location}</p>
+                      </div>
+                    </div>
+                    <div className="experience-content">
+                      <p className="portfolio-display text-base font-medium leading-7 text-slate-200">{item.summary}</p>
+                      <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                        {item.highlights.map((highlight, highlightIndex) => {
+                          const HighlightIcon = presentation.highlightIcons[highlightIndex]
+                          return (
+                            <li key={highlight} className="experience-highlight portfolio-display">
+                              <HighlightIcon size={18} strokeWidth={1.9} aria-hidden="true" />
+                              <span>{highlight}</span>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                  </article>
+                )
+              })}
             </div>
           </section>
 
-          <section id="skills" className="chapter-section relative z-10 min-h-screen px-5 py-28 sm:px-8 lg:px-14">
-            <ChapterHeading eyebrow="03 / Skills" title="A practical stack for ambitious products." description="Architecture, implementation, quality, and collaboration—connected into one delivery practice." />
-            <div className="mx-auto mt-14 grid max-w-[1200px] gap-5 lg:grid-cols-3">
-              {skillGroups.map(([title, ...skills], index) => (
-                <article key={title} className="cinematic-card">
-                  <span className="portfolio-label text-xs tracking-[0.24em] text-sky-300">0{index + 1}</span>
-                  <h3 className="mt-5 text-2xl font-semibold text-white">{title}</h3>
-                  <div className="mt-7 space-y-3">{skills.map((skill) => <div key={skill} className="flex items-center justify-between rounded-[10px] border border-[#1e1e1e] px-3 py-2.5 text-sm text-slate-300 shadow-[0_0_3px_#1b2331ba]"><span>{skill}</span><span className="h-1.5 w-1.5 rounded-full bg-sky-300" /></div>)}</div>
-                </article>
-              ))}
+          <section id="skills" className="chapter-section relative z-10 px-5 pb-14 pt-10 sm:px-8 lg:px-14 lg:pt-12">
+            <ChapterHeading compact eyebrow="03 / Skills" title="A practical stack for ambitious products." description="Architecture, implementation, quality, and collaboration—connected into one delivery practice." />
+            <div className="mx-auto mt-8 grid max-w-[1500px] gap-5 lg:grid-cols-3">
+              {skillGroups.map((group) => {
+                const GroupIcon = group.icon
+
+                return (
+                  <article key={group.title} className={`skill-showcase-card skill-tone-${group.tone}`}>
+                    <div className="relative z-10 flex items-start justify-between">
+                      <div className="skill-group-icon"><GroupIcon size={27} strokeWidth={1.7} aria-hidden="true" /></div>
+                      <span className="portfolio-label text-sm font-medium tracking-[0.12em] text-[rgb(var(--skill-accent))]">{group.number}</span>
+                    </div>
+                    <h3 className="relative z-10 mt-4 text-2xl font-semibold tracking-[-0.025em] text-white">{group.title}</h3>
+                    <div className="relative z-10 mt-5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                      {group.skills.map((skill) => (
+                        <div key={skill.name} className="skill-chip">
+                          <span className="skill-chip-code portfolio-label">{skill.code}</span>
+                          <span className="portfolio-display min-w-0 text-sm font-medium text-slate-200">{skill.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </article>
+                )
+              })}
             </div>
           </section>
 
-          <section id="contact" className="chapter-section relative z-10 flex min-h-screen items-center px-5 py-28 sm:px-8 lg:px-14">
-            <div className="mx-auto grid w-full max-w-[1200px] overflow-hidden rounded-[2.2rem]  bg-[#07101f]/80 shadow-2xl backdrop-blur-2xl lg:grid-cols-[1.08fr_0.92fr]">
-              <div className="p-7 sm:p-12 lg:p-16 lg:pr-8">
+          <section id="contact" className="chapter-section relative z-10 px-5 pb-24 pt-10 sm:px-8 lg:px-14 lg:pt-12">
+            <div className="mx-auto grid w-full max-w-[1400px] overflow-hidden rounded-[2.2rem] bg-[#07101f]/80 shadow-2xl backdrop-blur-2xl lg:grid-cols-[1.08fr_0.92fr]">
+              <div className="p-7 sm:p-10 lg:p-12 lg:pr-8">
                 <p className="portfolio-label text-xs uppercase tracking-[0.35em] text-sky-300">04 / Contact</p>
-                <h2 className="mt-6 max-w-4xl text-balance text-5xl font-semibold tracking-[-0.05em] text-white sm:text-6xl">Let’s build the next dependable thing.</h2>
-                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">Available for senior frontend and full-stack opportunities where thoughtful architecture and strong product craft matter.</p>
-                <div className="mt-10 flex flex-wrap gap-3">
+                <h2 className="mt-4 max-w-4xl text-balance text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">Let’s build the next dependable thing.</h2>
+                <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">Available for senior frontend and full-stack opportunities where thoughtful architecture and strong product craft matter.</p>
+                <div className="mt-7 flex flex-wrap gap-3">
                   <Link href={`mailto:${profile.email.trim()}`} className="contact-pill"><Mail size={16} /> Email me</Link>
                   <Link href={profile.linkedin} target="_blank" className="contact-pill"><Linkedin size={16} /> LinkedIn</Link>
                   <Link href={profile.github} target="_blank" className="contact-pill"><Github size={16} /> GitHub</Link>
@@ -418,12 +495,12 @@ function ContactImageSlider({ reducedMotion }: { reducedMotion: boolean }) {
   )
 }
 
-function ChapterHeading({ eyebrow, title, description }: { eyebrow: string; title: string; description: string }) {
+function ChapterHeading({ eyebrow, title, description, compact = false }: { eyebrow: string; title: string; description: string; compact?: boolean }) {
   return (
     <div className="mx-auto max-w-[1500px]">
       <p className="portfolio-label text-xs font-semibold uppercase tracking-[0.34em] text-sky-300">{eyebrow}</p>
-      <div className="mt-5 grid gap-6 lg:grid-cols-[1fr_480px] lg:items-end">
-        <h2 className="max-w-4xl text-balance text-4xl font-semibold tracking-[-0.045em] text-white sm:text-6xl">{title}</h2>
+      <div className={`${compact ? 'mt-3 gap-4' : 'mt-5 gap-6'} grid lg:grid-cols-[1fr_480px] lg:items-end`}>
+        <h2 className={`max-w-4xl text-balance font-semibold tracking-[-0.045em] text-white ${compact ? 'text-4xl sm:text-5xl' : 'text-4xl sm:text-6xl'}`}>{title}</h2>
         <p className="portfolio-display text-base font-medium leading-7 text-slate-300">{description}</p>
       </div>
     </div>
