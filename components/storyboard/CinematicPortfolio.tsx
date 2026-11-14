@@ -227,8 +227,8 @@ export default function CinematicPortfolio() {
       <a href="#projects" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-slate-950">Skip to portfolio</a>
 
       <div className="story-stage fixed inset-0 z-0" aria-hidden="true">
-        <video ref={heroVideoRef} className="h-full w-full object-cover" autoPlay loop muted playsInline preload="metadata">
-          <source src="/storyboard/portfolio-hero.webm" type="video/webm" />
+        <video ref={heroVideoRef} className="h-full w-full object-cover" autoPlay loop muted playsInline preload="metadata" poster="/storyboard/portfolio-hero-poster.png">
+          <source src="/storyboard/portfolio-hero.mp4" type="video/mp4" />
         </video>
         <div className="hero-texture-overlay absolute inset-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#030712]/58 via-[#030712]/12 to-[#030712]/10" />
