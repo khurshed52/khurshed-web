@@ -39,6 +39,21 @@ const achievementGroups = [
   },
 ] as const
 
+const contactSlides = [
+  {
+    src: '/contact/secure-platform-observability.png',
+    alt: 'Secure platform observability and infrastructure illustration',
+  },
+  {
+    src: '/contact/secure-customer-workflow.png',
+    alt: 'Secure customer identity and financial workflow illustration',
+  },
+  {
+    src: '/contact/secure-fintech-integrations.png',
+    alt: 'Secure fintech system integrations illustration',
+  },
+] as const
+
 export default function CinematicPortfolio() {
   const [activeChapter, setActiveChapter] = useState<number | null>(null)
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -222,6 +237,9 @@ export default function CinematicPortfolio() {
                   I build
                   <span key={heroMessage} className="hero-rotating-copy mt-2 block text-teal-300">{heroMessages[heroMessage]}</span>
                 </h1>
+                <p className="portfolio-display mt-6 text-sm font-semibold tracking-[0.02em] text-white/85 sm:text-base">
+                  React.js · Next.js · TypeScript · Node.js <span className="text-teal-300/70">|</span> Dubai, UAE
+                </p>
               </div>
             </div>
 
@@ -271,8 +289,13 @@ export default function CinematicPortfolio() {
                   <div className="px-1 pb-1 pt-6">
                     <h3 className="text-2xl font-semibold tracking-[-0.03em] text-white">{project.name}</h3>
                     <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-400">{project.description}</p>
-                    <div className="mt-5 flex flex-wrap gap-2">{project.stack.slice(0, 5).map((tech) => <span key={tech} className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-slate-300">{tech}</span>)}</div>
-                    <Link href={project.live} target="_blank" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-sky-300 transition hover:text-white">View case study <ArrowUpRight size={15} /></Link>
+                    <div className="mt-5 flex flex-wrap gap-2">{project.stack.map((tech) => <span key={tech} className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-slate-300">{tech}</span>)}</div>
+                    <div className="mt-6 flex flex-wrap items-center gap-5">
+                      <Link href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-sky-300 transition hover:text-white">View live site <ArrowUpRight size={15} /></Link>
+                      {project.hasGithub && project.github && (
+                        <Link href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 transition hover:text-white"><Github size={15} /> View source</Link>
+                      )}
+                    </div>
                   </div>
                 </article>
               ))}
@@ -305,20 +328,93 @@ export default function CinematicPortfolio() {
           </section>
 
           <section id="contact" className="chapter-section relative z-10 flex min-h-screen items-center px-5 py-28 sm:px-8 lg:px-14">
-            <div className="mx-auto w-full max-w-[1200px] rounded-[2.2rem] border border-white/12 bg-[#07101f]/80 p-7 shadow-2xl backdrop-blur-2xl sm:p-12 lg:p-16">
-              <p className="portfolio-label text-xs uppercase tracking-[0.35em] text-sky-300">04 / Contact</p>
-              <h2 className="mt-6 max-w-4xl text-balance text-5xl font-semibold tracking-[-0.05em] text-white sm:text-7xl">Let’s build the next dependable thing.</h2>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">Available for senior frontend and full-stack opportunities where thoughtful architecture and strong product craft matter.</p>
-              <div className="mt-10 flex flex-wrap gap-3">
-                <Link href={`mailto:${profile.email.trim()}`} className="contact-pill"><Mail size={16} /> Email me</Link>
-                <Link href={profile.linkedin} target="_blank" className="contact-pill"><Linkedin size={16} /> LinkedIn</Link>
-                <Link href={profile.github} target="_blank" className="contact-pill"><Github size={16} /> GitHub</Link>
-                <span className="contact-pill"><MapPin size={16} /> {profile.location}</span>
+            <div className="mx-auto grid w-full max-w-[1200px] overflow-hidden rounded-[2.2rem]  bg-[#07101f]/80 shadow-2xl backdrop-blur-2xl lg:grid-cols-[1.08fr_0.92fr]">
+              <div className="p-7 sm:p-12 lg:p-16 lg:pr-8">
+                <p className="portfolio-label text-xs uppercase tracking-[0.35em] text-sky-300">04 / Contact</p>
+                <h2 className="mt-6 max-w-4xl text-balance text-5xl font-semibold tracking-[-0.05em] text-white sm:text-6xl">Let’s build the next dependable thing.</h2>
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">Available for senior frontend and full-stack opportunities where thoughtful architecture and strong product craft matter.</p>
+                <div className="mt-10 flex flex-wrap gap-3">
+                  <Link href={`mailto:${profile.email.trim()}`} className="contact-pill"><Mail size={16} /> Email me</Link>
+                  <Link href={profile.linkedin} target="_blank" className="contact-pill"><Linkedin size={16} /> LinkedIn</Link>
+                  <Link href={profile.github} target="_blank" className="contact-pill"><Github size={16} /> GitHub</Link>
+                  <span className="contact-pill"><MapPin size={16} /> {profile.location}</span>
+                </div>
               </div>
+              <ContactImageSlider reducedMotion={reducedMotion} />
             </div>
           </section>
       </>
     </main>
+  )
+}
+
+function ContactImageSlider({ reducedMotion }: { reducedMotion: boolean }) {
+  const [activeSlide, setActiveSlide] = useState(0)
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setActiveSlide(0)
+      return
+    }
+
+    let intervalId: number | undefined
+
+    const start = () => {
+      if (document.hidden || intervalId !== undefined) return
+      intervalId = window.setInterval(() => {
+        setActiveSlide((current) => (current + 1) % contactSlides.length)
+      }, 4000)
+    }
+
+    const stop = () => {
+      if (intervalId !== undefined) window.clearInterval(intervalId)
+      intervalId = undefined
+    }
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) stop()
+      else start()
+    }
+
+    start()
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      stop()
+    }
+  }, [reducedMotion])
+
+  return (
+    <div className="relative min-h-[300px] border-t border-white/10 bg-[radial-gradient(circle_at_center,rgba(45,212,191,0.13),transparent_68%)] sm:min-h-[390px] lg:min-h-full lg:border-l lg:border-t-0" aria-label="Secure digital product illustrations">
+      {contactSlides.map((slide, index) => (
+        <div
+          key={slide.src}
+          className={`absolute inset-0 flex items-center justify-center p-7 transition-all duration-700 ease-out sm:p-10 lg:p-8 ${index === activeSlide ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'}`}
+          aria-hidden={index !== activeSlide}
+        >
+          <Image
+            src={slide.src}
+            alt={index === activeSlide ? slide.alt : ''}
+            fill
+            sizes="(max-width: 1024px) 100vw, 46vw"
+            className="object-contain p-7 drop-shadow-[0_24px_50px_rgba(45,212,191,0.18)] sm:p-10 lg:p-8"
+          />
+        </div>
+      ))}
+      <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2" aria-label={`Slide ${activeSlide + 1} of ${contactSlides.length}`}>
+        {contactSlides.map((slide, index) => (
+          <button
+            key={slide.src}
+            type="button"
+            onClick={() => setActiveSlide(index)}
+            className={`h-1.5 rounded-full transition-all duration-300 ${index === activeSlide ? 'w-7 bg-teal-300' : 'w-1.5 bg-white/30 hover:bg-white/55'}`}
+            aria-label={`Show illustration ${index + 1}`}
+            aria-current={index === activeSlide ? 'true' : undefined}
+          />
+        ))}
+      </div>
+    </div>
   )
 }
 

@@ -17,7 +17,18 @@ export const projects = [
     description:
       'An AI-powered Forex trading platform that enables secure user onboarding with KYC verification, wallet deposits, live market trading, portfolio management, and AI-driven trading insights to support smarter investment decisions.',
 
-    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Gemini API', 'GSAP', 'Ant Design'],
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'Node.js',
+      'Express.js',
+      'PostgreSQL',
+      'Prisma ORM',
+      'Stripe',
+      'Veriff',
+      'Gemini API',
+      'Secure Function Calling',
+    ],
 
     image: '/projects/tradepro.png',
 
@@ -36,7 +47,7 @@ export const projects = [
     description:
       'A secure Forex trading platform that streamlines user registration, KYC verification, wallet deposits, and seamless trading through MetaTrader 4 (MT4) and MetaTrader 5 (MT5), providing a reliable experience for global traders.',
 
-    stack: ['Angular', 'TypeScript', 'NgRx', 'Ant Design', 'PSP Integration'],
+    stack: ['Angular 20/21', 'TypeScript', 'NgRx', 'Ant Design', 'PSP Integration'],
 
     image: '/projects/trive-portal.png',
 

@@ -1,0 +1,190 @@
+KHURSHED
+KHAN
+Senior Frontend Developer | Full-Stack Developer
+Dubai, UAE
+
++971 559553204
+
+Khurshedkhan52@gmail.com
+
+khurshedkhan.dev
+
+linkedin.com/in/khurshed-khan-a30b0159
+
+PROFESSIONAL SUMMARY
+
+Senior Frontend Developer and Full-Stack Developer with 9+ years of experience building scalable applications across
+FinTech, Forex/CFD trading, enterprise systems, and the UAE government sector. Strong expertise in React.js, Next.js,
+Angular, TypeScript, and JavaScript, with full-stack experience in Node.js, Express.js, REST APIs, PostgreSQL, and
+Prisma ORM. Experienced in developing secure, accessible, and multilingual government applications with Arabic/RTL
+support, real-time trading dashboards, WebSocket integrations, financial workflows, and secure Google Gemini AI
+function calling.
+
+TECHNICAL SKILLS
+
+Frontend Technologies
+State Management & UI
+Backend & API Development
+Integrations
+AI & LLM Integration
+Visualization, GIS & Media
+Quality & Performance
+Tools & Technologies
+Architecture & Leadership
+
+React.js, Next.js, Angular 20/21, TypeScript, JavaScript (ES6+), Vue.js, Nuxt.js, HTML5,
+CSS3
+NgRx, Pinia, Redux, TanStack Query (React Query), Context API, Tailwind CSS, Angular
+Material, Ant Design, Bootstrap
+Node.js, Express.js, REST APIs, PostgreSQL, Prisma ORM, WebSockets
+Stripe, Veriff (KYC), PSP Integration, Authentication & Authorization, Live Market Data
+APIs, Arabic RTL/LTR
+Google Gemini API, Function Calling, Authenticated Backend Functions, Secure AI
+Integration
+Recharts, Highcharts, Chart.js, Mapbox, Video.js
+Playwright, Responsive Design, Performance Optimization, State Management, WCAG 2.1
+AA, UAE TDRA, CSP, XSS/CSRF Mitigation, Cross-Browser Testing
+Git, GitHub, CI/CD, Postman, MongoDB
+System Design, Frontend Architecture, Technical Decision-Making, Code Reviews,
+Mentorship, Agile/Scrum
+
+PROFESSIONAL EXPERIENCE
+
+Senior Frontend Developer (Full-Stack) Trive International, Dubai
+
+October 2025 – Present
+
+Lead development of Forex/CFD trading platforms using React.js, Next.js, and TypeScript, delivering account and
+trading workflows through REST API integrations.
+Delivered Angular 20/21 client portal features using TypeScript and NgRx, including authentication, KYC, account
+management, and payment workflows.
+Built real-time trading dashboards using WebSockets for live market data.
+Reduced page load time by 40% through code-splitting, lazy loading, and bundle optimization.
+Architected a library of 20+ reusable UI components, accelerating feature development.
+Lead technical decision-making for a team of 3–5 developers, including code reviews and architecture
+improvements.
+
+Senior Frontend Developer CPT Markets, Dubai
+
+March 2021 – September 2025
+
+Frontend Developer Micro Pro LLC — General Authority of Sports, Dubai
+
+February 2017 – February 2021
+
+Engineered and maintained global trading platforms using React.js, Next.js, Vue.js, and TypeScript.
+Built real-time dashboards, GIS maps, and video interfaces using Highcharts, Mapbox, and Video.js.
+Delivered multilingual Arabic and English experiences using i18n for international users and regional markets.
+Integrated REST APIs, WebSockets, and financial systems for live prices and account workflows.
+Built reusable UI components, mentored junior developers, and partnered with UX and backend teams to improve
+delivery speed and code quality.
+Developed responsive, accessible, and interactive government web applications using Angular, TypeScript,
+JavaScript, HTML5, and CSS3.
+Built reusable Angular components and multilingual Arabic (RTL) and English (LTR) interfaces with consistent
+layouts and user experience.
+Delivered accessible WCAG 2.1 AA and UAE TDRA-aligned government interfaces.
+Integrated REST APIs, applied CSP and XSS/CSRF mitigation, and optimized performance and cross-browser
+compatibility for secure government applications.
+
+EDUCATION
+
+Bachelor of Technology (B.Tech)
+Computer Science & Engineering
+Sabarmati University, Ahmedabad, India
+
+Languages
+Nationality
+
+English, Hindi
+Indian
+
+Project Summary
+— AI-Powered Trading Platform
+01 TradePro
+Senior Full-Stack Developer | FinTech & AI Integration
+
+Visit Link
+
+GitHub
+
+RESPONSIBILITIES
+
+Designed and developed responsive trading dashboards and financial data visualizations using Next.js, React.js,
+TypeScript, Recharts, Tailwind CSS, and Ant Design, integrating live market data APIs for real-time prices and currency
+exchange rates.
+Developed full-stack trading application features using Node.js, Express.js, Prisma ORM, and PostgreSQL, building REST
+APIs and integrating frontend and backend workflows.
+Implemented authentication, authorization, customer onboarding, Veriff KYC, and multi-currency deposit, withdrawal,
+transfer, and Stripe payment workflows.
+Integrated Google Gemini API using secure function calling with Node.js and TypeScript, enabling conversational access
+to account balances, transaction history, and withdrawal statuses through authenticated, authorized backend functions
+without direct database access.
+Developed transaction reporting with advanced filtering, server-side pagination, and history views, supported by
+reusable React components, custom hooks, and type-safe API services.
+
+TECH STACK
+Frontend:
+Backend & Database:
+Integrations:
+AI & Function Calling:
+Tools & Architecture:
+
+Next.js, React.js, TypeScript, JavaScript, Tailwind CSS, Ant Design, Recharts
+Node.js, Express.js, Prisma ORM, PostgreSQL
+REST APIs, Live Market Data APIs, Veriff (KYC), Stripe, Currency Exchange APIs
+Google Gemini API, Function Calling, Authenticated Backend Functions, Authorization Controls
+Git, GitHub, Postman, Custom React Hooks, Component-Based Architecture, Server-Side Pagination
+
+Client Portal
+02 Trive
+Senior Frontend Developer
+
+Visit Link
+
+RESPONSIBILITIES
+
+Developed responsive Angular 20/21 and TypeScript portal interfaces for registration, authentication, KYC, profiles, and
+account management, using NgRx for sessions and trading workflows.
+Integrated REST APIs for MetaTrader 4 (MT4), MetaTrader 5 (MT5), and real-time account information.
+Integrated PSP services supporting wallet deposits, withdrawals, and transaction processing.
+Collaborated with backend and product teams to deliver secure, responsive client workflows.
+
+TECH STACK
+
+Angular 20/21
+
+TypeScript
+
+NgRx
+
+Ant Design
+
+Markets
+03 CPT
+Senior Frontend Developer
+
+PSP Integration
+
+Visit Link
+
+RESPONSIBILITIES
+
+Developed responsive, SEO-friendly market interfaces using Vue.js and Nuxt.js.
+Built reusable UI components and managed application state using Pinia.
+Integrated REST APIs, Mapbox-powered mapping, and Video.js monitoring features.
+Converted approved UI/UX designs into responsive, cross-browser-compatible interfaces optimized for performance and
+technical SEO.
+
+TECH STACK
+
+Vue.js
+
+Nuxt.js
+
+Mapbox
+
+Video.js
+
+Pinia
+
+

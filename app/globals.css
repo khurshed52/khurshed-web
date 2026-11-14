@@ -541,6 +541,10 @@ body:has(.resume-generator-page) .ai-recruiter-widget {
   display: none;
 }
 
+body:has(.resume-source-page) .ai-recruiter-widget {
+  display: none !important;
+}
+
 .story-static-fallback .story-depth-back {
   transform: scale(1.01);
 }
