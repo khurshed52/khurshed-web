@@ -6,8 +6,16 @@ import { useEffect, useRef, useState } from 'react'
 import { Accessibility, Activity, ArrowUpRight, BarChart3, CalendarDays, ChartNoAxesCombined, Code2, FileCog, Github, Globe2, Languages, Layers3, Linkedin, Mail, MapPin, MonitorCog, Network, ShieldCheck, Users, WalletCards, Zap } from 'lucide-react'
 
 import { experience, profile, projects } from '@/data/portfolio'
+import VisitorCounter from './VisitorCounter'
 
 const chapters = ['Projects', 'Experience', 'Skills', 'Contact'] as const
+const heroMessages = [
+  'scalable FinTech and Forex platforms.',
+  'real-time dashboards for live markets.',
+  'secure full-stack financial workflows.',
+  'accessible multilingual government applications.',
+  'AI-powered experiences with controlled backend access.',
+] as const
 
 const skillGroups = [
   {
@@ -105,6 +113,7 @@ const contactSlides = [
 export default function CinematicPortfolio() {
   const [activeChapter, setActiveChapter] = useState<number | null>(null)
   const [reducedMotion, setReducedMotion] = useState(false)
+  const [heroMessage, setHeroMessage] = useState(0)
   const [showOwnerTools, setShowOwnerTools] = useState(false)
   const [achievementGroup, setAchievementGroup] = useState(0)
   const [achievementPhase, setAchievementPhase] = useState<'idle' | 'out' | 'in'>('idle')
@@ -130,6 +139,17 @@ export default function CinematicPortfolio() {
     if (!video) return
     if (reducedMotion) video.pause()
     else void video.play().catch(() => undefined)
+  }, [reducedMotion])
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setHeroMessage(0)
+      return
+    }
+    const interval = window.setInterval(() => {
+      setHeroMessage((current) => (current + 1) % heroMessages.length)
+    }, 3400)
+    return () => window.clearInterval(interval)
   }, [reducedMotion])
 
   useEffect(() => {
@@ -224,6 +244,7 @@ export default function CinematicPortfolio() {
 
   return (
     <main className="cinematic-portfolio min-h-screen bg-[#050712] text-slate-100">
+      <VisitorCounter visible={false} />
       <a href="#projects" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-slate-950">Skip to portfolio</a>
 
       <div className="story-stage fixed inset-0 z-0" aria-hidden="true">
@@ -281,7 +302,7 @@ export default function CinematicPortfolio() {
                 </p>
                 <h1 className="mt-7 text-balance text-4xl font-semibold leading-[1.06] tracking-[-0.045em] text-white drop-shadow-[0_3px_18px_rgba(0,0,0,0.85)] lg:text-5xl xl:text-6xl">
                   I build
-                  <span className="mt-2 block text-teal-300">scalable FinTech and Forex platforms.</span>
+                  <span key={heroMessage} className="hero-rotating-copy mt-2 block text-teal-300">{heroMessages[heroMessage]}</span>
                 </h1>
                 <p className="portfolio-display mt-6 text-sm font-semibold tracking-[0.02em] text-white/85 sm:text-base">
                   React.js · Next.js · TypeScript · Node.js <span className="text-teal-300/70">|</span> Dubai, UAE
@@ -292,21 +313,21 @@ export default function CinematicPortfolio() {
           </section>
 
             <div className="fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-[#030712]/88 px-5 py-4 backdrop-blur-md sm:px-8 sm:py-2 lg:px-14">
-              <div className="mx-auto grid min-h-[116px] max-w-[1500px] grid-cols-2 gap-3 sm:min-h-[48px] sm:grid-cols-3 sm:gap-0">
-                <div className="col-span-2 flex items-center justify-center gap-3 sm:col-span-1 sm:justify-start sm:border-r sm:border-white/15 sm:px-3 lg:gap-4 lg:px-8 xl:px-12">
+              <div className="mx-auto grid min-h-[116px] max-w-[1500px] grid-cols-2 gap-3 lg:min-h-[48px] lg:grid-cols-3 lg:gap-0">
+                <div className="col-span-2 flex min-w-0 items-center justify-center gap-3 lg:col-span-1 lg:justify-start lg:gap-4 lg:border-r lg:border-white/15 lg:px-6 xl:px-8">
                   <CalendarDays className="shrink-0 text-teal-300" size={22} aria-hidden="true" />
                   <span className="portfolio-label whitespace-nowrap text-[9px] font-bold uppercase tracking-[0.1em] text-white lg:text-[11px] xl:text-xs">9+ years experience</span>
                 </div>
-                <div className="flex min-w-0 items-center justify-center sm:border-r sm:border-white/15 sm:px-3 lg:px-8 xl:px-12">
-                  <div className={`flex w-full min-w-0 items-center justify-center gap-2 transition-[opacity,transform] duration-[350ms] ease-out sm:justify-start lg:gap-3 ${achievementMotionClass}`}>
+                <div className="flex min-w-0 items-center justify-center border-r border-white/15 lg:px-6 xl:px-8">
+                  <div className={`flex w-full min-w-0 items-center justify-center gap-2 transition-[opacity,transform] duration-[350ms] ease-out lg:justify-start lg:gap-3 ${achievementMotionClass}`}>
                     <MiddleAchievementIcon className="shrink-0 text-teal-300" size={22} aria-hidden="true" />
-                    <span className="portfolio-label text-center text-[9px] font-bold uppercase leading-4 tracking-[0.1em] text-white sm:whitespace-nowrap sm:text-left lg:text-[11px] xl:text-xs">{rotatingAchievements.middle.label}</span>
+                    <span className="portfolio-label text-center text-[9px] font-bold uppercase leading-4 tracking-[0.1em] text-white lg:whitespace-nowrap lg:text-left lg:text-[11px] xl:text-xs">{rotatingAchievements.middle.label}</span>
                   </div>
                 </div>
-                <div className="flex min-w-0 items-center justify-center sm:px-3 lg:px-8 xl:px-12">
-                  <div className={`flex w-full min-w-0 items-center justify-center gap-2 transition-[opacity,transform] duration-[350ms] ease-out sm:justify-start lg:gap-3 ${achievementMotionClass}`}>
+                <div className="flex min-w-0 items-center justify-center lg:px-6 xl:px-8">
+                  <div className={`flex w-full min-w-0 items-center justify-center gap-2 transition-[opacity,transform] duration-[350ms] ease-out lg:justify-start lg:gap-3 ${achievementMotionClass}`}>
                     <RightAchievementIcon className="shrink-0 text-teal-300" size={22} aria-hidden="true" />
-                    <span className="portfolio-label text-center text-[9px] font-bold uppercase leading-4 tracking-[0.1em] text-white sm:whitespace-nowrap sm:text-left lg:text-[11px] xl:text-xs">{rotatingAchievements.right.label}</span>
+                    <span className="portfolio-label text-center text-[9px] font-bold uppercase leading-4 tracking-[0.1em] text-white lg:whitespace-nowrap lg:text-left lg:text-[11px] xl:text-xs">{rotatingAchievements.right.label}</span>
                   </div>
                 </div>
               </div>
