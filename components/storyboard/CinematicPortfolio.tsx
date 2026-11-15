@@ -115,6 +115,7 @@ export default function CinematicPortfolio() {
   const [reducedMotion, setReducedMotion] = useState(false)
   const [heroMessage, setHeroMessage] = useState(0)
   const [showOwnerTools, setShowOwnerTools] = useState(false)
+  const [showVisitCount, setShowVisitCount] = useState(false)
   const [achievementGroup, setAchievementGroup] = useState(0)
   const [achievementPhase, setAchievementPhase] = useState<'idle' | 'out' | 'in'>('idle')
   const heroVideoRef = useRef<HTMLVideoElement>(null)
@@ -131,6 +132,9 @@ export default function CinematicPortfolio() {
     setShowOwnerTools(
       window.location.hostname === 'localhost'
       || window.location.hostname === '127.0.0.1'
+    )
+    setShowVisitCount(
+      new URLSearchParams(window.location.search).get('viewcount')?.toLowerCase() === 'true'
     )
   }, [])
 
@@ -435,7 +439,7 @@ export default function CinematicPortfolio() {
                   <Link href={profile.linkedin} target="_blank" className="contact-pill"><Linkedin size={16} /> LinkedIn</Link>
                   <Link href={profile.github} target="_blank" className="contact-pill"><Github size={16} /> GitHub</Link>
                   <span className="contact-pill"><MapPin size={16} /> {profile.location}</span>
-                  <VisitorCounter className="sm:ml-auto" />
+                  <VisitorCounter visible={showVisitCount} className="sm:ml-auto" />
                 </div>
               </div>
               <ContactImageSlider reducedMotion={reducedMotion} />
