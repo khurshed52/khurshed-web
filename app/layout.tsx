@@ -36,13 +36,13 @@ export const metadata: Metadata = {
     title: 'Khurshed Khan | Senior FinTech Frontend & Full-Stack Developer Dubai',
     description: 'Senior frontend and full-stack developer in Dubai specialising in scalable fintech platforms, real-time dashboards, secure AI integrations and accessible multilingual digital products.',
     siteName: 'Khurshed Khan Portfolio',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Khurshed Khan — Senior FinTech Frontend and Full-Stack Developer in Dubai' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Khurshed Khan — Senior Frontend and Full-Stack Developer' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Khurshed Khan | Senior FinTech Frontend & Full-Stack Developer Dubai',
     description: 'Senior frontend and full-stack developer in Dubai specialising in scalable fintech platforms, real-time dashboards, secure AI integrations and accessible multilingual digital products.',
-    images: ['/opengraph-image'],
+    images: ['/og-image.png'],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
   icons: {
