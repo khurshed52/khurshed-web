@@ -115,6 +115,7 @@ export default function CinematicPortfolio() {
   const [reducedMotion, setReducedMotion] = useState(false)
   const [heroMessage, setHeroMessage] = useState(0)
   const [showOwnerTools, setShowOwnerTools] = useState(false)
+  const [showVisitCount, setShowVisitCount] = useState(false)
   const [achievementGroup, setAchievementGroup] = useState(0)
   const [achievementPhase, setAchievementPhase] = useState<'idle' | 'out' | 'in'>('idle')
   const heroVideoRef = useRef<HTMLVideoElement>(null)
@@ -131,6 +132,9 @@ export default function CinematicPortfolio() {
     setShowOwnerTools(
       window.location.hostname === 'localhost'
       || window.location.hostname === '127.0.0.1'
+    )
+    setShowVisitCount(
+      new URLSearchParams(window.location.search).get('viewcount')?.toLowerCase() === 'true'
     )
   }, [])
 
@@ -244,7 +248,6 @@ export default function CinematicPortfolio() {
 
   return (
     <main className="cinematic-portfolio min-h-screen bg-[#050712] text-slate-100">
-      <VisitorCounter visible={false} />
       <a href="#projects" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-slate-950">Skip to portfolio</a>
 
       <div className="story-stage fixed inset-0 z-0" aria-hidden="true">
@@ -335,6 +338,10 @@ export default function CinematicPortfolio() {
 
           <section id="projects" className="chapter-section relative z-10 px-5 pb-14 pt-10 sm:px-8 lg:px-14 lg:pt-12">
             <ChapterHeading compact eyebrow="01 / Selected work" title="Projects built for moments that matter." description="Financial workflows, global trading experiences, and operational systems—designed to stay fast when the data does not slow down." />
+            <VisitorCounter
+              visible={showVisitCount}
+              className="mx-auto mt-4 max-w-[1500px] lg:absolute lg:right-14 lg:top-10 lg:mt-0"
+            />
             <div className="mx-auto mt-8 grid max-w-[1500px] gap-5 lg:grid-cols-3">
               {projects.map((project, index) => (
                 <article key={project.name} className="cinematic-card group">
