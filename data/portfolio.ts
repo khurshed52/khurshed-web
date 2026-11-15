@@ -15,7 +15,7 @@ export const projects = [
   {
     name: 'TradePro AI Trading Platform',
     description:
-      'An AI-powered Forex trading platform that enables secure user onboarding with KYC verification, wallet deposits, live market trading, portfolio management, and AI-driven trading insights to support smarter investment decisions.',
+      'An AI-powered financial platform combining secure customer onboarding, KYC verification, multi-currency wallets, payments, live market experiences, portfolio management and controlled AI assistance.',
 
     stack: [
       'Next.js',
@@ -45,7 +45,7 @@ export const projects = [
     name: 'Trive Client Portal',
 
     description:
-      'A secure Forex trading platform that streamlines user registration, KYC verification, wallet deposits, and seamless trading through MetaTrader 4 (MT4) and MetaTrader 5 (MT5), providing a reliable experience for global traders.',
+      'A secure global client portal supporting customer registration, KYC verification, wallet funding and access to MT4 and MT5 trading experiences through a scalable Angular architecture.',
 
     stack: ['Angular 19', 'TypeScript', 'NgRx', 'Ant Design', 'PSP Integration'],
 
@@ -64,7 +64,7 @@ export const projects = [
     name: 'CPT Markets Website',
 
     description:
-      'CPT Markets is a global trading service company providing Forex and CFDs trading services we provide the fastest and secure trading platforms for traders from all over the world.',
+      'Developed and maintained CPT Markets’ multilingual global trading website, delivering responsive market content, localized customer journeys and consistent performance across regional audiences.',
 
     stack: ['Vue.js', 'Nuxt.js', 'Figma', 'Pinia'],
 
@@ -102,9 +102,9 @@ export const experience = [
 
     highlights: [
       'Real-time market dashboards',
-      'Reusable component architecture',
+      '20+ reusable UI components',
       '40% faster page loads',
-      'Frontend team leadership',
+      'Technical leadership · 3–5 developers',
     ],
 
     stack: [

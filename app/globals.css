@@ -114,10 +114,11 @@ body {
 }
 
 .hero-texture-overlay {
+  background-color: rgba(0, 0, 0, 0.24);
   background-image:
-    radial-gradient(circle at 18% 46%, rgba(2, 8, 23, 0.22) 0, rgba(2, 8, 23, 0.06) 36%, transparent 64%),
-    repeating-linear-gradient(118deg, rgba(255, 255, 255, 0.018) 0, rgba(255, 255, 255, 0.018) 1px, transparent 1px, transparent 5px);
-  background-size: auto, 8px 8px;
+    radial-gradient(circle at 22% 46%, rgba(0, 0, 0, 0.52) 0, rgba(0, 0, 0, 0.24) 38%, transparent 70%),
+    repeating-linear-gradient(118deg, rgba(255, 255, 255, 0.016) 0, rgba(255, 255, 255, 0.016) 1px, rgba(0, 0, 0, 0.025) 1px, rgba(0, 0, 0, 0.025) 5px);
+  background-size: auto, 9px 9px;
   mix-blend-mode: multiply;
   opacity: 0.78;
   pointer-events: none;
@@ -492,10 +493,30 @@ body {
 }
 
 .chapter-section {
-  scroll-margin-top: 4.5rem;
+  scroll-margin-top: 5rem;
   background:
     linear-gradient(180deg, rgba(5, 7, 18, 0.72), rgba(5, 7, 18, 0.92)),
     radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.07), transparent 40%);
+}
+
+.achievement-scroll {
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline proximity;
+}
+
+.achievement-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.achievement-scroll > * {
+  scroll-snap-align: start;
+}
+
+@media (max-width: 1023px) {
+  .achievement-scroll {
+    padding-bottom: max(0.25rem, env(safe-area-inset-bottom));
+  }
 }
 
 .cinematic-card {

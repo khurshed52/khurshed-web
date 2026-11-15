@@ -26,8 +26,25 @@ const ibmPlexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Khurshed Khan | Senior Frontend Developer',
-  description: 'Cinematic portfolio of Khurshed Khan, a Senior Frontend Developer in Dubai building real-time FinTech, government and AI-enabled products.',
+  metadataBase: new URL('https://www.khurshedkhan.dev'),
+  title: 'Khurshed Khan | Senior FinTech Frontend & Full-Stack Developer Dubai',
+  description: 'Senior frontend and full-stack developer in Dubai specialising in scalable fintech platforms, real-time dashboards, secure AI integrations and accessible multilingual digital products.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'profile',
+    url: 'https://www.khurshedkhan.dev/',
+    title: 'Khurshed Khan | Senior FinTech Frontend & Full-Stack Developer Dubai',
+    description: 'Senior frontend and full-stack developer in Dubai specialising in scalable fintech platforms, real-time dashboards, secure AI integrations and accessible multilingual digital products.',
+    siteName: 'Khurshed Khan Portfolio',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Khurshed Khan — Senior FinTech Frontend and Full-Stack Developer in Dubai' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Khurshed Khan | Senior FinTech Frontend & Full-Stack Developer Dubai',
+    description: 'Senior frontend and full-stack developer in Dubai specialising in scalable fintech platforms, real-time dashboards, secure AI integrations and accessible multilingual digital products.',
+    images: ['/opengraph-image'],
+  },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
   icons: {
     icon: '/favicon.ico',
   },

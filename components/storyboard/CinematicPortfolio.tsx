@@ -3,18 +3,32 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { Accessibility, Activity, ArrowUpRight, BarChart3, CalendarDays, ChartNoAxesCombined, Code2, FileCog, Github, Globe2, Languages, Layers3, Linkedin, Mail, MapPin, MonitorCog, Network, ShieldCheck, Users, WalletCards, Zap } from 'lucide-react'
+import { Accessibility, Activity, ArrowUpRight, BarChart3, CalendarDays, ChartNoAxesCombined, Code2, FileCog, Github, Globe2, Languages, Layers3, Linkedin, Mail, MapPin, Menu, MonitorCog, Network, ShieldCheck, Users, WalletCards, X, Zap } from 'lucide-react'
 
 import { experience, profile, projects } from '@/data/portfolio'
 import VisitorCounter from './VisitorCounter'
 
 const chapters = ['Projects', 'Experience', 'Skills', 'Contact'] as const
+
 const heroMessages = [
   'scalable FinTech and Forex platforms.',
   'real-time dashboards for live markets.',
   'secure full-stack financial workflows.',
   'accessible multilingual government applications.',
   'AI-powered experiences with controlled backend access.',
+] as const
+
+const tradeProCaseStudy = [
+  { title: 'Product overview', body: 'TradePro is an AI-powered financial platform combining customer onboarding, KYC verification, multi-currency account workflows, payments, live market experiences, portfolio management and controlled AI assistance.' },
+  { title: 'My role', body: 'Senior Full-Stack Developer responsible for frontend experiences, backend API workflows, data integration and secure AI function calling.' },
+  { title: 'Core workflow', body: 'The product supports authentication, customer onboarding, Veriff KYC, deposits, withdrawals, transfers, Stripe payments, portfolio views and transaction history.' },
+  { title: 'Frontend architecture', body: 'The interface uses Next.js, React and TypeScript with reusable components, custom hooks, type-safe API services, responsive dashboards and server-side pagination.' },
+  { title: 'Backend and data layer', body: 'Node.js and Express provide REST APIs, with Prisma ORM and PostgreSQL supporting application data and financial workflows.' },
+  { title: 'AI safety and controlled function calling', body: 'Google Gemini uses server-controlled function calling through authenticated and authorized backend functions. The AI does not receive direct database access.' },
+  { title: 'Security considerations', body: 'Authentication and authorization protect account workflows and backend functions, while KYC and payment integrations remain server controlled.' },
+  { title: 'Accessibility and responsive design', body: 'The component-based interface is designed to adapt across screen sizes with clear, consistent account, transaction and market-data views.' },
+  { title: 'Technical challenges', body: 'The implementation coordinates type-safe frontend and backend workflows across onboarding, KYC, wallets, payments, live market data, transaction reporting and controlled AI actions.' },
+  { title: 'Technology stack', body: 'Next.js, React, TypeScript, Node.js, Express, PostgreSQL, Prisma ORM, REST APIs, Veriff, Stripe, live market data APIs and Google Gemini.' },
 ] as const
 
 const skillGroups = [
@@ -116,9 +130,17 @@ export default function CinematicPortfolio() {
   const [heroMessage, setHeroMessage] = useState(0)
   const [showOwnerTools, setShowOwnerTools] = useState(false)
   const [showVisitCount, setShowVisitCount] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [caseStudyOpen, setCaseStudyOpen] = useState(false)
   const [achievementGroup, setAchievementGroup] = useState(0)
   const [achievementPhase, setAchievementPhase] = useState<'idle' | 'out' | 'in'>('idle')
   const heroVideoRef = useRef<HTMLVideoElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const firstMenuItemRef = useRef<HTMLButtonElement>(null)
+  const mobileNavRef = useRef<HTMLElement>(null)
+  const caseStudyButtonRef = useRef<HTMLButtonElement>(null)
+  const caseStudyCloseRef = useRef<HTMLButtonElement>(null)
+  const caseStudyDialogRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -150,11 +172,62 @@ export default function CinematicPortfolio() {
       setHeroMessage(0)
       return
     }
-    const interval = window.setInterval(() => {
-      setHeroMessage((current) => (current + 1) % heroMessages.length)
-    }, 3400)
-    return () => window.clearInterval(interval)
+
+    let intervalId: number | undefined
+
+    const startRotation = () => {
+      if (document.hidden || intervalId !== undefined) return
+      intervalId = window.setInterval(() => {
+        setHeroMessage((current) => (current + 1) % heroMessages.length)
+      }, 3400)
+    }
+
+    const stopRotation = () => {
+      if (intervalId !== undefined) window.clearInterval(intervalId)
+      intervalId = undefined
+    }
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) stopRotation()
+      else startRotation()
+    }
+
+    startRotation()
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      stopRotation()
+    }
   }, [reducedMotion])
+
+  useEffect(() => {
+    if (!mobileMenuOpen && !caseStudyOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      if (caseStudyOpen) {
+        setCaseStudyOpen(false)
+        caseStudyButtonRef.current?.focus()
+      } else {
+        setMobileMenuOpen(false)
+        menuButtonRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [mobileMenuOpen, caseStudyOpen])
+
+  useEffect(() => {
+    if (mobileMenuOpen) firstMenuItemRef.current?.focus()
+  }, [mobileMenuOpen])
+
+  useEffect(() => {
+    if (caseStudyOpen) caseStudyCloseRef.current?.focus()
+  }, [caseStudyOpen])
 
   useEffect(() => {
     if (reducedMotion) {
@@ -234,6 +307,7 @@ export default function CinematicPortfolio() {
   }, [])
 
   const scrollToChapter = (index: number) => {
+    setMobileMenuOpen(false)
     document.getElementById(chapters[index].toLowerCase())?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })
   }
 
@@ -255,7 +329,7 @@ export default function CinematicPortfolio() {
           <source src="/storyboard/portfolio-hero.mp4" type="video/mp4" />
         </video>
         <div className="hero-texture-overlay absolute inset-0" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#030712]/58 via-[#030712]/12 to-[#030712]/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-black/20" />
         <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#050712]/75 to-transparent" />
       </div>
       <>
@@ -286,15 +360,70 @@ export default function CinematicPortfolio() {
                   href="/Resume.pdf"
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full border border-sky-300/25 bg-sky-300/10 px-4 py-2 text-xs font-medium text-sky-100 transition hover:bg-sky-300 hover:text-slate-950"
+                  className="hidden rounded-full border border-sky-300/25 bg-sky-300/10 px-4 py-2 text-xs font-medium text-sky-100 transition hover:bg-sky-300 hover:text-slate-950 md:inline-flex"
                 >
                   Resume <ArrowUpRight className="ml-1 inline" size={13} />
                 </Link>
+                <button
+                  ref={menuButtonRef}
+                  type="button"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-sky-300/25 bg-sky-300/10 text-sky-100 transition hover:bg-sky-300 hover:text-slate-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300 md:hidden"
+                  aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                  aria-expanded={mobileMenuOpen}
+                  aria-controls="mobile-navigation"
+                  onClick={() => setMobileMenuOpen((open) => !open)}
+                >
+                  {mobileMenuOpen ? <X size={19} aria-hidden="true" /> : <Menu size={19} aria-hidden="true" />}
+                </button>
               </div>
             </div>
           </header>
 
-          <section id="hero" className="relative z-10 mt-[73px] flex min-h-[calc(100svh-73px)] items-center px-5 pb-[190px] pt-8 sm:px-8 sm:pb-[104px] lg:px-14">
+          {mobileMenuOpen && (
+            <div className="fixed inset-0 z-[35] bg-[#030712]/72 pt-[73px] backdrop-blur-xl md:hidden" onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setMobileMenuOpen(false)
+            }}>
+              <nav ref={mobileNavRef} id="mobile-navigation" aria-label="Mobile portfolio navigation" className="border-b border-white/10 bg-[#07101f]/96 px-5 py-5 shadow-2xl" onKeyDown={(event) => {
+                if (event.key !== 'Tab') return
+                const focusable = mobileNavRef.current?.querySelectorAll<HTMLElement>('button, a[href]')
+                if (!focusable?.length) return
+                const first = focusable[0]
+                const last = focusable[focusable.length - 1]
+                if (event.shiftKey && document.activeElement === first) {
+                  event.preventDefault()
+                  last.focus()
+                } else if (!event.shiftKey && document.activeElement === last) {
+                  event.preventDefault()
+                  first.focus()
+                }
+              }}>
+                <div className="mx-auto grid max-w-lg gap-2">
+                  {chapters.map((chapter, index) => (
+                    <button
+                      ref={index === 0 ? firstMenuItemRef : undefined}
+                      key={chapter}
+                      type="button"
+                      onClick={() => scrollToChapter(index)}
+                      className="rounded-xl px-4 py-3 text-left font-semibold text-slate-100 transition hover:bg-white/8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300"
+                    >
+                      {chapter}
+                    </button>
+                  ))}
+                  <Link
+                    href="/Resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between rounded-xl px-4 py-3 font-semibold text-teal-200 transition hover:bg-white/8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300"
+                  >
+                    Resume <ArrowUpRight size={16} aria-hidden="true" />
+                  </Link>
+                </div>
+              </nav>
+            </div>
+          )}
+
+          <section id="hero" className="relative z-10 mt-[73px] flex min-h-[calc(100svh-73px)] items-center px-5 pb-10 pt-8 sm:px-8 lg:px-14 lg:pb-[104px]">
             <div className="mx-auto w-full max-w-[1500px]">
               <div className="max-w-[690px]">
                 <p className="hero-role-badge portfolio-label">
@@ -307,6 +436,9 @@ export default function CinematicPortfolio() {
                   I build
                   <span key={heroMessage} className="hero-rotating-copy mt-2 block text-teal-300">{heroMessages[heroMessage]}</span>
                 </h1>
+                <p className="portfolio-display mt-5 max-w-2xl text-base font-medium leading-7 text-white/82">
+                  Senior Frontend &amp; Full-Stack Developer specialising in secure financial workflows, AI integrations and accessible multilingual experiences.
+                </p>
                 <p className="portfolio-display mt-6 text-sm font-semibold tracking-[0.02em] text-white/85 sm:text-base">
                   React.js · Next.js · TypeScript · Node.js <span className="text-teal-300/70">|</span> Dubai, UAE
                 </p>
@@ -315,19 +447,19 @@ export default function CinematicPortfolio() {
 
           </section>
 
-            <div className="fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-[#030712]/88 px-5 py-4 backdrop-blur-md sm:px-8 sm:py-2 lg:px-14">
-              <div className="mx-auto grid min-h-[116px] max-w-[1500px] grid-cols-2 gap-3 lg:min-h-[48px] lg:grid-cols-3 lg:gap-0">
-                <div className="col-span-2 flex min-w-0 items-center justify-center gap-3 lg:col-span-1 lg:justify-start lg:gap-4 lg:border-r lg:border-white/15 lg:px-6 xl:px-8">
+            <div className="relative z-20 border-y border-white/10 bg-[#030712]/88 px-5 py-3 backdrop-blur-md sm:px-8 lg:fixed lg:inset-x-0 lg:bottom-0 lg:z-30 lg:border-b-0 lg:px-14 lg:py-2">
+              <div className="achievement-scroll mx-auto flex max-w-[1500px] gap-2 overflow-x-auto pb-1 lg:grid lg:min-h-[48px] lg:grid-cols-3 lg:gap-0 lg:overflow-visible lg:pb-0">
+                <div className="flex min-w-[230px] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.025] px-4 py-3 lg:min-w-0 lg:justify-start lg:gap-4 lg:rounded-none lg:border-y-0 lg:border-l-0 lg:border-r lg:border-white/15 lg:bg-transparent lg:px-6 lg:py-0 xl:px-8">
                   <CalendarDays className="shrink-0 text-teal-300" size={22} aria-hidden="true" />
                   <span className="portfolio-label whitespace-nowrap text-[9px] font-bold uppercase tracking-[0.1em] text-white lg:text-[11px] xl:text-xs">9+ years experience</span>
                 </div>
-                <div className="flex min-w-0 items-center justify-center border-r border-white/15 lg:px-6 xl:px-8">
+                <div className="flex min-w-[300px] items-center rounded-xl border border-white/10 bg-white/[0.025] px-4 py-3 lg:min-w-0 lg:rounded-none lg:border-y-0 lg:border-l-0 lg:border-r lg:border-white/15 lg:bg-transparent lg:px-6 lg:py-0 xl:px-8">
                   <div className={`flex w-full min-w-0 items-center justify-center gap-2 transition-[opacity,transform] duration-[350ms] ease-out lg:justify-start lg:gap-3 ${achievementMotionClass}`}>
                     <MiddleAchievementIcon className="shrink-0 text-teal-300" size={22} aria-hidden="true" />
                     <span className="portfolio-label text-center text-[9px] font-bold uppercase leading-4 tracking-[0.1em] text-white lg:whitespace-nowrap lg:text-left lg:text-[11px] xl:text-xs">{rotatingAchievements.middle.label}</span>
                   </div>
                 </div>
-                <div className="flex min-w-0 items-center justify-center lg:px-6 xl:px-8">
+                <div className="flex min-w-[280px] items-center rounded-xl border border-white/10 bg-white/[0.025] px-4 py-3 lg:min-w-0 lg:rounded-none lg:border-0 lg:bg-transparent lg:px-6 lg:py-0 xl:px-8">
                   <div className={`flex w-full min-w-0 items-center justify-center gap-2 transition-[opacity,transform] duration-[350ms] ease-out lg:justify-start lg:gap-3 ${achievementMotionClass}`}>
                     <RightAchievementIcon className="shrink-0 text-teal-300" size={22} aria-hidden="true" />
                     <span className="portfolio-label text-center text-[9px] font-bold uppercase leading-4 tracking-[0.1em] text-white lg:whitespace-nowrap lg:text-left lg:text-[11px] xl:text-xs">{rotatingAchievements.right.label}</span>
@@ -351,11 +483,22 @@ export default function CinematicPortfolio() {
                     <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-400">{project.description}</p>
                     <div className="mt-4 flex flex-wrap gap-2">{project.stack.map((tech) => <span key={tech} className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-slate-300">{tech}</span>)}</div>
                     <div className="mt-4 flex flex-wrap items-center gap-5">
-                      <Link href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-sky-300 transition hover:text-white">View live site <ArrowUpRight size={15} /></Link>
+                      <Link href={project.live} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.name} live site`} className="inline-flex items-center gap-2 text-sm font-medium text-sky-300 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-300">View live site <ArrowUpRight size={15} /></Link>
                       {project.hasGithub && project.github && (
-                        <Link href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 transition hover:text-white"><Github size={15} /> View source</Link>
+                        <Link href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-300"><Github size={15} /> View source</Link>
+                      )}
+                      {index === 0 && (
+                        <button
+                          ref={caseStudyButtonRef}
+                          type="button"
+                          onClick={() => setCaseStudyOpen(true)}
+                          className="inline-flex items-center gap-2 text-sm font-medium text-teal-300 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-300"
+                        >
+                          View case study <ArrowUpRight size={15} aria-hidden="true" />
+                        </button>
                       )}
                     </div>
+                    {index === 0 && <p className="portfolio-label mt-3 text-[10px] uppercase tracking-[0.13em] text-slate-500">Live product demo · Vercel</p>}
                   </div>
                 </article>
               ))}
@@ -433,11 +576,11 @@ export default function CinematicPortfolio() {
               <div className="p-7 sm:p-10 lg:p-12 lg:pr-8">
                 <p className="portfolio-label text-xs uppercase tracking-[0.35em] text-sky-300">04 / Contact</p>
                 <h2 className="mt-4 max-w-4xl text-balance text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">Let’s build the next dependable thing.</h2>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">Available for senior frontend and full-stack opportunities where thoughtful architecture and strong product craft matter.</p>
+                <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">Available for senior frontend and full-stack opportunities where thoughtful architecture, secure product delivery and strong frontend craft matter.</p>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <Link href={`mailto:${profile.email.trim()}`} className="contact-pill"><Mail size={16} /> Email me</Link>
-                  <Link href={profile.linkedin} target="_blank" className="contact-pill"><Linkedin size={16} /> LinkedIn</Link>
-                  <Link href={profile.github} target="_blank" className="contact-pill"><Github size={16} /> GitHub</Link>
+                  <Link href={`mailto:${profile.email.trim()}`} className="contact-pill"><Mail size={16} /> Discuss an opportunity</Link>
+                  <Link href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="contact-pill"><Linkedin size={16} /> LinkedIn</Link>
+                  <Link href={profile.github} target="_blank" rel="noopener noreferrer" className="contact-pill"><Github size={16} /> GitHub</Link>
                   <span className="contact-pill"><MapPin size={16} /> {profile.location}</span>
                   <VisitorCounter visible={showVisitCount} className="sm:ml-auto" />
                 </div>
@@ -445,6 +588,63 @@ export default function CinematicPortfolio() {
               <ContactImageSlider reducedMotion={reducedMotion} />
             </div>
           </section>
+
+          {caseStudyOpen && (
+            <div
+              className="fixed inset-0 z-[70] flex items-center justify-center bg-[#020617]/88 p-4 backdrop-blur-xl sm:p-7"
+              onMouseDown={(event) => {
+                if (event.target === event.currentTarget) {
+                  setCaseStudyOpen(false)
+                  caseStudyButtonRef.current?.focus()
+                }
+              }}
+            >
+              <div
+                ref={caseStudyDialogRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="tradepro-case-study-title"
+                className="max-h-[88svh] w-full max-w-5xl overflow-y-auto rounded-[1.75rem] border border-teal-300/25 bg-[#07101f] p-5 shadow-[0_30px_100px_rgba(0,0,0,0.7)] sm:p-8"
+                onKeyDown={(event) => {
+                  if (event.key !== 'Tab') return
+                  const focusable = caseStudyDialogRef.current?.querySelectorAll<HTMLElement>('button, a[href], [tabindex]:not([tabindex="-1"])')
+                  if (!focusable?.length) return
+                  const first = focusable[0]
+                  const last = focusable[focusable.length - 1]
+                  if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault()
+                    last.focus()
+                  } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault()
+                    first.focus()
+                  }
+                }}
+              >
+                <div className="flex items-start justify-between gap-5 border-b border-white/10 pb-5">
+                  <div>
+                    <p className="portfolio-label text-xs uppercase tracking-[0.28em] text-teal-300">TradePro case study</p>
+                    <h2 id="tradepro-case-study-title" className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">Secure financial workflows with controlled AI</h2>
+                  </div>
+                  <button ref={caseStudyCloseRef} type="button" onClick={() => {
+                    setCaseStudyOpen(false)
+                    caseStudyButtonRef.current?.focus()
+                  }} aria-label="Close TradePro case study" className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 text-slate-200 transition hover:border-teal-300/50 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300"><X size={19} aria-hidden="true" /></button>
+                </div>
+                <div className="mt-6 grid gap-5 md:grid-cols-2">
+                  {tradeProCaseStudy.map((section) => (
+                    <section key={section.title} className="rounded-2xl border border-white/10 bg-white/[0.025] p-5">
+                      <h3 className="text-lg font-semibold text-white">{section.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-300">{section.body}</p>
+                    </section>
+                  ))}
+                </div>
+                <div className="mt-7 flex flex-wrap gap-4 border-t border-white/10 pt-5">
+                  <Link href={projects[0].live} target="_blank" rel="noopener noreferrer" className="contact-pill">View live site <ArrowUpRight size={15} aria-hidden="true" /></Link>
+                  <Link href={projects[0].github} target="_blank" rel="noopener noreferrer" className="contact-pill"><Github size={15} aria-hidden="true" /> View source</Link>
+                </div>
+              </div>
+            </div>
+          )}
       </>
     </main>
   )
