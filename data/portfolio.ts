@@ -8,7 +8,7 @@ export const profile = {
     'Frontend Engineer with 9+ years of experience building scalable, high-performance web applications using React, Next.js, and TypeScript. Passionate about crafting intuitive user experiences, clean architecture, and performant solutions that deliver real business value',
   email: 'khurshedkhan52@gmail.com ',
   github: 'https://github.com/khurshed52/',
-  linkedin: 'https://www.linkedin.com/in/khurshed-khan-a30b0159/',
+  linkedin: 'https://www.linkedin.com/in/khurshedkhandev',
 }
 
 export const projects = [

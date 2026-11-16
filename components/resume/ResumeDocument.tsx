@@ -100,7 +100,7 @@ function SkillsTable({
   const rows = [
     ...skillGroups,
     {
-      title: 'Architecture & Leadership',
+      title: 'Architecture & Delivery',
       skills: softSkills,
     },
   ]
@@ -169,7 +169,7 @@ function EmploymentHistory({
           <div className="resume-experience-body">
             <div className="resume-experience-header">
               <h3>{experience.role}</h3>
-              <span aria-hidden="true" />
+              <span className="resume-experience-separator" aria-hidden="true">|</span>
               <p>
                 {experience.company}, {experience.location}
               </p>
@@ -246,13 +246,12 @@ function ResumeFooterDetails({
         </div>
       </section>
 
-      <div className="resume-personal-details">
+      <div className="resume-personal-details resume-language-details">
         <div>
           <Languages size={15} />
           <h3>Languages</h3>
           <p>{languages.join(', ')}</p>
         </div>
-
         <div>
           <Globe2 size={15} />
           <h3>Nationality</h3>
@@ -297,12 +296,6 @@ function FirstPage({ data }: { data: ResolvedResumeData }) {
 
           <EmploymentHistory experience={data.experience} />
         </section>
-
-        <ResumeFooterDetails
-          education={data.education}
-          languages={data.languages}
-          nationality={data.nationality}
-        />
       </main>
     </section>
   )
@@ -327,9 +320,18 @@ function ProjectMeta({
 function SecondPage({ data }: { data: ResolvedResumeData }) {
   return (
     <section className="resume-page resume-page-two">
+      <div className="resume-second-page-education">
+        <ResumeFooterDetails
+          education={data.education}
+          languages={data.languages}
+          nationality={data.nationality}
+        />
+      </div>
+
       <header className="resume-project-page-header">
         <div>
-          <h1>Project Summary</h1>
+          <h1>Selected Projects</h1>
+          <span aria-hidden="true" />
         </div>
       </header>
 

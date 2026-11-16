@@ -8,7 +8,7 @@ export default function Page() {
     url: 'https://www.khurshedkhan.dev/',
     jobTitle: 'Senior Frontend and Full-Stack Developer',
     address: { '@type': 'PostalAddress', addressLocality: 'Dubai', addressCountry: 'AE' },
-    sameAs: ['https://www.linkedin.com/in/khurshed-khan-a30b0159/', 'https://github.com/khurshed52/'],
+    sameAs: ['https://www.linkedin.com/in/khurshedkhandev', 'https://github.com/khurshed52/'],
     knowsAbout: ['React.js', 'Next.js', 'Angular', 'TypeScript', 'Node.js', 'FinTech', 'WebSockets', 'Accessible web applications'],
   }
   const website = {

@@ -9,20 +9,19 @@ export const resumeTargets = {
       'Full Stack Developer with 9+ years of experience building scalable, high-performance FinTech and enterprise web applications, plus hands-on full-stack project experience using React.js, Next.js, TypeScript, Node.js, Express.js, PostgreSQL, and Prisma ORM. Experienced in secure REST APIs, real-time WebSocket workflows, WCAG-aligned interfaces, financial transactions, and Gemini-powered features. Combines senior frontend architecture expertise with practical backend, database, and API integration experience to deliver secure, maintainable applications. Foundational understanding of Java and Spring Boot.',
     skillGroupOrder: [
       'Frontend Technologies',
-      'Backend & API Development',
       'State Management & UI',
-      'Integrations',
-      'Quality & Performance',
-      'AI & LLM Integration',
-      'Visualization, GIS & Media',
-      'Tools & Technologies',
+      'Visualization & Media',
+      'Backend & API Development',
+      'FinTech & Integrations',
+      'AI Integration',
+      'Quality, Performance & Security',
     ],
     skillAdditions: {
       'Backend & API Development': [
         'Java (Foundational Knowledge)',
         'Spring Boot (Foundational Knowledge)',
       ],
-      'Tools & Technologies': ['Docker'],
+      'Quality, Performance & Security': ['Docker'],
     },
     experienceOverrides: {
       'Trive International': {
@@ -50,12 +49,11 @@ export const resumeTargets = {
     skillGroupOrder: [
       'Frontend Technologies',
       'State Management & UI',
+      'Visualization & Media',
       'Backend & API Development',
-      'Integrations',
-      'Quality & Performance',
-      'AI & LLM Integration',
-      'Visualization, GIS & Media',
-      'Tools & Technologies',
+      'FinTech & Integrations',
+      'AI Integration',
+      'Quality, Performance & Security',
     ],
     skillReplacements: {
       'Frontend Technologies': [

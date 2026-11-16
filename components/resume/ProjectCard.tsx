@@ -45,7 +45,7 @@ function ProjectCard({
                 rel="noopener noreferrer"
               >
                 <Globe2 aria-hidden="true" />
-                <span>Visit Link</span>
+                <span>Live Demo</span>
                 <ExternalLink
                   className="resume-project-external-icon"
                   aria-hidden="true"
@@ -60,7 +60,7 @@ function ProjectCard({
                 rel="noopener noreferrer"
               >
                 <Github aria-hidden="true" />
-                <span>GitHub</span>
+                <span>Source Code</span>
               </a>
             )}
           </nav>

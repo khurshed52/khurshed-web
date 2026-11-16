@@ -72,7 +72,7 @@ export const contact = {
   website: "https://www.khurshedkhan.dev/",
 
   // 💼 LinkedIn
-  linkedin: "https://www.linkedin.com/in/khurshed-khan-a30b0159/",
+  linkedin: "https://www.linkedin.com/in/khurshedkhandev",
 
   // 💻 GitHub
   github: "https://github.com/khurshed52",
@@ -139,6 +139,6 @@ NEXT_PUBLIC_EMAIL="khurshedkhan52@gmail.com"
 
 NEXT_PUBLIC_GITHUB="https://github.com/khurshed52"
 
-NEXT_PUBLIC_LINKEDIN="https://www.linkedin.com/in/khurshed-khan-a30b0159/"
+NEXT_PUBLIC_LINKEDIN="https://www.linkedin.com/in/khurshedkhandev"
 `,
 }

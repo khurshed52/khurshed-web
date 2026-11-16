@@ -59,15 +59,15 @@ export const resumeData = {
     },
 
     linkedin: {
-      label: 'linkedin.com/in/khurshed-khan-a30b0159',
-      url: 'https://www.linkedin.com/in/khurshed-khan-a30b0159/',
+      label: 'linkedin.com/in/khurshedkhandev',
+      url: 'https://www.linkedin.com/in/khurshedkhandev/',
     },
 
     photo: '/resume/profile.png',
   },
 
   summary:
-    'Senior Frontend Developer and Full-Stack Developer with 9+ years of experience building scalable applications across FinTech, Forex/CFD trading, enterprise systems, and the UAE government sector. Strong expertise in React.js, Next.js, Angular, TypeScript, and JavaScript, with full-stack experience in Node.js, Express.js, REST APIs, PostgreSQL, and Prisma ORM. Experienced in developing secure, accessible, and multilingual government applications with Arabic/RTL support, real-time trading dashboards, WebSocket integrations, financial workflows, and secure Google Gemini AI function calling.',
+    'Senior Frontend and Full-Stack Developer with 9+ years of experience delivering scalable FinTech, Forex/CFD, enterprise and UAE government applications. Specialised in React, Next.js, Angular and TypeScript, with full-stack experience across Node.js, PostgreSQL, real-time WebSocket systems and secure financial workflows. Experienced in technical leadership, multilingual Arabic RTL applications, WCAG 2.1 AA and UAE TDRA-aligned delivery, and secure Google Gemini function calling.',
 
   skillGroups: [
     {
@@ -90,13 +90,15 @@ export const resumeData = {
         'NgRx',
         'Pinia',
         'Redux',
-        'TanStack Query (React Query)',
-        'Context API',
+        'TanStack Query',
         'Tailwind CSS',
         'Angular Material',
         'Ant Design',
-        'Bootstrap',
       ],
+    },
+    {
+      title: 'Visualization & Media',
+      skills: ['Highcharts', 'Recharts', 'Chart.js', 'Mapbox', 'Video.js'],
     },
     {
       title: 'Backend & API Development',
@@ -104,57 +106,39 @@ export const resumeData = {
         'Node.js',
         'Express.js',
         'REST APIs',
+        'WebSockets',
         'PostgreSQL',
         'Prisma ORM',
-        'WebSockets',
+        'Postman',
       ],
     },
     {
-      title: 'Integrations',
+      title: 'FinTech & Integrations',
       skills: [
         'Stripe',
-        'Veriff (KYC)',
-        'PSP Integration',
-        'Authentication & Authorization',
-        'Live Market Data APIs',
+        'Veriff KYC',
+        'PSP integrations',
+        'authentication',
+        'live market data APIs',
         'Arabic RTL/LTR',
+        'i18n',
       ],
     },
     {
-      title: 'AI & LLM Integration',
-      skills: [
-        'Google Gemini API',
-        'Function Calling',
-        'Authenticated Backend Functions',
-        'Secure AI Integration',
-      ],
+      title: 'AI Integration',
+      skills: ['Google Gemini API', 'function calling'],
     },
     {
-      title: 'Visualization, GIS & Media',
-      skills: ['Recharts', 'Highcharts', 'Chart.js', 'Mapbox', 'Video.js'],
-    },
-    {
-      title: 'Quality & Performance',
+      title: 'Quality, Performance & Security',
       skills: [
         'Playwright',
-        'Responsive Design',
-        'Performance Optimization',
-        'State Management',
+        'performance optimisation',
+        'responsive design',
+        'cross-browser testing',
         'WCAG 2.1 AA',
         'UAE TDRA',
         'CSP',
-        'XSS/CSRF Mitigation',
-        'Cross-Browser Testing',
-      ],
-    },
-    {
-      title: 'Tools & Technologies',
-      skills: [
-        'Git',
-        'GitHub',
-        'CI/CD',
-        'Postman',
-        'MongoDB',
+        'XSS/CSRF mitigation',
       ],
     },
   ] satisfies ResumeSkillGroup[],
@@ -165,11 +149,12 @@ export const resumeData = {
     'Technical Decision-Making',
     'Code Reviews',
     'Mentorship',
+    'CI/CD',
+    'Git/GitHub',
     'Agile/Scrum',
   ],
 
   languages: ['English', 'Hindi'],
-
   nationality: 'Indian',
 
   education: [
@@ -195,7 +180,7 @@ export const resumeData = {
         'Lead development of Forex/CFD trading platforms using React.js, Next.js, and TypeScript, delivering account and trading workflows through REST API integrations.',
         'Delivered Angular 19 client portal features using TypeScript and NgRx, including authentication, KYC, account management, and payment workflows.',
         'Built real-time trading dashboards using WebSockets for live market data.',
-        'Reduced page load time by 40% through code-splitting, lazy loading, and bundle optimization.',
+        'Reduced page load time by 40% through code-splitting, lazy loading, and bundle optimisation.',
         'Architected a library of 20+ reusable UI components, accelerating feature development.',
         'Lead technical decision-making for a team of 3–5 developers, including code reviews and architecture improvements.',
       ],
@@ -249,7 +234,7 @@ export const resumeData = {
         'Developed responsive, accessible, and interactive government web applications using Angular, TypeScript, JavaScript, HTML5, and CSS3.',
         'Built reusable Angular components and multilingual Arabic (RTL) and English (LTR) interfaces with consistent layouts and user experience.',
         'Delivered accessible WCAG 2.1 AA and UAE TDRA-aligned government interfaces.',
-        'Integrated REST APIs, applied CSP and XSS/CSRF mitigation, and optimized performance and cross-browser compatibility for secure government applications.',
+        'Integrated REST APIs, applied CSP and XSS/CSRF mitigation, and optimised performance and cross-browser compatibility for secure government applications.',
       ],
 
       highlights: [
@@ -269,7 +254,7 @@ export const resumeData = {
  projects: [
       {
     name: 'TradePro — AI-Powered Trading Platform',
-    role: 'Senior Full-Stack Developer | FinTech & AI Integration',
+    role: 'Independent Full-Stack Project | FinTech & AI Integration',
 
     software: [
       'Next.js',
@@ -290,7 +275,7 @@ export const resumeData = {
       'Google Gemini API',
       'Function Calling',
       'Authenticated Backend Functions',
-      'Authorization Controls',
+      'Authorisation Controls',
       'Git',
       'GitHub',
       'Postman',
@@ -314,7 +299,7 @@ export const resumeData = {
       },
       {
         label: 'AI & Function Calling',
-        technologies: ['Google Gemini API', 'Function Calling', 'Authenticated Backend Functions', 'Authorization Controls'],
+        technologies: ['Google Gemini API', 'Function Calling', 'Authenticated Backend Functions', 'Authorisation Controls'],
       },
       {
         label: 'Tools & Architecture',
@@ -323,11 +308,10 @@ export const resumeData = {
     ],
 
     responsibilities: [
-      'Designed and developed responsive trading dashboards and financial data visualizations using Next.js, React.js, TypeScript, Recharts, Tailwind CSS, and Ant Design, integrating live market data APIs for real-time prices and currency exchange rates.',
-      'Developed full-stack trading application features using Node.js, Express.js, Prisma ORM, and PostgreSQL, building REST APIs and integrating frontend and backend workflows.',
-      'Implemented authentication, authorization, customer onboarding, Veriff KYC, and multi-currency deposit, withdrawal, transfer, and Stripe payment workflows.',
-      'Integrated Google Gemini API using secure function calling with Node.js and TypeScript, enabling conversational access to account balances, transaction history, and withdrawal statuses through authenticated, authorized backend functions without direct database access.',
-      'Developed transaction reporting with advanced filtering, server-side pagination, and history views, supported by reusable React components, custom hooks, and type-safe API services.',
+      'Architected a full-stack financial platform using Next.js, React.js, TypeScript, Node.js, Express.js, Prisma ORM, and PostgreSQL with reusable components and type-safe REST API services.',
+      'Integrated Google Gemini API using secure function calling with Node.js and TypeScript, enabling conversational access to account balances, transaction history, and withdrawal statuses through authenticated, authorised backend functions without direct database access.',
+      'Implemented secure authentication, Veriff KYC, multi-currency deposits, withdrawals, transfers, Stripe payments, live market data, portfolio views, and transaction history workflows.',
+      'Delivered responsive, accessible trading dashboards with Playwright coverage, server-side pagination, performance-conscious data loading, and reusable custom React hooks.',
     ],
 
     visitLink: 'https://ai-trading-platfrom.vercel.app/login',
@@ -371,7 +355,7 @@ export const resumeData = {
       'Developed responsive, SEO-friendly market interfaces using Vue.js and Nuxt.js.',
       'Built reusable UI components and managed application state using Pinia.',
       'Integrated REST APIs, Mapbox-powered mapping, and Video.js monitoring features.',
-      'Converted approved UI/UX designs into responsive, cross-browser-compatible interfaces optimized for performance and technical SEO.',
+      'Converted approved UI/UX designs into responsive, cross-browser-compatible interfaces optimised for performance and technical SEO.',
     ],
 
     visitLink: 'https://www.cptmarkets.com/',
