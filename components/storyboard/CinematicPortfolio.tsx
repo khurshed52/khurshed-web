@@ -2,8 +2,8 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import { Accessibility, Activity, ArrowUpRight, BarChart3, CalendarDays, ChartNoAxesCombined, Code2, FileCog, Github, Globe2, Languages, Layers3, Linkedin, Mail, MapPin, Menu, MonitorCog, Network, ShieldCheck, Users, WalletCards, X, Zap } from 'lucide-react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { Accessibility, Activity, ArrowUpRight, BarChart3, CalendarDays, ChartNoAxesCombined, Code2, FileCog, Github, Globe2, Languages, Layers3, Linkedin, Mail, MapPin, Menu, MonitorCog, Network, Play, ShieldCheck, Users, WalletCards, X, Zap } from 'lucide-react'
 
 import { experience, profile, projects } from '@/data/portfolio'
 import VisitorCounter from './VisitorCounter'
@@ -134,6 +134,7 @@ export default function CinematicPortfolio() {
   const [caseStudyOpen, setCaseStudyOpen] = useState(false)
   const [achievementGroup, setAchievementGroup] = useState(0)
   const [achievementPhase, setAchievementPhase] = useState<'idle' | 'out' | 'in'>('idle')
+  const [heroVideoNeedsPlay, setHeroVideoNeedsPlay] = useState(false)
   const heroVideoRef = useRef<HTMLVideoElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const firstMenuItemRef = useRef<HTMLButtonElement>(null)
@@ -160,12 +161,41 @@ export default function CinematicPortfolio() {
     )
   }, [])
 
+  const requestHeroPlayback = useCallback(() => {
+    const video = heroVideoRef.current
+    if (!video) return
+
+    // Safari requires the media element to be muted before play() is requested.
+    video.muted = true
+    video.defaultMuted = true
+    video.playsInline = true
+    video.setAttribute('muted', '')
+    video.setAttribute('playsinline', '')
+
+    void video.play()
+      .then(() => setHeroVideoNeedsPlay(false))
+      .catch(() => setHeroVideoNeedsPlay(true))
+  }, [])
+
   useEffect(() => {
     const video = heroVideoRef.current
     if (!video) return
-    if (reducedMotion) video.pause()
-    else void video.play().catch(() => undefined)
-  }, [reducedMotion])
+
+    const resumePlayback = () => {
+      if (!document.hidden) requestHeroPlayback()
+    }
+
+    requestHeroPlayback()
+    video.addEventListener('canplay', requestHeroPlayback)
+    window.addEventListener('pageshow', requestHeroPlayback)
+    document.addEventListener('visibilitychange', resumePlayback)
+
+    return () => {
+      video.removeEventListener('canplay', requestHeroPlayback)
+      window.removeEventListener('pageshow', requestHeroPlayback)
+      document.removeEventListener('visibilitychange', resumePlayback)
+    }
+  }, [requestHeroPlayback])
 
   useEffect(() => {
     if (reducedMotion) {
@@ -325,7 +355,20 @@ export default function CinematicPortfolio() {
       <a href="#projects" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-slate-950">Skip to portfolio</a>
 
       <div className="story-stage fixed inset-0 z-0" aria-hidden="true">
-        <video ref={heroVideoRef} className="h-full w-full object-cover" autoPlay loop muted playsInline preload="metadata" poster="/storyboard/portfolio-hero-poster.png">
+        <video
+          ref={heroVideoRef}
+          className="h-full w-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster="/storyboard/portfolio-hero-poster.png"
+          onPlay={() => setHeroVideoNeedsPlay(false)}
+          onPause={() => {
+            if (!document.hidden) setHeroVideoNeedsPlay(true)
+          }}
+        >
           <source src="/storyboard/portfolio-hero.mp4" type="video/mp4" />
         </video>
         <div className="hero-texture-overlay absolute inset-0" />
@@ -424,6 +467,16 @@ export default function CinematicPortfolio() {
           )}
 
           <section id="hero" className="relative z-10 mt-[73px] flex min-h-[calc(100svh-73px)] items-center px-5 pb-10 pt-8 sm:px-8 lg:px-14 lg:pb-[104px]">
+            {heroVideoNeedsPlay && (
+              <button
+                type="button"
+                onClick={requestHeroPlayback}
+                className="absolute left-1/2 top-1/2 z-20 inline-flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#050712]/75 text-white shadow-2xl backdrop-blur-md transition hover:scale-105 hover:bg-[#07101f]/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-300"
+                aria-label="Play hero background video"
+              >
+                <Play className="ml-1" size={28} fill="currentColor" aria-hidden="true" />
+              </button>
+            )}
             <div className="mx-auto w-full max-w-[1500px]">
               <div className="max-w-[690px]">
                 <p className="hero-role-badge portfolio-label">

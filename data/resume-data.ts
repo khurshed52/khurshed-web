@@ -126,7 +126,7 @@ export const resumeData = {
     },
     {
       title: 'AI Integration',
-      skills: ['Google Gemini API', 'function calling'],
+      skills: ['Google Gemini API', 'LLM Integration', 'Function Calling', 'RAG, PostgreSQL/pgvector'],
     },
     {
       title: 'Quality, Performance & Security',
