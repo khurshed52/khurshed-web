@@ -490,11 +490,15 @@ export default function CinematicPortfolio() {
                   <span key={heroMessage} className="hero-rotating-copy mt-2 block text-teal-300">{heroMessages[heroMessage]}</span>
                 </h1>
                 <p className="portfolio-display mt-5 max-w-2xl text-base font-medium leading-7 text-white/82">
-                  Senior Frontend &amp; Full-Stack Developer specialising in secure financial workflows, AI integrations and accessible multilingual experiences.
+                  Senior Frontend &amp; Full-Stack Developer with 9+ years of experience building scalable web applications, secure FinTech platforms, and AI-powered solutions.
                 </p>
-                <p className="portfolio-display mt-6 text-sm font-semibold tracking-[0.02em] text-white/85 sm:text-base">
-                  React.js · Next.js · TypeScript · Node.js <span className="text-teal-300/70">|</span> Dubai, UAE
-                </p>
+                <div className="portfolio-display mt-6 space-y-2 text-sm font-semibold tracking-[0.02em] text-white/85 sm:text-base">
+                  <p>React.js · Next.js · Angular · TypeScript · Node.js · AI Integrations</p>
+                  <p className="flex items-center gap-2 text-white/75">
+                    <MapPin className="shrink-0 text-teal-300" size={16} aria-hidden="true" />
+                    <span>Dubai, UAE</span>
+                  </p>
+                </div>
               </div>
             </div>
 
